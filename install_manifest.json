@@ -1,0 +1,39 @@
+{
+  "downloads": [
+    {
+      "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors",
+      "subdir": "checkpoints",
+      "filename": "sd_xl_base_1.0.safetensors"
+    },
+    {
+      "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors",
+      "subdir": "checkpoints",
+      "filename": "sd_xl_refiner_1.0.safetensors"
+    },
+    {
+      "url": "https://huggingface.co/ByteDance/SDXL-Lightning/resolve/main/sdxl_lightning_4step.safetensors",
+      "subdir": "checkpoints",
+      "filename": "sdxl_lightning_4step.safetensors"
+    },
+    {
+      "url": "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors",
+      "subdir": "checkpoints",
+      "filename": "v1-5-pruned-emaonly.safetensors"
+    },
+    {
+      "url": "https://huggingface.co/StableDiffusionVN/Prunedcontrolnet/resolve/main/control_v11p_sd15_canny.safetensors",
+      "subdir": "controlnet",
+      "filename": "control_v11p_sd15_canny.safetensors"
+    },
+    {
+      "url": "https://huggingface.co/StableDiffusionVN/Prunedcontrolnet/resolve/main/control_v11p_sd15_openpose.safetensors",
+      "subdir": "controlnet",
+      "filename": "control_v11p_sd15_openpose.safetensors"
+    },
+    {
+      "url": "https://huggingface.co/latent-consistency/lcm-lora-sdxl/resolve/main/pytorch_lora_weights.safetensors",
+      "subdir": "loras",
+      "filename": "lcm_lora_sdxl.safetensors"
+    }
+  ]
+}

@@ -1,0 +1,325 @@
+{
+  "1": {
+    "inputs": {
+      "prompt": "cinematic portrait, moody lighting, high detail",
+      "ollama_model": "qwen2.5:7b",
+      "registry_path": "model_registry.json",
+      "task_hint": "auto",
+      "user_negative": "blurry, extra fingers, deformed",
+      "ollama_host": "localhost",
+      "ollama_port": 11434
+    },
+    "class_type": "OllamaPromptPlanner"
+  },
+  "2": {
+    "inputs": {
+      "width": [
+        "1",
+        6
+      ],
+      "height": [
+        "1",
+        7
+      ],
+      "batch_size": 1,
+      "color": 0
+    },
+    "class_type": "EmptyImage"
+  },
+  "3": {
+    "inputs": {
+      "checkpoint": [
+        "1",
+        0
+      ],
+      "model_type": "auto",
+      "registry_path": "model_registry.json",
+      "custom_path": "",
+      "vae_override": [
+        "1",
+        12
+      ],
+      "clip_override": [
+        "1",
+        13
+      ]
+    },
+    "class_type": "DynamicCheckpointLoader"
+  },
+  "4": {
+    "inputs": {
+      "model": [
+        "3",
+        0
+      ],
+      "clip": [
+        "3",
+        1
+      ],
+      "loras": [
+        "1",
+        1
+      ],
+      "lora_strengths": [
+        "1",
+        2
+      ],
+      "custom_path": ""
+    },
+    "class_type": "DynamicLoraStack"
+  },
+  "5": {
+    "inputs": {
+      "text": [
+        "1",
+        9
+      ],
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "6": {
+    "inputs": {
+      "text": [
+        "1",
+        10
+      ],
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "7": {
+    "inputs": {
+      "positive": [
+        "5",
+        0
+      ],
+      "negative": [
+        "6",
+        0
+      ],
+      "controlnet_name": [
+        "1",
+        18
+      ],
+      "strength": [
+        "1",
+        19
+      ],
+      "start_percent": [
+        "1",
+        20
+      ],
+      "end_percent": [
+        "1",
+        21
+      ],
+      "image": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "OptionalControlNetApply"
+  },
+  "8": {
+    "inputs": {
+      "width": [
+        "1",
+        6
+      ],
+      "height": [
+        "1",
+        7
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "9": {
+    "inputs": {
+      "seed": [
+        "1",
+        8
+      ],
+      "steps": [
+        "1",
+        4
+      ],
+      "cfg": [
+        "1",
+        5
+      ],
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": [
+        "1",
+        15
+      ],
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "7",
+        0
+      ],
+      "negative": [
+        "7",
+        1
+      ],
+      "latent_image": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "KSampler"
+  },
+  "10": {
+    "inputs": {
+      "checkpoint": [
+        "1",
+        17
+      ],
+      "model_type": "sdxl",
+      "registry_path": "model_registry.json",
+      "custom_path": "",
+      "vae_override": "",
+      "clip_override": ""
+    },
+    "class_type": "DynamicCheckpointLoader"
+  },
+  "11": {
+    "inputs": {
+      "text": [
+        "1",
+        9
+      ],
+      "clip": [
+        "10",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "12": {
+    "inputs": {
+      "text": [
+        "1",
+        10
+      ],
+      "clip": [
+        "10",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "13": {
+    "inputs": {
+      "seed": [
+        "1",
+        8
+      ],
+      "steps": [
+        "1",
+        4
+      ],
+      "cfg": [
+        "1",
+        5
+      ],
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 0.3,
+      "model": [
+        "10",
+        0
+      ],
+      "positive": [
+        "11",
+        0
+      ],
+      "negative": [
+        "12",
+        0
+      ],
+      "latent_image": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "KSampler"
+  },
+  "14": {
+    "inputs": {
+      "use_b": [
+        "1",
+        16
+      ],
+      "a": [
+        "9",
+        0
+      ],
+      "b": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "RouteLatentByBool"
+  },
+  "15": {
+    "inputs": {
+      "use_b": [
+        "1",
+        16
+      ],
+      "a": [
+        "3",
+        2
+      ],
+      "b": [
+        "10",
+        2
+      ]
+    },
+    "class_type": "RouteVaeByBool"
+  },
+  "16": {
+    "inputs": {
+      "samples": [
+        "14",
+        0
+      ],
+      "vae": [
+        "15",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "17": {
+    "inputs": {
+      "filename_prefix": "ollama_full",
+      "images": [
+        "16",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  },
+  "18": {
+    "inputs": {
+      "text": [
+        "1",
+        11
+      ]
+    },
+    "class_type": "OllamaDebugInfo"
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "1": {
+    "inputs": {
+      "image": "example.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "2": {
+    "inputs": {
+      "image": [
+        "1",
+        0
+      ],
+      "prompt": "match the style but improve detail and color grading",
+      "ollama_model": "llava:7b",
+      "registry_path": "model_registry.json",
+      "task_hint": "img2img",
+      "user_negative": "blurry, deformed, watermark",
+      "ollama_host": "localhost",
+      "ollama_port": 11434
+    },
+    "class_type": "OllamaVisionStylePlanner"
+  },
+  "3": {
+    "inputs": {
+      "checkpoint": [
+        "2",
+        0
+      ],
+      "model_type": "auto",
+      "registry_path": "model_registry.json",
+      "custom_path": "",
+      "vae_override": "",
+      "clip_override": ""
+    },
+    "class_type": "DynamicCheckpointLoader"
+  },
+  "4": {
+    "inputs": {
+      "model": [
+        "3",
+        0
+      ],
+      "clip": [
+        "3",
+        1
+      ],
+      "loras": [
+        "2",
+        1
+      ],
+      "lora_strengths": [
+        "2",
+        2
+      ],
+      "custom_path": ""
+    },
+    "class_type": "DynamicLoraStack"
+  },
+  "5": {
+    "inputs": {
+      "text": [
+        "2",
+        9
+      ],
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "6": {
+    "inputs": {
+      "text": [
+        "2",
+        10
+      ],
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "7": {
+    "inputs": {
+      "samples": [
+        "1",
+        0
+      ],
+      "vae": [
+        "3",
+        2
+      ]
+    },
+    "class_type": "VAEEncode"
+  },
+  "8": {
+    "inputs": {
+      "seed": [
+        "2",
+        8
+      ],
+      "steps": [
+        "2",
+        4
+      ],
+      "cfg": [
+        "2",
+        5
+      ],
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": [
+        "2",
+        15
+      ],
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "12",
+        0
+      ],
+      "negative": [
+        "12",
+        1
+      ],
+      "latent_image": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "KSampler"
+  },
+  "12": {
+    "inputs": {
+      "positive": [
+        "5",
+        0
+      ],
+      "negative": [
+        "6",
+        0
+      ],
+      "controlnet_name": [
+        "2",
+        18
+      ],
+      "strength": [
+        "2",
+        19
+      ],
+      "start_percent": [
+        "2",
+        20
+      ],
+      "end_percent": [
+        "2",
+        21
+      ],
+      "image": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "OptionalControlNetApply"
+  },
+  "9": {
+    "inputs": {
+      "samples": [
+        "8",
+        0
+      ],
+      "vae": [
+        "3",
+        2
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "10": {
+    "inputs": {
+      "filename_prefix": "ollama_img2img",
+      "images": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  },
+  "11": {
+    "inputs": {
+      "text": [
+        "2",
+        11
+      ]
+    },
+    "class_type": "OllamaDebugInfo"
+  }
+}
