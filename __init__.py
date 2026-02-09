@@ -9,6 +9,8 @@ from .nodes_ollama_router_new import (
     RouteVaeByBool,
     OllamaDebugInfo,
     OllamaRegistryInfo,
+    PreviewTextMerge,
+    LiveStatus,
 )
 
 NODE_CLASS_MAPPINGS = {
@@ -22,6 +24,8 @@ NODE_CLASS_MAPPINGS = {
     "RouteVaeByBool": RouteVaeByBool,
     "OllamaDebugInfo": OllamaDebugInfo,
     "OllamaRegistryInfo": OllamaRegistryInfo,
+    "PreviewTextMerge": PreviewTextMerge,
+    "LiveStatus": LiveStatus,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -35,6 +39,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "RouteVaeByBool": "Route VAE (Bool)",
     "OllamaDebugInfo": "Ollama Plan Debug Info",
     "OllamaRegistryInfo": "Ollama Registry Debug Info",
+    "PreviewTextMerge": "Preview Text Merge",
+    "LiveStatus": "Live Status",
 }
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS"]

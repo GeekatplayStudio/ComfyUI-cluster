@@ -485,23 +485,63 @@ class DynamicCheckpointLoader:
         return (out_model, out_clip, out_vae)
 
     def _find_path(self, folder_type, filename, custom_path):
-        try:
-            path = folder_paths.get_full_path(folder_type, filename)
-            if path: return path
-        except: pass
-        
-        if folder_type != "checkpoints":
-             try:
+        folder_types = [folder_type]
+        if folder_type == "checkpoints":
+            folder_types = ["checkpoints", "diffusion_models", "unet"]
+        elif folder_type == "clip":
+            folder_types = ["clip", "text_encoders", "checkpoints"]
+        elif folder_type == "diffusion_models":
+            folder_types = ["diffusion_models", "unet", "checkpoints"]
+        elif folder_type == "vae":
+            folder_types = ["vae", "checkpoints"]
+
+        for ft in folder_types:
+            try:
+                path = folder_paths.get_full_path(ft, filename)
+                if path: return path
+            except: pass
+
+        searched_roots = set()
+        for ft in folder_types:
+            try:
+                roots = folder_paths.get_folder_paths(ft)
+            except Exception:
+                roots = []
+            for root in roots:
+                if not root or root in searched_roots:
+                    continue
+                searched_roots.add(root)
+                try:
+                    p = os.path.join(root, filename)
+                    if os.path.isfile(p):
+                        return p
+                    if os.path.isdir(root):
+                        for r, _, files in os.walk(root):
+                            if filename in files:
+                                return os.path.join(r, filename)
+                except Exception:
+                    pass
+
+        if folder_type != "checkpoints" and "checkpoints" not in folder_types:
+            try:
                 path = folder_paths.get_full_path("checkpoints", filename)
                 if path: return path
-             except: pass
+            except: pass
 
         if custom_path and os.path.exists(custom_path):
             p = os.path.join(custom_path, filename)
-            if os.path.exists(p): return p
-            for root, dirs, files in os.walk(custom_path):
-                if filename in files:
-                    return os.path.join(root, filename)
+            if os.path.isfile(p):
+                return p
+            for ft in folder_types:
+                p_sub = os.path.join(custom_path, ft, filename)
+                if os.path.isfile(p_sub):
+                    return p_sub
+            try:
+                for root, _, files in os.walk(custom_path):
+                    if filename in files:
+                        return os.path.join(root, filename)
+            except Exception:
+                pass
         return None
 
     def _find_fallback(self, registry, target_info, resolved_type, custom_path):

@@ -1,0 +1,196 @@
+{
+  "1": {
+    "inputs": {
+      "prompt": "brand: geekatplay studio, cinematic portrait with neon rim light",
+      "ollama_model": "qwen2.5:7b",
+      "registry_path": "model_registry.json",
+      "task_hint": "auto",
+      "user_negative": "blurry, extra fingers, deformed",
+      "aspect_ratio": "3:2",
+      "base_size": 1024,
+      "ollama_host": "localhost",
+      "ollama_port": 11434
+    },
+    "class_type": "OllamaPromptPlanner"
+  },
+  "2": {
+    "inputs": {
+      "checkpoint": [
+        "1",
+        0
+      ],
+      "model_type": "auto",
+      "registry_path": "model_registry.json",
+      "custom_path": "",
+      "vae_override": [
+        "1",
+        14
+      ],
+      "clip_override": [
+        "1",
+        15
+      ]
+    },
+    "class_type": "DynamicCheckpointLoader"
+  },
+  "3": {
+    "inputs": {
+      "model": [
+        "2",
+        0
+      ],
+      "clip": [
+        "2",
+        1
+      ],
+      "loras": [
+        "1",
+        1
+      ],
+      "lora_strengths": [
+        "1",
+        2
+      ],
+      "custom_path": ""
+    },
+    "class_type": "DynamicLoraStack"
+  },
+  "4": {
+    "inputs": {
+      "text": [
+        "1",
+        11
+      ],
+      "clip": [
+        "3",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "5": {
+    "inputs": {
+      "text": [
+        "1",
+        12
+      ],
+      "clip": [
+        "3",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "6": {
+    "inputs": {
+      "width": [
+        "1",
+        8
+      ],
+      "height": [
+        "1",
+        9
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "7": {
+    "inputs": {
+      "seed": [
+        "1",
+        10
+      ],
+      "steps": [
+        "1",
+        4
+      ],
+      "cfg": [
+        "1",
+        5
+      ],
+      "sampler_name": [
+        "1",
+        6
+      ],
+      "scheduler": [
+        "1",
+        7
+      ],
+      "denoise": [
+        "1",
+        17
+      ],
+      "model": [
+        "3",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "5",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "KSampler"
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "7",
+        0
+      ],
+      "vae": [
+        "2",
+        2
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "9": {
+    "inputs": {
+      "filename_prefix": "geekatplay_auto",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  },
+  "10": {
+    "inputs": {
+      "stage": "Planner",
+      "message": [
+        "1",
+        13
+      ]
+    },
+    "class_type": "LiveStatus"
+  },
+  "11": {
+    "inputs": {
+      "count": 3,
+      "separator": "\\n",
+      "emit_outputs": false,
+      "text1": [
+        "1",
+        11
+      ],
+      "text2": [
+        "1",
+        12
+      ],
+      "text3": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "PreviewTextMerge"
+  }
+}

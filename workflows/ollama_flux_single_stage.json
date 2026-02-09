@@ -1,0 +1,164 @@
+{
+  "1": {
+    "inputs": {
+      "prompt": "flux test prompt",
+      "ollama_model": "qwen2.5:7b",
+      "registry_path": "model_registry.json",
+      "task_hint": "flux",
+      "user_negative": "",
+      "ollama_host": "localhost",
+      "ollama_port": 11434
+    },
+    "class_type": "OllamaPromptPlanner"
+  },
+  "2": {
+    "inputs": {
+      "checkpoint": [
+        "1",
+        0
+      ],
+      "model_type": "auto",
+      "registry_path": "model_registry.json",
+      "custom_path": "",
+      "vae_override": [
+        "1",
+        12
+      ],
+      "clip_override": [
+        "1",
+        13
+      ]
+    },
+    "class_type": "DynamicCheckpointLoader"
+  },
+  "3": {
+    "inputs": {
+      "model": [
+        "2",
+        0
+      ],
+      "clip": [
+        "2",
+        1
+      ],
+      "loras": [
+        "1",
+        1
+      ],
+      "lora_strengths": [
+        "1",
+        2
+      ],
+      "custom_path": ""
+    },
+    "class_type": "DynamicLoraStack"
+  },
+  "4": {
+    "inputs": {
+      "text": [
+        "1",
+        9
+      ],
+      "clip": [
+        "3",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "5": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "3",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "6": {
+    "inputs": {
+      "width": [
+        "1",
+        6
+      ],
+      "height": [
+        "1",
+        7
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "7": {
+    "inputs": {
+      "seed": [
+        "1",
+        8
+      ],
+      "steps": [
+        "1",
+        4
+      ],
+      "cfg": [
+        "1",
+        5
+      ],
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1.0,
+      "model": [
+        "3",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "5",
+        0
+      ],
+      "latent_image": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "KSampler"
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "7",
+        0
+      ],
+      "vae": [
+        "2",
+        2
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "9": {
+    "inputs": {
+      "filename_prefix": "ollama_flux_single",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  },
+  "10": {
+    "inputs": {
+      "text": [
+        "1",
+        11
+      ],
+      "count": 4,
+      "separator": "\\n",
+      "emit_outputs": false
+    },
+    "class_type": "PreviewTextMerge"
+  }
+}

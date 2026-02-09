@@ -231,6 +231,71 @@ def _parse_plan(raw: str) -> dict | None:
     return None
 
 
+def _extract_keywords(prompt: str, top_k: int = 12) -> list[str]:
+    stop = {
+        "the","a","an","with","and","of","in","on","at","for","by","to","from","is","are","be",
+        "this","that","these","those","it","as","over","under","into","onto","around","about",
+        "portrait","photo","image","picture"
+    }
+    tokens = re.findall(r"[a-zA-Z0-9]{3,}", prompt.lower())
+    freq = {}
+    for t in tokens:
+        if t in stop:
+            continue
+        freq[t] = freq.get(t, 0) + 1
+    sorted_tokens = sorted(freq.items(), key=lambda x: x[1], reverse=True)
+    return [t for t, _ in sorted_tokens[:top_k]]
+
+
+def _score_model(keywords: list[str], tags: list[str], recommended: bool) -> int:
+    score = 0
+    tag_set = {t.lower() for t in tags}
+    for kw in keywords:
+        if kw in tag_set:
+            score += 4
+        elif any(kw in t for t in tag_set):
+            score += 2
+    if recommended:
+        score += 1
+    return score
+
+
+def _pick_sampler(model_type: str, target_info: dict | None) -> tuple[str, str]:
+    if target_info and target_info.get("sampler"):
+        return (target_info.get("sampler"), target_info.get("scheduler", "normal"))
+    mt = (model_type or "").lower()
+    if mt == "flux":
+        return ("dpmpp_2m", "karras")
+    if mt == "sdxl":
+        return ("dpmpp_2m", "karras")
+    return ("euler", "normal")
+
+
+def _compute_resolution(aspect_ratio: str, base_size: int, model_type: str) -> tuple[int, int]:
+    ratios = {
+        "1:1": (1, 1),
+        "3:2": (3, 2),
+        "2:3": (2, 3),
+        "16:9": (16, 9),
+        "9:16": (9, 16),
+        "4:5": (4, 5),
+        "5:4": (5, 4),
+    }
+    num, den = ratios.get(aspect_ratio, (1, 1))
+    long_side = max(256, int(base_size))
+    short_side = int(long_side * den / num)
+    # snap to multiples of 64
+    def snap(x): return max(256, int(round(x / 64)) * 64)
+    w = snap(long_side)
+    h = snap(short_side)
+    if w > 2048: w = 2048
+    if h > 2048: h = 2048
+    if model_type.lower() in ("sd15", "sd1.5", "sd"):
+        if w > 1024: w = 1024
+        if h > 1024: h = 1024
+    return w, h
+
+
 class OllamaPromptPlanner:
     """
     Use local Ollama to pick checkpoint + LoRAs + params based on the prompt and registry.
@@ -245,34 +310,38 @@ class OllamaPromptPlanner:
                 "registry_path": ("STRING", {"default": "model_registry.json"}),
                 "task_hint": (["auto", "text2img", "img2img", "inpaint", "sdxl", "sd15", "flux"],),
                 "user_negative": ("STRING", {"multiline": True, "default": ""}),
+                "aspect_ratio": (["1:1", "3:2", "2:3", "16:9", "9:16", "4:5", "5:4"],),
+                "base_size": ("INT", {"default": 1024, "min": 256, "max": 2048, "step": 64}),
                 "ollama_host": ("STRING", {"default": "localhost"}),
                 "ollama_port": ("INT", {"default": 11434, "min": 1, "max": 65535}),
             }
         }
 
     RETURN_TYPES = (
-        "STRING",
-        "STRING",
-        "STRING",
-        "STRING",
-        "INT",
-        "FLOAT",
-        "INT",
-        "INT",
-        "INT",
-        "STRING",
-        "STRING",
-        "STRING",
-        "STRING",
-        "STRING",
-        "STRING",
-        "FLOAT",
-        "BOOLEAN",
-        "STRING",
-        "STRING",
-        "FLOAT",
-        "FLOAT",
-        "FLOAT",
+        "STRING",  # checkpoint
+        "STRING",  # loras
+        "STRING",  # lora_strengths
+        "STRING",  # model_type
+        "INT",     # steps
+        "FLOAT",   # cfg
+        "STRING",  # sampler_name
+        "STRING",  # scheduler
+        "INT",     # width
+        "INT",     # height
+        "INT",     # seed
+        "STRING",  # positive
+        "STRING",  # negative
+        "STRING",  # plan_json
+        "STRING",  # vae_name
+        "STRING",  # clip_name
+        "STRING",  # task
+        "FLOAT",   # denoise
+        "BOOLEAN", # use_refiner
+        "STRING",  # refiner_checkpoint
+        "STRING",  # controlnet_name
+        "FLOAT",   # controlnet_strength
+        "FLOAT",   # controlnet_start
+        "FLOAT",   # controlnet_end
     )
     RETURN_NAMES = (
         "checkpoint",
@@ -281,6 +350,8 @@ class OllamaPromptPlanner:
         "model_type",
         "steps",
         "cfg",
+        "sampler_name",
+        "scheduler",
         "width",
         "height",
         "seed",
@@ -301,7 +372,7 @@ class OllamaPromptPlanner:
     FUNCTION = "plan"
     CATEGORY = "Ollama/Planner"
 
-    def plan(self, prompt, ollama_model, registry_path, task_hint, user_negative, ollama_host="localhost", ollama_port=11434):
+    def plan(self, prompt, ollama_model, registry_path, task_hint, user_negative, aspect_ratio, base_size, ollama_host="localhost", ollama_port=11434):
         registry = _read_registry(registry_path)
         compact = _compact_registry(registry)
         system_prompt = (
@@ -312,7 +383,7 @@ class OllamaPromptPlanner:
             "use_refiner (bool), refiner_checkpoint, "
             "loras (array of names), lora_strengths (array of floats), "
             "controlnet_name, controlnet_strength (float), controlnet_start (float), controlnet_end (float), "
-            "positive_prompt, negative_prompt, steps (int), cfg (float), width (int), height (int), "
+            "positive_prompt, negative_prompt, steps (int), cfg (float), sampler_name, scheduler, width (int), height (int), "
             "denoise (float), seed (int). "
             "Use checkpoint, vae, clip and lora names exactly from the registry. "
             "If unsure, pick a recommended checkpoint."
@@ -334,8 +405,46 @@ class OllamaPromptPlanner:
 
         if plan is None:
             plan = _heuristic_plan(prompt, registry)
-            plan["task"] = "img2img"
-            plan["denoise"] = 0.7
+
+        # Keywords + registry-driven selection if checkpoint missing
+        keywords = _extract_keywords(prompt)
+        if not plan.get("checkpoint"):
+            best_ckpt = None
+            best_score = -1
+            for ckpt in registry.get("checkpoints", []):
+                score = _score_model(keywords, ckpt.get("tags", []), ckpt.get("recommended", False))
+                if score > best_score:
+                    best_score = score
+                    best_ckpt = ckpt
+            if best_ckpt:
+                plan["checkpoint"] = best_ckpt.get("name", "")
+                plan["model_type"] = best_ckpt.get("type", "sdxl")
+                plan["vae_name"] = best_ckpt.get("required_vae", "")
+                plan["clip_name"] = best_ckpt.get("required_clip", "")
+
+        target_info = None
+        for ckpt in registry.get("checkpoints", []):
+            if ckpt.get("name") == plan.get("checkpoint"):
+                target_info = ckpt
+                break
+        if target_info:
+            if target_info.get("required_vae"):
+                plan["vae_name"] = target_info.get("required_vae", "")
+            if target_info.get("required_clip"):
+                plan["clip_name"] = target_info.get("required_clip", "")
+            sampler_name, scheduler = _pick_sampler(plan.get("model_type", ""), target_info)
+        else:
+            sampler_name, scheduler = _pick_sampler(plan.get("model_type", ""), None)
+
+        w, h = _compute_resolution(
+            aspect_ratio=aspect_ratio,
+            base_size=base_size,
+            model_type=plan.get("model_type", "sdxl"),
+        )
+        plan["width"] = w
+        plan["height"] = h
+        plan["sampler_name"] = sampler_name
+        plan["scheduler"] = scheduler
 
         negative = plan.get("negative_prompt", "") or ""
         if user_negative.strip():
@@ -354,6 +463,11 @@ class OllamaPromptPlanner:
         lora_str = ",".join([l for l in loras if l])
         strength_str = ",".join([str(s) for s in strengths if str(s).strip()])
 
+        # Flux typically ignores negative prompts; enforce blank to avoid artifacts.
+        if str(plan.get("model_type", "")).lower() == "flux":
+            negative = ""
+            plan["use_refiner"] = False
+
         return (
             str(plan.get("checkpoint", "")),
             lora_str,
@@ -361,6 +475,8 @@ class OllamaPromptPlanner:
             str(plan.get("model_type", "sdxl")),
             int(plan.get("steps", 25)),
             float(plan.get("cfg", 6.5)),
+            str(plan.get("sampler_name", "euler")),
+            str(plan.get("scheduler", "normal")),
             int(plan.get("width", 1024)),
             int(plan.get("height", 1024)),
             int(plan.get("seed", int(time.time()) % 2_000_000_000)),
@@ -571,35 +687,26 @@ class DynamicCheckpointLoader:
                   log_lines.append(f"-> Using Native CLIP (explicitly requested).")
              else:
                  # SPLIT logic for comma-separated CLIPs (e.g. "clip_l, t5")
-                 # We will try to find the FIRST available one from the list to avoid errors.
                  clip_candidates = [c.strip() for c in effective_clip.split(",") if c.strip()]
-                 
-                 found_clip_path = None
+
+                 clip_paths = []
                  for c_cand in clip_candidates:
                      path_res = self._find_path("clip", c_cand, custom_path)
+                     if not path_res:
+                         path_res = self._find_path("checkpoints", c_cand, custom_path)
                      if path_res:
-                         found_clip_path = path_res
-                         if len(clip_candidates) > 1:
-                              log_lines.append(f"-> Selected '{c_cand}' from list.")
-                         break
+                         clip_paths.append(path_res)
+                         log_lines.append(f"-> CLIP candidate found: {path_res}")
                      else:
                          log_lines.append(f"-> Candidate '{c_cand}' missing.")
                  
-                 if found_clip_path:
+                 if clip_paths:
                       try:
-                          # Optimization: Use load_clip specifically if possible, else checkpoint guesser works for most safetensors
-                          if "checkpoint" in folder_paths.get_folder_paths("checkpoints"): # Checking context
-                               # Try generic loader first
-                               pass
-                          
-                          # Note: load_checkpoint_guess_config is robust for safetensors clips too usually
-                          _, out_clip, _ = comfy.sd.load_checkpoint_guess_config(
-                                found_clip_path, 
-                                output_vae=False, 
-                                output_clip=True, 
-                                embedding_directory=folder_paths.get_folder_paths("embeddings")
-                          )[:3]
-                          log_lines.append(f"-> CLIP Loaded from: {found_clip_path}")
+                          out_clip = comfy.sd.load_clip(
+                                clip_paths,
+                                embedding_directory=folder_paths.get_folder_paths("embeddings"),
+                          )
+                          log_lines.append(f"-> CLIP Loaded from: {clip_paths}")
                       except Exception as e:
                           log_lines.append(f"-> CLIP Load Failed: {e}")
                  else:
@@ -615,15 +722,37 @@ class DynamicCheckpointLoader:
         elif folder_type == "clip":
             folder_types = ["clip", "text_encoders", "checkpoints"]
         elif folder_type == "diffusion_models":
-             folder_types = ["diffusion_models", "unet", "checkpoints"]
+               folder_types = ["diffusion_models", "unet", "checkpoints"]
         elif folder_type == "vae":
             folder_types = ["vae", "checkpoints"]
 
+        # Direct lookup using ComfyUI path mapping
         for ft in folder_types:
             try:
                 path = folder_paths.get_full_path(ft, filename)
                 if path: return path
             except: pass
+
+        # Recursive search inside ComfyUI configured roots for the folder types
+        searched_roots = set()
+        for ft in folder_types:
+            try:
+                roots = folder_paths.get_folder_paths(ft)
+            except Exception:
+                roots = []
+            for root in roots:
+                if not root or root in searched_roots:
+                    continue
+                searched_roots.add(root)
+                try:
+                    if os.path.isfile(os.path.join(root, filename)):
+                        return os.path.join(root, filename)
+                    if os.path.isdir(root):
+                        for r, _, files in os.walk(root):
+                            if filename in files:
+                                return os.path.join(r, filename)
+                except Exception:
+                    pass
         
         # Checkpoint fallback (original behavior) if not covered above
         if folder_type != "checkpoints" and "checkpoints" not in folder_types:
@@ -882,6 +1011,8 @@ class OllamaVisionStylePlanner:
                 "registry_path": ("STRING", {"default": "model_registry.json"}),
                 "task_hint": (["auto", "img2img", "sdxl", "sd15", "flux"],),
                 "user_negative": ("STRING", {"multiline": True, "default": ""}),
+                "aspect_ratio": (["1:1", "3:2", "2:3", "16:9", "9:16", "4:5", "5:4"],),
+                "base_size": ("INT", {"default": 1024, "min": 256, "max": 2048, "step": 64}),
                 "ollama_host": ("STRING", {"default": "localhost"}),
                 "ollama_port": ("INT", {"default": 11434, "min": 1, "max": 65535}),
             }
@@ -918,6 +1049,8 @@ class OllamaVisionStylePlanner:
         "model_type",
         "steps",
         "cfg",
+        "sampler_name",
+        "scheduler",
         "width",
         "height",
         "seed",
@@ -938,7 +1071,7 @@ class OllamaVisionStylePlanner:
     FUNCTION = "plan"
     CATEGORY = "Ollama/Planner"
 
-    def plan(self, image, prompt, ollama_model, registry_path, task_hint, user_negative, ollama_host="localhost", ollama_port=11434):
+    def plan(self, image, prompt, ollama_model, registry_path, task_hint, user_negative, aspect_ratio, base_size, ollama_host="localhost", ollama_port=11434):
         registry = _read_registry(registry_path)
         compact = _compact_registry(registry)
         system_prompt = (
@@ -949,7 +1082,7 @@ class OllamaVisionStylePlanner:
             "use_refiner (bool), refiner_checkpoint, "
             "loras (array of names), lora_strengths (array of floats), "
             "controlnet_name, controlnet_strength (float), controlnet_start (float), controlnet_end (float), "
-            "positive_prompt, negative_prompt, steps (int), cfg (float), width (int), height (int), "
+            "positive_prompt, negative_prompt, steps (int), cfg (float), sampler_name, scheduler, width (int), height (int), "
             "denoise (float), seed (int). "
             "Use checkpoint, vae, clip and lora names exactly from the registry. "
             "If unsure, pick a recommended checkpoint."
@@ -980,6 +1113,46 @@ class OllamaVisionStylePlanner:
         if plan is None:
             plan = _heuristic_plan(prompt, registry)
 
+        # Keywords + registry-driven selection if checkpoint missing
+        keywords = _extract_keywords(prompt)
+        if not plan.get("checkpoint"):
+            best_ckpt = None
+            best_score = -1
+            for ckpt in registry.get("checkpoints", []):
+                score = _score_model(keywords, ckpt.get("tags", []), ckpt.get("recommended", False))
+                if score > best_score:
+                    best_score = score
+                    best_ckpt = ckpt
+            if best_ckpt:
+                plan["checkpoint"] = best_ckpt.get("name", "")
+                plan["model_type"] = best_ckpt.get("type", "sdxl")
+                plan["vae_name"] = best_ckpt.get("required_vae", "")
+                plan["clip_name"] = best_ckpt.get("required_clip", "")
+
+        target_info = None
+        for ckpt in registry.get("checkpoints", []):
+            if ckpt.get("name") == plan.get("checkpoint"):
+                target_info = ckpt
+                break
+        if target_info:
+            if target_info.get("required_vae"):
+                plan["vae_name"] = target_info.get("required_vae", "")
+            if target_info.get("required_clip"):
+                plan["clip_name"] = target_info.get("required_clip", "")
+            sampler_name, scheduler = _pick_sampler(plan.get("model_type", ""), target_info)
+        else:
+            sampler_name, scheduler = _pick_sampler(plan.get("model_type", ""), None)
+
+        w, h = _compute_resolution(
+            aspect_ratio=aspect_ratio,
+            base_size=base_size,
+            model_type=plan.get("model_type", "sdxl"),
+        )
+        plan["width"] = w
+        plan["height"] = h
+        plan["sampler_name"] = sampler_name
+        plan["scheduler"] = scheduler
+
         negative = plan.get("negative_prompt", "") or ""
         if user_negative.strip():
             if negative.strip():
@@ -997,6 +1170,10 @@ class OllamaVisionStylePlanner:
         lora_str = ",".join([l for l in loras if l])
         strength_str = ",".join([str(s) for s in strengths if str(s).strip()])
 
+        if str(plan.get("model_type", "")).lower() == "flux":
+            negative = ""
+            plan["use_refiner"] = False
+
         return (
             str(plan.get("checkpoint", "")),
             lora_str,
@@ -1004,6 +1181,8 @@ class OllamaVisionStylePlanner:
             str(plan.get("model_type", "sdxl")),
             int(plan.get("steps", 25)),
             float(plan.get("cfg", 6.5)),
+            str(plan.get("sampler_name", "euler")),
+            str(plan.get("scheduler", "normal")),
             int(plan.get("width", 1024)),
             int(plan.get("height", 1024)),
             int(plan.get("seed", int(time.time()) % 2_000_000_000)),
@@ -1149,6 +1328,89 @@ class OllamaDebugInfo:
 
     def notify(self, text):
         print(f"\n[Ollama Plan Debug]:\n{text}\n")
+        return {"ui": {"text": [text]}, "result": (text,)}
+
+
+class PreviewTextMerge:
+    """
+    Aggregate multiple text inputs, preview them together, and output combined + passthrough strings.
+    Useful for keeping a single preview node instead of many individual text preview nodes.
+    """
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        # Fixed max of 8 inputs; "count" lets the user decide how many are active.
+        optional_fields = {f"text{i}": ("STRING", {"forceInput": True, "default": ""}) for i in range(1, 9)}
+        return {
+            "required": {
+                "count": ("INT", {"default": 4, "min": 1, "max": 8}),
+                "separator": ("STRING", {"default": "\\n"}),
+                "emit_outputs": ("BOOLEAN", {"default": False}),
+            },
+            "optional": optional_fields,
+        }
+
+    RETURN_TYPES = (
+        "STRING",  # combined
+        "STRING", "STRING", "STRING", "STRING",
+        "STRING", "STRING", "STRING", "STRING",  # passthrough text1..text8
+    )
+    RETURN_NAMES = (
+        "combined",
+        "text1", "text2", "text3", "text4",
+        "text5", "text6", "text7", "text8",
+    )
+    FUNCTION = "merge"
+    CATEGORY = "Ollama/Debug"
+    OUTPUT_NODE = True
+
+    def merge(self, count, separator, emit_outputs, **kwargs):
+        # clamp count
+        n = max(1, min(8, int(count)))
+        texts = []
+        for i in range(1, 9):
+            key = f"text{i}"
+            val = kwargs.get(key, "")
+            texts.append("" if val is None else str(val))
+        active = texts[:n]
+        combined = separator.join(active)
+        preview = "\n".join(f"[{i}] {t}" for i, t in enumerate(active, 1))
+        if emit_outputs:
+            return {
+                "ui": {"text": [preview]},
+                "result": (combined, *texts),
+            }
+        else:
+            # Only preview; outputs are empty strings to satisfy the interface.
+            empty_out = tuple("" for _ in range(9))
+            return {
+                "ui": {"text": [preview]},
+                "result": empty_out,
+            }
+
+
+class LiveStatus:
+    """
+    Emit status text for live monitoring in the UI.
+    """
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "stage": ("STRING", {"default": "stage"}),
+                "message": ("STRING", {"multiline": True, "default": ""}),
+            }
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("status",)
+    FUNCTION = "emit"
+    CATEGORY = "Ollama/Debug"
+    OUTPUT_NODE = True
+
+    def emit(self, stage, message):
+        text = f"[{stage}] {message}"
+        print(text)
         return {"ui": {"text": [text]}, "result": (text,)}
 
 
