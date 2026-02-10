@@ -1,7 +1,7 @@
 {
   "1": {
     "inputs": {
-      "image": "example.png"
+      "image": "input.png"
     },
     "class_type": "LoadImage"
   },
@@ -11,11 +11,13 @@
         "1",
         0
       ],
-      "prompt": "match the style but improve detail and color grading",
+      "prompt": "analyze image style, keep composition, improve detail and lighting",
       "ollama_model": "llava:7b",
       "registry_path": "model_registry.json",
       "task_hint": "img2img",
-      "user_negative": "blurry, deformed, watermark",
+      "user_negative": "blurry, oversmoothed, artifacts",
+      "aspect_ratio": "1:1",
+      "base_size": 1024,
       "ollama_host": "localhost",
       "ollama_port": 11434
     },
@@ -29,9 +31,7 @@
       ],
       "model_type": "auto",
       "registry_path": "model_registry.json",
-      "custom_path": "",
-      "vae_override": "",
-      "clip_override": ""
+      "custom_path": ""
     },
     "class_type": "DynamicCheckpointLoader"
   },
@@ -61,7 +61,7 @@
     "inputs": {
       "text": [
         "2",
-        9
+        11
       ],
       "clip": [
         "4",
@@ -74,7 +74,7 @@
     "inputs": {
       "text": [
         "2",
-        10
+        12
       ],
       "clip": [
         "4",
@@ -100,7 +100,7 @@
     "inputs": {
       "seed": [
         "2",
-        8
+        10
       ],
       "steps": [
         "2",
@@ -110,33 +110,22 @@
         "2",
         5
       ],
-      "sampler_name": "euler",
-      "scheduler": "normal",
+      "sampler_name": [
+        "2",
+        6
+      ],
+      "scheduler": [
+        "2",
+        7
+      ],
       "denoise": [
         "2",
-        15
+        17
       ],
       "model": [
         "4",
         0
       ],
-      "positive": [
-        "12",
-        0
-      ],
-      "negative": [
-        "12",
-        1
-      ],
-      "latent_image": [
-        "7",
-        0
-      ]
-    },
-    "class_type": "KSampler"
-  },
-  "12": {
-    "inputs": {
       "positive": [
         "5",
         0
@@ -145,28 +134,12 @@
         "6",
         0
       ],
-      "controlnet_name": [
-        "2",
-        18
-      ],
-      "strength": [
-        "2",
-        19
-      ],
-      "start_percent": [
-        "2",
-        20
-      ],
-      "end_percent": [
-        "2",
-        21
-      ],
-      "image": [
-        "1",
+      "latent_image": [
+        "7",
         0
       ]
     },
-    "class_type": "OptionalControlNetApply"
+    "class_type": "KSampler"
   },
   "9": {
     "inputs": {
@@ -183,7 +156,7 @@
   },
   "10": {
     "inputs": {
-      "filename_prefix": "ollama_img2img",
+      "filename_prefix": "cluster_image_checkpoint_lora",
       "images": [
         "9",
         0
@@ -193,11 +166,42 @@
   },
   "11": {
     "inputs": {
-      "text": [
+      "stage": "Vision Planner JSON",
+      "message": [
         "2",
-        11
+        13
       ]
     },
-    "class_type": "OllamaDebugInfo"
+    "class_type": "LiveStatus"
+  },
+  "12": {
+    "inputs": {
+      "stage": "Selected Checkpoint",
+      "message": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "LiveStatus"
+  },
+  "13": {
+    "inputs": {
+      "stage": "Checkpoint Loader",
+      "message": [
+        "3",
+        3
+      ]
+    },
+    "class_type": "LiveStatus"
+  },
+  "14": {
+    "inputs": {
+      "stage": "LoRA Stack",
+      "message": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "LiveStatus"
   }
 }

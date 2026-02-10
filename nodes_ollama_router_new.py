@@ -821,7 +821,8 @@ class DynamicCheckpointLoader:
         for c in ordered_candidates:
             if c["name"] == target_info["name"]: continue
             if c.get("group") == grp and c.get("category") == cat and c.get("type") == resolved_type:
-                 found = self._find_path("checkpoints", c["name"], custom_path)
+                 cand_folder = c.get("folder_type", "checkpoints")
+                 found = self._find_path(cand_folder, c["name"], custom_path)
                  if found: return c["name"]
                  # log_store.append(f"Candidate '{c['name']}' matched metadata but file not found.") 
         
@@ -830,14 +831,16 @@ class DynamicCheckpointLoader:
         for c in ordered_candidates:
             if c["name"] == target_info["name"]: continue
             if c.get("group") == grp and c.get("type") == resolved_type:
-                 if self._find_path("checkpoints", c["name"], custom_path): return c["name"]
+                 cand_folder = c.get("folder_type", "checkpoints")
+                 if self._find_path(cand_folder, c["name"], custom_path): return c["name"]
 
         # Priority 3: Same Type
         log_store.append(f"Fallback Strategy: Relaxed -> Match Type='{resolved_type}' only")
         for c in ordered_candidates:
             if c["name"] == target_info["name"]: continue
             if c.get("type") == resolved_type:
-                 if self._find_path("checkpoints", c["name"], custom_path): return c["name"]
+                 cand_folder = c.get("folder_type", "checkpoints")
+                 if self._find_path(cand_folder, c["name"], custom_path): return c["name"]
         
         log_store.append("Fallback: No suitable candidate found on disk.")
         return None
@@ -1025,6 +1028,8 @@ class OllamaVisionStylePlanner:
         "STRING",
         "INT",
         "FLOAT",
+        "STRING",
+        "STRING",
         "INT",
         "INT",
         "INT",

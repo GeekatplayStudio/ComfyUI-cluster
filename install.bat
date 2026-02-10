@@ -48,7 +48,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command ^
   "  $content = Get-Content -Raw -Path $yamlPath;" ^
   "  if($content -notmatch '(?m)^ollama_cluster:'){" ^
   "    $base = ('%MODEL_ROOT%' -replace '\\\\','/');" ^
-  "    $section = \"`nollama_cluster:`n     base_path: $base`n     is_default: true`n     checkpoints: models/checkpoints/`n     loras: models/loras/`n     controlnet: models/controlnet/`n     vae: models/vae/`n     embeddings: models/embeddings/`n\";" ^
+  "    $section = \"`nollama_cluster:`n     base_path: $base`n     is_default: true`n     checkpoints: checkpoints/`n     diffusion_models: diffusion_models/`n     unet: diffusion_models/`n     loras: loras/`n     text_encoders: text_encoders/`n     clip: text_encoders/`n     controlnet: controlnet/`n     vae: vae/`n     embeddings: embeddings/`n\";" ^
   "    Add-Content -Path $yamlPath -Value $section;" ^
   "    Write-Host '[yaml] Added ollama_cluster section to extra_model_paths.yaml';" ^
   "  } else { Write-Host '[yaml] ollama_cluster section already present'; }" ^

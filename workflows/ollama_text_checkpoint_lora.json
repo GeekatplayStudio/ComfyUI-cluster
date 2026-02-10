@@ -1,11 +1,11 @@
 {
   "1": {
     "inputs": {
-      "prompt": "brand: geekatplay studio, cinematic portrait with neon rim light",
+      "prompt": "cinematic portrait, detailed skin texture, soft key light, 85mm lens",
       "ollama_model": "qwen2.5:7b",
       "registry_path": "model_registry.json",
       "task_hint": "auto",
-      "user_negative": "blurry, extra fingers, deformed",
+      "user_negative": "blurry, deformed, extra fingers, low quality",
       "aspect_ratio": "3:2",
       "base_size": 1024,
       "ollama_host": "localhost",
@@ -21,15 +21,7 @@
       ],
       "model_type": "auto",
       "registry_path": "model_registry.json",
-      "custom_path": "",
-      "vae_override": [
-        "1",
-        14
-      ],
-      "clip_override": [
-        "1",
-        15
-      ]
+      "custom_path": ""
     },
     "class_type": "DynamicCheckpointLoader"
   },
@@ -155,7 +147,7 @@
   },
   "9": {
     "inputs": {
-      "filename_prefix": "geekatplay_auto",
+      "filename_prefix": "cluster_text_checkpoint_lora",
       "images": [
         "8",
         0
@@ -165,7 +157,7 @@
   },
   "10": {
     "inputs": {
-      "stage": "Planner",
+      "stage": "Planner JSON",
       "message": [
         "1",
         13
@@ -175,22 +167,32 @@
   },
   "11": {
     "inputs": {
-      "count": 3,
-      "separator": "\\n",
-      "emit_outputs": false,
-      "text1": [
-        "1",
-        11
-      ],
-      "text2": [
-        "1",
-        12
-      ],
-      "text3": [
+      "stage": "Selected Checkpoint",
+      "message": [
         "1",
         0
       ]
     },
-    "class_type": "PreviewTextMerge"
+    "class_type": "LiveStatus"
+  },
+  "12": {
+    "inputs": {
+      "stage": "Checkpoint Loader",
+      "message": [
+        "2",
+        3
+      ]
+    },
+    "class_type": "LiveStatus"
+  },
+  "13": {
+    "inputs": {
+      "stage": "LoRA Stack",
+      "message": [
+        "3",
+        2
+      ]
+    },
+    "class_type": "LiveStatus"
   }
 }
