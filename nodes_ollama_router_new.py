@@ -15,6 +15,7 @@ import folder_paths
 import comfy.sd
 import comfy.utils
 import comfy.controlnet
+import comfy.samplers
 
 
 _DEFAULT_REGISTRY = {
@@ -54,6 +55,7 @@ def _compact_registry(registry: dict, max_items: int = 50) -> dict:
                 "type": item.get("type", ""),
                 "tags": item.get("tags", []),
                 "recommended": bool(item.get("recommended", False)),
+                "enabled": item.get("enabled", True), 
             })
         return compact
 
@@ -65,10 +67,63 @@ def _compact_registry(registry: dict, max_items: int = 50) -> dict:
 
 
 def _score_tags(prompt: str, tags: list[str]) -> int:
+    """
+    Advanced scoring:
+    - Matches tokens (words) to find substring matches.
+    - Matches multi-word tags against the prompt.
+    - Penalizes contradictions (e.g., 'anime' vs 'photorealistic').
+    - Rewards maximum matching tags.
+    """
+    prompt = prompt.lower()
+    # Normalize punctuation-heavy prompts
+    prompt_search = " " + re.sub(r"[^a-z0-9]", " ", prompt) + " "
+    
     score = 0
+    matched_tags = 0
+    
+    # 1. Direct Tag Matching (Weighted by length/specificity)
     for tag in tags:
-        if tag and tag in prompt:
-            score += 3
+        t = tag.lower()
+        if not t: 
+            continue
+            
+        # Check whole word match first (stronger)
+        # e.g., tag "landscape" in "beautiful landscape photo"
+        if f" {t} " in prompt_search:
+            score += 5
+            matched_tags += 1
+            
+        # Check substring match (weaker)
+        # e.g., tag "realism" in "photorealism"
+        elif t in prompt:
+            score += 2
+            matched_tags += 1
+        
+        # Check reverse substring (prompt word in tag)
+        # e.g., prompt "photo" in tag "photorealism"
+        elif any(w in t for w in prompt.split() if w and len(w) > 3):
+            score += 1
+            
+    # 2. Negative Constraints / Penalty
+    # If prompt strongly implies style X, penalize model with style Y
+    # Explicit Style Groups
+    is_anime_prompt = any(x in prompt for x in ["anime", "cartoon", "illustration", "waifu", "2d"])
+    is_photo_prompt = any(x in prompt for x in ["photo", "realis", "raw", "dslr", "4k"])
+    
+    has_anime_tag = any("anime" in t or "cartoon" in t for t in tags)
+    has_photo_tag = any("realis" in t or "photo" in t for t in tags)
+    
+    if is_anime_prompt and has_photo_tag and not has_anime_tag:
+        score -= 10
+    if is_photo_prompt and has_anime_tag and not has_photo_tag:
+        score -= 10
+
+    # 3. Specificity Bonus
+    # If we matched multiple tags, it means the model is a better 'conceptual' fit
+    # than a model where we just matched one generic tag.
+    if matched_tags > 1:
+        score += (matched_tags * 2)
+
     return score
 
 
@@ -81,6 +136,8 @@ def _heuristic_plan(prompt: str, registry: dict) -> dict:
     best_ckpt = None
     best_score = -1
     for ckpt in checkpoints:
+        if ckpt.get("enabled", True) is False:
+             continue
         tags = [t.lower() for t in ckpt.get("tags", [])]
         score = _score_tags(prompt_l, tags)
         if ckpt.get("recommended"):
@@ -89,12 +146,27 @@ def _heuristic_plan(prompt: str, registry: dict) -> dict:
             best_score = score
             best_ckpt = ckpt
 
+    # Safety: If filtered list is empty, best_ckpt remains None.
+    # Fallback to first available enabled checkpoint if possible?
+    if best_ckpt is None:
+         # Try find ANY enabled checkpoint
+         for ckpt in checkpoints:
+             if ckpt.get("enabled", True) is not False:
+                 best_ckpt = ckpt
+                 break
+
     if best_ckpt is None and checkpoints:
+        # If absolutely everything is disabled, we might have to just pick one or fail.
+        # Let's pick the first one and hope the user knows what they are doing, or just return it.
+        # But per user request "only use those that are enabled", maybe we should warn?
+        # For now, if all disabled, just pick first to avoid crash, but it will likely fail downstream.
         best_ckpt = checkpoints[0]
 
     selected_loras = []
     selected_strengths = []
     for lora in loras:
+        if lora.get("enabled", True) is False:
+             continue
         tags = [t.lower() for t in lora.get("tags", [])]
         if _score_tags(prompt_l, tags) > 0:
             selected_loras.append(lora.get("name", ""))
@@ -104,6 +176,8 @@ def _heuristic_plan(prompt: str, registry: dict) -> dict:
     controlnet_name = ""
     controlnet_strength = 0.0
     for cn in controlnets:
+        if cn.get("enabled", True) is False:
+             continue
         tags = [t.lower() for t in cn.get("tags", [])]
         if "pose" in prompt_l and ("pose" in tags or "openpose" in tags):
             controlnet_name = cn.get("name", "")
@@ -261,14 +335,56 @@ def _score_model(keywords: list[str], tags: list[str], recommended: bool) -> int
 
 
 def _pick_sampler(model_type: str, target_info: dict | None) -> tuple[str, str]:
-    if target_info and target_info.get("sampler"):
-        return (target_info.get("sampler"), target_info.get("scheduler", "normal"))
-    mt = (model_type or "").lower()
-    if mt == "flux":
-        return ("dpmpp_2m", "karras")
-    if mt == "sdxl":
-        return ("dpmpp_2m", "karras")
-    return ("euler", "normal")
+    # Default fallback
+    sampler = "euler"
+    scheduler = "normal"
+    
+    # Check target_info first
+    if target_info:
+        s_try = target_info.get("sampler_name") or target_info.get("sampler")
+        sch_try = target_info.get("scheduler")
+        if s_try:
+            sampler = s_try
+        if sch_try:
+            scheduler = sch_try
+            
+    # Heuristics if not set in registry
+    else:
+        mt = (model_type or "").lower()
+        if "flux" in mt:
+            sampler = "euler"
+            scheduler = "simple"
+        elif "sdxl" in mt:
+            sampler = "dpmpp_2m"
+            scheduler = "karras"
+        elif "sd15" in mt or "sd1.5" in mt:
+            sampler = "euler_ancestral" 
+            scheduler = "normal"
+
+    # Validate against ComfyUI known types to ensure compatibility
+    # This helps when connecting to KSampler nodes which expect exact string matches
+    try:
+        valid_samplers = comfy.samplers.KSampler.SAMPLERS
+        valid_schedulers = comfy.samplers.KSampler.SCHEDULERS
+        
+        if sampler not in valid_samplers:
+            # Try close match or standard backup
+            if sampler == "euler_a": sampler = "euler_ancestral"
+            elif sampler == "dpm++_2m": sampler = "dpmpp_2m"
+            elif sampler not in valid_samplers:
+                # Keep it but warn? Or fallback. KSampler might error if invalid.
+                # Fallback to euler if completely unknown
+                 pass 
+
+        if scheduler not in valid_schedulers:
+            if scheduler == "simple" and "simple" not in valid_schedulers:
+                scheduler = "normal" # simple not available in old comfy
+            elif scheduler == "karras" and "karras" not in valid_schedulers:
+                scheduler = "normal"
+    except:
+        pass
+
+    return (sampler, scheduler)
 
 
 def _compute_resolution(aspect_ratio: str, base_size: int, model_type: str) -> tuple[int, int]:
@@ -314,6 +430,7 @@ class OllamaPromptPlanner:
                 "base_size": ("INT", {"default": 1024, "min": 256, "max": 2048, "step": 64}),
                 "ollama_host": ("STRING", {"default": "localhost"}),
                 "ollama_port": ("INT", {"default": 11434, "min": 1, "max": 65535}),
+                "max_vram": ([24, 16, 12, 8, 6], {"default": 24}),
             }
         }
 
@@ -324,8 +441,8 @@ class OllamaPromptPlanner:
         "STRING",  # model_type
         "INT",     # steps
         "FLOAT",   # cfg
-        "STRING",  # sampler_name
-        "STRING",  # scheduler
+        comfy.samplers.KSampler.SAMPLERS,  # sampler_name
+        comfy.samplers.KSampler.SCHEDULERS,  # scheduler
         "INT",     # width
         "INT",     # height
         "INT",     # seed
@@ -372,8 +489,17 @@ class OllamaPromptPlanner:
     FUNCTION = "plan"
     CATEGORY = "Ollama/Planner"
 
-    def plan(self, prompt, ollama_model, registry_path, task_hint, user_negative, aspect_ratio, base_size, ollama_host="localhost", ollama_port=11434):
+    def plan(self, prompt, ollama_model, registry_path, task_hint, user_negative, aspect_ratio, base_size, max_vram=24, ollama_host="localhost", ollama_port=11434):
         registry = _read_registry(registry_path)
+        
+        # Filter by VRAM
+        valid_ckpts = []
+        for ckpt in registry.get("checkpoints", []):
+            req = ckpt.get("min_vram", 0)
+            if req <= max_vram:
+                valid_ckpts.append(ckpt)
+        registry["checkpoints"] = valid_ckpts
+        
         compact = _compact_registry(registry)
         system_prompt = (
             "You are a routing planner for image generation. "
@@ -432,6 +558,12 @@ class OllamaPromptPlanner:
                 plan["vae_name"] = target_info.get("required_vae", "")
             if target_info.get("required_clip"):
                 plan["clip_name"] = target_info.get("required_clip", "")
+
+            if target_info.get("steps"):
+                plan["steps"] = target_info.get("steps")
+            if target_info.get("cfg"):
+                plan["cfg"] = target_info.get("cfg")
+
             sampler_name, scheduler = _pick_sampler(plan.get("model_type", ""), target_info)
         else:
             sampler_name, scheduler = _pick_sampler(plan.get("model_type", ""), None)
@@ -598,6 +730,16 @@ class DynamicCheckpointLoader:
                      if c.get("name") == fallback_name:
                          fallback_info = c
                          break
+
+                # CRITICAL FIX: If we fell back to a model, we MUST update target_info effectively
+                # so that downstream logic (VAE/CLIP requirements) uses the FALLBACK model's metadata, not the original missing one.
+                if fallback_info:
+                    target_info = fallback_info
+                    # Also update resolved_type if it was generic 'auto' and now we have specific
+                    if model_type == "auto":
+                        resolved_type = fallback_info.get("type", "sdxl")
+                    
+                    log_lines.append(f"-> Switched metadata context to '{fallback_name}' (Type: {resolved_type})")
                 
                 fallback_folder = "checkpoints"
                 if fallback_info and fallback_info.get("folder_type"):
@@ -678,7 +820,11 @@ class DynamicCheckpointLoader:
                     except Exception as e:
                         log_lines.append(f"-> VAE Load Failed: {e}")
                 else:
-                    log_lines.append(f"-> VAE Not Found!")
+                    msg = f"-> VAE '{effective_vae}' NOT FOUND in search paths!"
+                    log_lines.append(msg)
+                    print(f"[OllamaRouter] WARNING: {msg}")
+                    if "flux" in str(active_model_name).lower() or reg_vae:
+                        print("[OllamaRouter] CRITICAL: Missing required VAE for this model. Rendering will likely fail.")
 
         if effective_clip:
              log_lines.append(f"Override CLIP: '{effective_clip}' ...")
@@ -702,15 +848,27 @@ class DynamicCheckpointLoader:
                  
                  if clip_paths:
                       try:
+                          # Determine clip_type based on resolved_type to ensure correct model loading (especially for Flux/SD3)
+                          clip_type_enum = comfy.sd.CLIPType.STABLE_DIFFUSION
+                          if str(resolved_type).lower() == "flux":
+                              clip_type_enum = comfy.sd.CLIPType.FLUX
+                          elif str(resolved_type).lower() == "sd3":
+                              clip_type_enum = comfy.sd.CLIPType.SD3
+                          
                           out_clip = comfy.sd.load_clip(
                                 clip_paths,
                                 embedding_directory=folder_paths.get_folder_paths("embeddings"),
+                                clip_type=clip_type_enum,
                           )
-                          log_lines.append(f"-> CLIP Loaded from: {clip_paths}")
+                          log_lines.append(f"-> CLIP Loaded from: {clip_paths} (Type: {clip_type_enum})")
                       except Exception as e:
                           log_lines.append(f"-> CLIP Load Failed: {e}")
                  else:
-                     log_lines.append(f"-> CLIP Not Found! (Searched: {clip_candidates})")
+                     msg = f"-> CLIP components {clip_candidates} NOT FOUND!"
+                     log_lines.append(msg)
+                     print(f"[OllamaRouter] WARNING: {msg}")
+                     if "flux" in str(active_model_name).lower() or reg_clip:
+                        print("[OllamaRouter] CRITICAL: Missing required CLIP/T5 for this model. Rendering will likely fail.")
 
         return (out_model, out_clip, out_vae, "\n".join(log_lines))
 
@@ -749,8 +907,13 @@ class DynamicCheckpointLoader:
                         return os.path.join(root, filename)
                     if os.path.isdir(root):
                         for r, _, files in os.walk(root):
+                            # Exact match first
                             if filename in files:
                                 return os.path.join(r, filename)
+                            # Case-insensitive match
+                            lower_map = {f.lower(): f for f in files}
+                            if filename.lower() in lower_map:
+                                return os.path.join(r, lower_map[filename.lower()])
                 except Exception:
                     pass
         
@@ -803,6 +966,9 @@ class DynamicCheckpointLoader:
         if not target_info:
              log_store.append("Fallback: No target info, searching by type only...")
              for c in ordered_candidates:
+                 # Check enabled status
+                 if c.get("enabled", True) is False: continue
+
                  # If mode is 'auto', accept any type, otherwise must match
                  if resolved_type == "auto" or c.get("type") == resolved_type:
                      # We need to find the correct folder type for this candidate to check existence
@@ -820,6 +986,7 @@ class DynamicCheckpointLoader:
         # Priority 1: Same Group & Category
         for c in ordered_candidates:
             if c["name"] == target_info["name"]: continue
+            if c.get("enabled", True) is False: continue
             if c.get("group") == grp and c.get("category") == cat and c.get("type") == resolved_type:
                  cand_folder = c.get("folder_type", "checkpoints")
                  found = self._find_path(cand_folder, c["name"], custom_path)
@@ -830,6 +997,7 @@ class DynamicCheckpointLoader:
         log_store.append(f"Fallback Strategy: Relaxed -> Match Group='{grp}' AND Type='{resolved_type}'")
         for c in ordered_candidates:
             if c["name"] == target_info["name"]: continue
+            if c.get("enabled", True) is False: continue
             if c.get("group") == grp and c.get("type") == resolved_type:
                  cand_folder = c.get("folder_type", "checkpoints")
                  if self._find_path(cand_folder, c["name"], custom_path): return c["name"]
@@ -838,6 +1006,7 @@ class DynamicCheckpointLoader:
         log_store.append(f"Fallback Strategy: Relaxed -> Match Type='{resolved_type}' only")
         for c in ordered_candidates:
             if c["name"] == target_info["name"]: continue
+            if c.get("enabled", True) is False: continue
             if c.get("type") == resolved_type:
                  cand_folder = c.get("folder_type", "checkpoints")
                  if self._find_path(cand_folder, c["name"], custom_path): return c["name"]
@@ -964,12 +1133,14 @@ class DynamicLoraStack:
         # Priority 1: Same Group & Category
         for l in registry.get("loras", []):
             if l["name"] == target_info["name"]: continue
+            if l.get("enabled", True) is False: continue
             if l.get("group") == target_grp and l.get("category") == target_cat:
                 if self._find_path(l["name"], custom_path): return l["name"]
         
         # Priority 2: Same Category only
         for l in registry.get("loras", []):
             if l["name"] == target_info["name"]: continue
+            if l.get("enabled", True) is False: continue
             if l.get("category") == target_cat:
                 if self._find_path(l["name"], custom_path): return l["name"]
         
@@ -1018,6 +1189,7 @@ class OllamaVisionStylePlanner:
                 "base_size": ("INT", {"default": 1024, "min": 256, "max": 2048, "step": 64}),
                 "ollama_host": ("STRING", {"default": "localhost"}),
                 "ollama_port": ("INT", {"default": 11434, "min": 1, "max": 65535}),
+                "max_vram": ([24, 16, 12, 8, 6], {"default": 24}),
             }
         }
 
@@ -1028,8 +1200,8 @@ class OllamaVisionStylePlanner:
         "STRING",
         "INT",
         "FLOAT",
-        "STRING",
-        "STRING",
+        comfy.samplers.KSampler.SAMPLERS,
+        comfy.samplers.KSampler.SCHEDULERS,
         "INT",
         "INT",
         "INT",
@@ -1076,8 +1248,17 @@ class OllamaVisionStylePlanner:
     FUNCTION = "plan"
     CATEGORY = "Ollama/Planner"
 
-    def plan(self, image, prompt, ollama_model, registry_path, task_hint, user_negative, aspect_ratio, base_size, ollama_host="localhost", ollama_port=11434):
+    def plan(self, image, prompt, ollama_model, registry_path, task_hint, user_negative, aspect_ratio, base_size, max_vram=24, ollama_host="localhost", ollama_port=11434):
         registry = _read_registry(registry_path)
+
+        # Filter by VRAM
+        valid_ckpts = []
+        for ckpt in registry.get("checkpoints", []):
+            req = ckpt.get("min_vram", 0)
+            if req <= max_vram:
+                valid_ckpts.append(ckpt)
+        registry["checkpoints"] = valid_ckpts
+        
         compact = _compact_registry(registry)
         system_prompt = (
             "You analyze an image style and select the best image generation setup. "
@@ -1144,6 +1325,12 @@ class OllamaVisionStylePlanner:
                 plan["vae_name"] = target_info.get("required_vae", "")
             if target_info.get("required_clip"):
                 plan["clip_name"] = target_info.get("required_clip", "")
+
+            if target_info.get("steps"):
+                plan["steps"] = target_info.get("steps")
+            if target_info.get("cfg"):
+                plan["cfg"] = target_info.get("cfg")
+
             sampler_name, scheduler = _pick_sampler(plan.get("model_type", ""), target_info)
         else:
             sampler_name, scheduler = _pick_sampler(plan.get("model_type", ""), None)

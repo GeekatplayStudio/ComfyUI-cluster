@@ -7,219 +7,356 @@
       "url": "https://huggingface.co/black-forest-labs/FLUX.1-dev",
       "tags": [
         "flux",
-        "dev",
-        "fp8",
-        "realism"
+        "realism",
+        "general-purpose",
+        "best-overall-quality",
+        "text-rendering",
+        "complex-composition"
       ],
       "type": "flux",
       "group": "Group A (Flux VAE / T5-CLIP)",
       "recommended": true,
       "required_vae": "ae.safetensors",
       "required_clip": "clip_l.safetensors, t5xxl_fp8_e4m3fn.safetensors",
-      "folder_type": "diffusion_models"
+      "folder_type": "diffusion_models",
+      "steps": 20,
+      "cfg": 3.5,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "min_vram": 12,
+      "enabled": false
     },
     {
       "name": "Flux.2-dev-fp16.safetensors",
       "category": "Photorealism",
       "url": "https://huggingface.co/black-forest-labs/FLUX.2-dev",
       "tags": [
+        "flux",
         "hyper-realism",
-        "skin-texture",
-        "text-rendering",
-        "high-fidelity"
+        "extreme-detail",
+        "macro-photography",
+        "ultimate-fidelity",
+        "heavy-vram"
       ],
       "type": "flux",
       "group": "Group A (Flux VAE / T5-CLIP)",
-      "recommended": true
+      "recommended": true,
+      "steps": 20,
+      "cfg": 3.5,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "min_vram": 32,
+      "enabled": false
     },
     {
       "name": "RealVisXL_V6.0_B1.safetensors",
       "category": "Photorealism",
       "url": "https://civitai.com/models/150629",
       "tags": [
-        "raw-photo",
+        "photorealism",
+        "portrait",
+        "human-focus",
         "dslr",
-        "8k",
-        "professional-photography",
-        "anatomy"
+        "raw-photo",
+        "social-media-style",
+        "interview-lighting"
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE / CLIP-L)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Juggernaut_XL_v10.safetensors",
       "category": "Photorealism",
       "url": "https://civitai.com/models/133005",
       "tags": [
+        "photorealism",
         "cinematic",
-        "lighting",
-        "generalist",
-        "commercial-photography"
+        "landscape",
+        "movie-still",
+        "lighting-heavy",
+        "atmospheric",
+        "wide-angle"
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Z-Image-Turbo-v1.safetensors",
       "category": "Photorealism",
       "url": "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo",
       "tags": [
-        "speed",
-        "realism",
-        "architectural",
-        "clean-lighting"
+        "photorealism",
+        "architecture",
+        "interior-design",
+        "fast-render",
+        "sharp-lines",
+        "modern-style"
       ],
       "type": "sdxl",
       "group": "Group B (Z-VAE / Z-CLIP)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "epiCPhotoGasm_v2.safetensors",
       "category": "Photorealism",
       "url": "https://civitai.com/models/132632",
       "tags": [
-        "studio-lighting",
-        "portraits",
-        "soft-skin",
-        "bokeh"
+        "photorealism",
+        "portrait",
+        "artistic-nude",
+        "soft-lighting",
+        "bokeh",
+        "intimate-shot",
+        "feminine-focus"
       ],
       "type": "sd15",
       "group": "Group D (SD1.5 VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 25,
+      "cfg": 7.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "min_vram": 6,
+      "enabled": false
     },
     {
       "name": "Realistic_Vision_V7.0.safetensors",
       "category": "Photorealism",
       "url": "https://civitai.com/models/4201",
       "tags": [
+        "photorealism",
+        "portrait",
         "analog-film",
-        "retro",
-        "human-anatomy",
-        "natural-poses"
+        "film-grain",
+        "vintage-style",
+        "90s-photo",
+        "imperfect-realism"
       ],
       "type": "sd15",
       "group": "Group D (SD1.5 VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 25,
+      "cfg": 7.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "min_vram": 6,
+      "enabled": false
     },
     {
       "name": "IC-Light-XL-Realistic.safetensors",
       "category": "Photorealism",
       "url": "https://huggingface.co/lllyasviel/ic-light",
       "tags": [
+        "photorealism",
         "relighting",
-        "shadow-control",
-        "background-blending"
+        "light-control",
+        "studio-setup",
+        "background-replacement"
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Sateluco-IOR-XL.safetensors",
       "category": "Photorealism",
       "url": "https://civitai.com/models/sateluco",
       "tags": [
-        "extreme-clarity",
-        "high-dynamic-range",
-        "reflection-logic"
+        "photorealism",
+        "landscape",
+        "nature",
+        "hdr",
+        "travel-photography",
+        "high-contrast",
+        "outdoor-focus"
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "AnalogMadness_XL_v4.safetensors",
       "category": "Photorealism",
       "url": "https://civitai.com/models/analog-xl",
       "tags": [
-        "film-grain",
+        "photorealism",
+        "film-stock",
         "kodak-portra",
-        "fuji-film",
-        "nostalgia"
+        "fujifilm",
+        "street-photography",
+        "nostalgic"
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Photopedia_XL_v2.safetensors",
       "category": "Photorealism",
       "url": "https://civitai.com/models/photopedia",
       "tags": [
-        "stock-photography",
-        "documentary-style",
-        "authentic"
+        "photorealism",
+        "documentary",
+        "journalism",
+        "stock-photo",
+        "neutral-style",
+        "everyday-life"
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Mobius_XL_v1.safetensors",
       "category": "Photorealism",
       "url": "https://civitai.com/models/mobius",
       "tags": [
-        "lighting-consistency",
-        "character-depth",
-        "sharp-focus"
+        "photorealism",
+        "fantasy-realism",
+        "cinematic-character",
+        "digital-art",
+        "clean-render",
+        "game-cinematic"
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "AbsoluteReality_v1.8.safetensors",
       "category": "Photorealism",
       "url": "https://civitai.com/models/81458",
       "tags": [
-        "sharp-details",
-        "natural-skin",
-        "non-ai-look"
+        "photorealism",
+        "portrait",
+        "sharp-focus",
+        "reality-engine",
+        "uncanny-valley-avoidance"
       ],
       "type": "sd15",
       "group": "Group D (SD1.5 VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 25,
+      "cfg": 7.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "min_vram": 6,
+      "enabled": false
     },
     {
       "name": "ThinkDiffusionXL_v1.safetensors",
       "category": "Photorealism",
       "url": "https://civitai.com/models/thinkdiffusion",
       "tags": [
-        "4k-resolution",
-        "crisp-edges",
-        "studio-render"
+        "photorealism",
+        "advertisement",
+        "commercial-product",
+        "4k-render",
+        "clean-background"
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "NightVision_XL_v9.safetensors",
       "category": "Photorealism",
       "url": "https://civitai.com/models/nightvision",
       "tags": [
+        "photorealism",
         "night-photography",
         "low-light",
-        "street-lighting"
+        "cyberpunk",
+        "neon-lights",
+        "dark-atmosphere"
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "CyberRealistic_XL_v6.safetensors",
       "category": "Photorealism",
       "url": "https://civitai.com/models/cyberrealistic",
       "tags": [
-        "hyper-detail",
-        "intricate-skin",
-        "photorealism"
+        "photorealism",
+        "portrait",
+        "face-detail",
+        "headshot",
+        "studio-portrait",
+        "skin-pores"
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Illustrious-XL-v1.0.safetensors",
@@ -227,143 +364,232 @@
       "url": "https://civitai.com/models/illustrious",
       "tags": [
         "anime",
-        "high-res",
+        "illustration",
+        "vibrant-color",
+        "modern-anime",
         "cel-shaded",
-        "modern-anime"
+        "digital-painting"
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "PonyDiffusion_V7_XL.safetensors",
       "category": "Anime",
       "url": "https://civitai.com/models/257",
       "tags": [
-        "character-design",
-        "complex-poses",
-        "fandom",
-        "expressive"
+        "anime",
+        "western-style",
+        "cartoon",
+        "variable-style",
+        "furry-compatible",
+        "concept-art"
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "AAM_XL_AnimeMix_v2.safetensors",
       "category": "Anime",
       "url": "https://civitai.com/models/anime-mix",
       "tags": [
-        "vibrant",
-        "fantasy-anime",
-        "wallpaper-quality"
+        "anime",
+        "scenery",
+        "detailed-background",
+        "wallpaper-art",
+        "visual-novel-style"
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "MeinaMix_V11.safetensors",
       "category": "Anime",
       "url": "https://civitai.com/models/meinamix",
       "tags": [
-        "soft-anime",
-        "romantic-style",
-        "clean-lines"
+        "anime",
+        "soft-shading",
+        "pastel-colors",
+        "romantic-anime",
+        "character-illustration"
       ],
       "type": "sd15",
       "group": "Group D (SD1.5 VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 25,
+      "cfg": 7.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "min_vram": 6,
+      "enabled": false
     },
     {
       "name": "Cetus-Mix-Final.safetensors",
       "category": "Anime",
       "url": "https://civitai.com/models/cetus",
       "tags": [
-        "painterly-anime",
+        "anime",
+        "semi-realistic",
         "2.5D",
-        "semi-realistic"
+        "painterly-style",
+        "concept-art"
       ],
       "type": "sd15",
       "group": "Group D (SD1.5 VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 25,
+      "cfg": 7.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "min_vram": 6,
+      "enabled": false
     },
     {
       "name": "NoobAI-XL-v1.safetensors",
       "category": "Anime",
       "url": "https://civitai.com/models/noobai",
       "tags": [
-        "danbooru-tags",
-        "technical-prompts",
-        "precision"
+        "anime",
+        "tag-adherence",
+        "danbooru-style",
+        "technical-precision",
+        "clean-lines"
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Animagine_XL_v4.0.safetensors",
       "category": "Anime",
       "url": "https://civitai.com/models/animagine",
       "tags": [
+        "anime",
+        "official-art-style",
+        "media-franchise",
         "consistent-character",
-        "high-quality-anime",
-        "official-art-style"
+        "high-res-anime"
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "AbyssOrangeMix3_AOM3.safetensors",
       "category": "Anime",
       "url": "https://civitai.com/models/abyssorangemix",
       "tags": [
-        "dark-anime",
+        "anime",
+        "dark-fantasy",
+        "gothic-style",
         "detailed-eyes",
-        "aesthetic"
+        "atmospheric-anime"
       ],
       "type": "sd15",
       "group": "Group D (SD1.5 VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 25,
+      "cfg": 7.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "min_vram": 6,
+      "enabled": false
     },
     {
       "name": "Counterfeit-V3.0.safetensors",
       "category": "Anime",
       "url": "https://civitai.com/models/counterfeit",
       "tags": [
-        "background-focused",
-        "atmospheric-anime"
+        "anime",
+        "landscape-anime",
+        "scenic",
+        "makoto-shinkai-style",
+        "high-detail-background"
       ],
       "type": "sd15",
       "group": "Group D (SD1.5 VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 25,
+      "cfg": 7.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "min_vram": 6,
+      "enabled": false
     },
     {
       "name": "BlueberryMix_XL.safetensors",
       "category": "Anime",
       "url": "https://civitai.com/models/blueberry",
       "tags": [
-        "moe-style",
-        "soft-colors",
-        "kawaii"
+        "anime",
+        "cute-style",
+        "kawaii",
+        "chibi-compatible",
+        "moe"
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Mistoon_Anime_v2.safetensors",
       "category": "Anime",
       "url": "https://civitai.com/models/mistoon",
       "tags": [
+        "anime",
         "flat-color",
-        "vector-style",
-        "clean-anime"
+        "western-cartoon-mix",
+        "vector-art",
+        "simple-shading"
       ],
       "type": "sd15",
       "group": "Group D (SD1.5 VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 25,
+      "cfg": 7.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "min_vram": 6,
+      "enabled": false
     },
     {
       "name": "Pastel-Mix-Stylized.safetensors",
@@ -376,7 +602,13 @@
       ],
       "type": "sd15",
       "group": "Group D (SD1.5 VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 25,
+      "cfg": 7.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "min_vram": 6,
+      "enabled": false
     },
     {
       "name": "Real-Anime-XL.safetensors",
@@ -389,7 +621,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "HoloDayo_XL_v1.safetensors",
@@ -402,7 +640,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Waifu-Diffusion-XL.safetensors",
@@ -415,7 +659,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Painterly_XL_Check_v2.safetensors",
@@ -429,7 +679,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "DreamShaper_XL_Turbo.safetensors",
@@ -443,7 +699,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Watercolor_Stylized_v3.safetensors",
@@ -456,7 +718,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Copax_TimeLess_XL_v9.safetensors",
@@ -469,7 +737,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Oil_Brush_Pro_v2.safetensors",
@@ -482,7 +756,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Arcane_Style_XL.safetensors",
@@ -496,7 +776,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Inkpunk_Diffusion_v2.safetensors",
@@ -509,7 +795,13 @@
       ],
       "type": "sd15",
       "group": "Group D (SD1.5 VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 25,
+      "cfg": 7.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "min_vram": 6,
+      "enabled": false
     },
     {
       "name": "Abstract_Master_XL.safetensors",
@@ -522,7 +814,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Charcoal_Pro_v1.safetensors",
@@ -535,7 +833,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Ukiyo-e_XL_v2.safetensors",
@@ -548,7 +852,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "ComicMix_XL_v3.safetensors",
@@ -561,7 +871,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Gouache_Style_XL.safetensors",
@@ -574,7 +890,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Pencil-Sketch-XL.safetensors",
@@ -587,7 +909,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Synthwave_Master_XL.safetensors",
@@ -600,7 +928,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Dark-Vibe-XL.safetensors",
@@ -613,7 +947,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Modern_Architecture_XL.safetensors",
@@ -627,7 +967,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Interior_Design_Flux_v2.safetensors",
@@ -640,7 +986,13 @@
       ],
       "type": "flux",
       "group": "Group A (Flux VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 20,
+      "cfg": 3.5,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "min_vram": 16,
+      "enabled": false
     },
     {
       "name": "Abandoned_Places_XL.safetensors",
@@ -654,7 +1006,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "CyberCity_XL_Pro.safetensors",
@@ -667,7 +1025,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Brutalist_Logic_XL.safetensors",
@@ -680,7 +1044,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Gothic_Stone_Carving.safetensors",
@@ -693,7 +1063,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "TinyHouse_Master_XL.safetensors",
@@ -706,7 +1082,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Steampunk_City_v2.safetensors",
@@ -720,7 +1102,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Skyscraper_High_Angle.safetensors",
@@ -733,7 +1121,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Japanese_Traditional_House.safetensors",
@@ -746,7 +1140,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Landscape_Anime_Max.safetensors",
@@ -759,7 +1159,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "GrandCanyon_RedRock_XL.safetensors",
@@ -772,7 +1178,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Misty_Forest_XL_v3.safetensors",
@@ -785,7 +1197,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Arctic_Tundra_Pro.safetensors",
@@ -798,7 +1216,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Biolume_Jungle_XL.safetensors",
@@ -811,7 +1235,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Volcano_Fury_XL.safetensors",
@@ -824,7 +1254,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Alpine_Valley_v2.safetensors",
@@ -837,7 +1273,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Lavender_Sunset_XL.safetensors",
@@ -850,7 +1292,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Ocean_Deep_Pro.safetensors",
@@ -863,7 +1311,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Martian_Colony_XL.safetensors",
@@ -876,7 +1330,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Wan_2.1_T2V_14B.safetensors",
@@ -892,7 +1352,9 @@
       "recommended": true,
       "required_vae": "wan_2.1_vae.safetensors",
       "required_clip": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
-      "folder_type": "diffusion_models"
+      "folder_type": "diffusion_models",
+      "min_vram": 6,
+      "enabled": false
     },
     {
       "name": "Wan2.1-t2v-1.3B.safetensors",
@@ -908,7 +1370,9 @@
       "recommended": true,
       "required_vae": "wan_2.1_vae.safetensors",
       "required_clip": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
-      "folder_type": "diffusion_models"
+      "folder_type": "diffusion_models",
+      "min_vram": 6,
+      "enabled": false
     },
     {
       "name": "HunyuanVideo_v1.safetensors",
@@ -924,7 +1388,9 @@
       "recommended": true,
       "required_vae": "hunyuan_video_vae.safetensors",
       "required_clip": "llava_llama3_fp8_scaled.safetensors, clip_l.safetensors",
-      "folder_type": "diffusion_models"
+      "folder_type": "diffusion_models",
+      "min_vram": 6,
+      "enabled": false
     },
     {
       "name": "SVD-XT-1.1.safetensors",
@@ -936,7 +1402,9 @@
       ],
       "type": "svd",
       "group": "Group V (SVD VAE)",
-      "recommended": true
+      "recommended": true,
+      "min_vram": 6,
+      "enabled": false
     },
     {
       "name": "LivePortrait_XL_v2.safetensors",
@@ -949,7 +1417,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Disney_Pixar_Cartoon_XL.safetensors",
@@ -962,7 +1436,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Blender-Style-XL.safetensors",
@@ -975,7 +1455,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Clay-Aardman-Style.safetensors",
@@ -988,7 +1474,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Unreal-Engine-5-XL.safetensors",
@@ -1001,7 +1493,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "ZBrush-Sculpt-XL.safetensors",
@@ -1014,7 +1512,13 @@
       ],
       "type": "sdxl",
       "group": "Group C (SDXL VAE)",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "ControlNet-Union-SDXL.safetensors",
@@ -1028,7 +1532,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "IP-Adapter-FaceID-XL.safetensors",
@@ -1040,7 +1550,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "OmniGen-v2.safetensors",
@@ -1052,7 +1568,13 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Hyper-SDXL-Lightning.safetensors",
@@ -1064,7 +1586,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Segment-Anything-2.safetensors",
@@ -1077,7 +1605,13 @@
       ],
       "type": "sdxl",
       "group": "Group ALL",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Food-Photography-XL.safetensors",
@@ -1090,7 +1624,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Macro-Nature-XL.safetensors",
@@ -1103,7 +1643,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Product-Commercial-XL.safetensors",
@@ -1116,7 +1662,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Mature-Faces-XL-v2.safetensors",
@@ -1129,7 +1681,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Fashion-Editorial-XL.safetensors",
@@ -1142,7 +1700,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Tarot-Card-Check-XL.safetensors",
@@ -1155,7 +1719,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Stained-Glass-v4.safetensors",
@@ -1168,7 +1738,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Blueprint-Draft-XL.safetensors",
@@ -1181,7 +1757,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Pixel-Art-Ultra-XL.safetensors",
@@ -1194,7 +1776,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Graffiti-Wall-Pro-XL.safetensors",
@@ -1207,7 +1795,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Chalkboard-Menu-XL.safetensors",
@@ -1220,7 +1814,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Embroidery-Craft-XL.safetensors",
@@ -1233,7 +1833,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Neon-Signs-XL.safetensors",
@@ -1245,7 +1851,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Infographic-Clean-XL.safetensors",
@@ -1258,7 +1870,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Qwen2.5-VL-7B-Instruct.safetensors",
@@ -1271,7 +1889,13 @@
       ],
       "type": "sdxl",
       "group": "Group L",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Llama-4-8B-Vision.safetensors",
@@ -1284,7 +1908,13 @@
       ],
       "type": "sdxl",
       "group": "Group L",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Medical-Anatomy-XL.safetensors",
@@ -1296,7 +1926,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Jewelry-Detail-XL.safetensors",
@@ -1309,7 +1945,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Comic-Book-Inker-XL.safetensors",
@@ -1321,7 +1963,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Retro-VCR-XL.safetensors",
@@ -1334,7 +1982,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     },
     {
       "name": "Miniature-World-XL.safetensors",
@@ -1347,7 +2001,13 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "min_vram": 8,
+      "enabled": false
     }
   ],
   "loras": [
@@ -1362,7 +2022,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Smartphone_Snap_v2.safetensors",
@@ -1376,7 +2037,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "RealLife_Skin_Fix.safetensors",
@@ -1388,7 +2050,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Mature_Faces_Slider.safetensors",
@@ -1402,7 +2065,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Fashion_Editorial_Flux.safetensors",
@@ -1415,7 +2079,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Cinematic_Shot_XL.safetensors",
@@ -1428,7 +2093,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Steve_McCurry_Photography.safetensors",
@@ -1441,7 +2107,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Low-Light_Night_Photography.safetensors",
@@ -1454,7 +2121,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "8k_Ultra_Detail_Flux.safetensors",
@@ -1467,7 +2135,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Amateur_Style_Snapshot.safetensors",
@@ -1480,7 +2149,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Facial_Expression_Extreme.safetensors",
@@ -1494,7 +2164,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Skin_Texture_Macro_Flux.safetensors",
@@ -1507,7 +2178,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Candid_Street_Photography.safetensors",
@@ -1520,7 +2192,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Kodak_Portra_400_XL.safetensors",
@@ -1533,7 +2206,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Hand_Fixer_v2.safetensors",
@@ -1545,7 +2219,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Disney_Pixar_Style_v2.safetensors",
@@ -1559,7 +2234,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Sakimi-Chan_Style_Flux.safetensors",
@@ -1572,7 +2248,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Makoto_Shinkai_Vibe.safetensors",
@@ -1585,7 +2262,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Arcane_Texture_XL.safetensors",
@@ -1598,7 +2276,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Spider-Verse_VFX.safetensors",
@@ -1610,7 +2289,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Retro_Anime_90s.safetensors",
@@ -1623,7 +2303,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Claymation_Stop_Motion.safetensors",
@@ -1636,7 +2317,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Papercraft_Origami_XL.safetensors",
@@ -1649,7 +2331,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Comic_Ink_Lineart.safetensors",
@@ -1662,7 +2345,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Ghibli_Background_Artist.safetensors",
@@ -1675,7 +2359,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Neon_Cyberpunk_Fashion.safetensors",
@@ -1688,7 +2373,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Elf_Ears_Fantasy.safetensors",
@@ -1701,7 +2387,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Super_Hero_Suit_Texture.safetensors",
@@ -1714,7 +2401,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Cybernetic_Implants.safetensors",
@@ -1727,7 +2415,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Expressions_Anime_XL.safetensors",
@@ -1740,7 +2429,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Oil_Impasto_Texture.safetensors",
@@ -1753,7 +2443,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Watercolor_Wash_Pro.safetensors",
@@ -1766,7 +2457,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Charcoal_Sketch_Flux.safetensors",
@@ -1779,7 +2471,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Ukiyo-e_Traditional.safetensors",
@@ -1791,7 +2484,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Art_Nouveau_Mucha.safetensors",
@@ -1804,7 +2498,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Synthwave_Grid_Vibe.safetensors",
@@ -1817,7 +2512,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Gothic_Noir_XL.safetensors",
@@ -1830,7 +2526,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Minimalist_Vector_Art.safetensors",
@@ -1843,7 +2540,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Steampunk_Gears_Brass.safetensors",
@@ -1856,7 +2554,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Chalkboard_Art_Texture.safetensors",
@@ -1869,7 +2568,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Embroidery_Sewn_Art.safetensors",
@@ -1882,7 +2582,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Graffiti_Drip_Style.safetensors",
@@ -1895,7 +2596,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Inkpunk_Splash_Art.safetensors",
@@ -1908,7 +2610,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Pastel_Dream_Vibe.safetensors",
@@ -1921,7 +2624,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Pop_Art_Lichtenstein.safetensors",
@@ -1934,7 +2638,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Modern_Interior_Design.safetensors",
@@ -1948,7 +2653,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Abandoned_Overgrown_Flux.safetensors",
@@ -1961,7 +2667,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Cyber_City_Neon_Grid.safetensors",
@@ -1974,7 +2681,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Cozy_Cottage_Garden.safetensors",
@@ -1987,7 +2695,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Brutalist_Concrete_Flux.safetensors",
@@ -2000,7 +2709,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Gothic_Stone_Cathedral.safetensors",
@@ -2012,7 +2722,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Treehouse_Natural_Build.safetensors",
@@ -2025,7 +2736,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Martian_Base_Modular.safetensors",
@@ -2038,7 +2750,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Underwater_Biosphere.safetensors",
@@ -2051,7 +2764,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Tiny_House_Organization.safetensors",
@@ -2064,7 +2778,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Kitchen_Luxury_Flux.safetensors",
@@ -2076,7 +2791,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Gamer_Room_RGB.safetensors",
@@ -2089,7 +2805,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Old_Library_Mahogany.safetensors",
@@ -2102,7 +2819,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Zen_Garden_Tranquil.safetensors",
@@ -2115,7 +2833,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Industrial_Loft_Flux.safetensors",
@@ -2128,7 +2847,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Arctic_Ice_Tundra.safetensors",
@@ -2141,7 +2861,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Tropical_Island_Beach.safetensors",
@@ -2154,7 +2875,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Grand_Canyon_Utah_XL.safetensors",
@@ -2167,7 +2889,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Misty_Forest_Flux_Atmo.safetensors",
@@ -2180,7 +2903,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Volcano_Eruption_Fire.safetensors",
@@ -2193,7 +2917,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Lavender_Field_Horizon.safetensors",
@@ -2206,7 +2931,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Space_Nebula_Starfield.safetensors",
@@ -2219,7 +2945,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Swiss_Alps_Summit.safetensors",
@@ -2232,7 +2959,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Autumn_Fall_Colors.safetensors",
@@ -2245,7 +2973,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Biolume_Crystal_Cave.safetensors",
@@ -2258,7 +2987,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Detailifier_Enhance_XL.safetensors",
@@ -2271,7 +3001,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Lighting_Master_Pro.safetensors",
@@ -2283,7 +3014,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "No-Background_Sticker.safetensors",
@@ -2296,7 +3028,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Text_Spelling_Fixer.safetensors",
@@ -2308,7 +3041,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Color_Pop_Vibrant.safetensors",
@@ -2321,7 +3055,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Tactical_Armor_XL.safetensors",
@@ -2334,7 +3069,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Victorian_Lace_Dress.safetensors",
@@ -2346,7 +3082,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Silk_Satin_Flow_Flux.safetensors",
@@ -2358,7 +3095,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Diamond_Gold_Macro.safetensors",
@@ -2371,7 +3109,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Magic_Spell_Particles.safetensors",
@@ -2384,7 +3123,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Glitch_Digital_Artifacts.safetensors",
@@ -2396,7 +3136,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Smoke_Fog_Volumetric.safetensors",
@@ -2409,7 +3150,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Tarot_Card_Frame.safetensors",
@@ -2422,7 +3164,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Blueprint_Technical.safetensors",
@@ -2435,7 +3178,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Stained_Glass_Effect.safetensors",
@@ -2448,7 +3192,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Origami_Paper_Fold.safetensors",
@@ -2460,7 +3205,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Tattoo_Traditional_Flash.safetensors",
@@ -2473,7 +3219,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Neon_Sign_Glow.safetensors",
@@ -2486,7 +3233,8 @@
       ],
       "type": "sdxl",
       "group": "Group A",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Miniature_Tilt_Shift.safetensors",
@@ -2498,7 +3246,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Hologram_Projection.safetensors",
@@ -2511,7 +3260,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Infographic_Icon_Set.safetensors",
@@ -2524,7 +3274,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Food_Plating_Gourmet.safetensors",
@@ -2537,7 +3288,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Sci-Fi_HUD_Overlay.safetensors",
@@ -2549,7 +3301,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Post-Apocalypse_Dust.safetensors",
@@ -2562,7 +3315,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     },
     {
       "name": "Bioluminescent_Creatures.safetensors",
@@ -2574,7 +3328,8 @@
       ],
       "type": "sdxl",
       "group": "Group C",
-      "recommended": true
+      "recommended": true,
+      "enabled": false
     }
   ],
   "controlnets": [
@@ -2590,7 +3345,8 @@
       "type": "sd15",
       "group": "ControlNet SD15",
       "recommended": true,
-      "strength": 0.8
+      "strength": 0.8,
+      "enabled": false
     },
     {
       "name": "control_v11p_sd15_openpose.safetensors",
@@ -2604,7 +3360,8 @@
       "type": "sd15",
       "group": "ControlNet SD15",
       "recommended": true,
-      "strength": 0.8
+      "strength": 0.8,
+      "enabled": false
     }
   ]
 }
