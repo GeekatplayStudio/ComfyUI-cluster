@@ -3,37 +3,51 @@
     {
       "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors",
       "subdir": "checkpoints",
-      "filename": "sd_xl_base_1.0.safetensors"
+      "filename": "sd_xl_base_1.0.safetensors",
+      "description": "SDXL base checkpoint for general photorealistic use.",
+      "nsfw": false
     },
     {
       "url": "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors",
       "subdir": "checkpoints",
-      "filename": "v1-5-pruned-emaonly.safetensors"
+      "filename": "v1-5-pruned-emaonly.safetensors",
+      "description": "Classic SD1.5 base; good for legacy and lightweight flows.",
+      "nsfw": false
     },
     {
       "url": "https://huggingface.co/Comfy-Org/flux1-dev/resolve/main/flux1-dev-fp8.safetensors",
       "subdir": "diffusion_models",
-      "filename": "Flux.1-dev-fp8.safetensors"
+      "filename": "Flux.1-dev-fp8.safetensors",
+      "description": "Flux 1 dev UNet (FP8) for split-model workflows.",
+      "nsfw": false
     },
     {
       "url": "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/ae.safetensors",
       "subdir": "vae",
-      "filename": "ae.safetensors"
+      "filename": "ae.safetensors",
+      "description": "Flux 1 autoencoder (VAE) companion file.",
+      "nsfw": false
     },
     {
       "url": "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors",
       "subdir": "text_encoders",
-      "filename": "clip_l.safetensors"
+      "filename": "clip_l.safetensors",
+      "description": "Flux text encoder (CLIP-L).",
+      "nsfw": false
     },
     {
       "url": "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors",
       "subdir": "text_encoders",
-      "filename": "t5xxl_fp8_e4m3fn.safetensors"
+      "filename": "t5xxl_fp8_e4m3fn.safetensors",
+      "description": "Flux T5 XXL text encoder (FP8).",
+      "nsfw": false
     },
     {
       "url": "https://huggingface.co/latent-consistency/lcm-lora-sdxl/resolve/main/pytorch_lora_weights.safetensors",
       "subdir": "loras",
-      "filename": "lcm_lora_sdxl.safetensors"
+      "filename": "lcm_lora_sdxl.safetensors",
+      "description": "LCM LoRA for SDXL to speed sampling.",
+      "nsfw": false
     }
   ]
 }

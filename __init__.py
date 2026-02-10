@@ -1,3 +1,5 @@
+"""Geekatplay Studio custom nodes for ComfyUI routing and loading."""
+
 from .nodes_ollama_router_new import (
     OllamaPromptPlanner,
     OllamaVisionStylePlanner,

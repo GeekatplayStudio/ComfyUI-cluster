@@ -1,4 +1,9 @@
 
+"""
+Custom ComfyUI routing, loading, and debugging nodes maintained by Geekatplay Studio.
+The module wraps Ollama-powered planning with lightweight heuristics so workflows stay portable.
+"""
+
 import base64
 import io
 import json
@@ -18,6 +23,19 @@ import comfy.controlnet
 import comfy.samplers
 
 
+BRAND_NAME = "Geekatplay Studio"
+LOG_PREFIX = f"[{BRAND_NAME} | OllamaRouter]"
+
+
+def _log(message: str, leading_newline: bool = False) -> None:
+    """
+    Lightweight logger that prefixes messages with Geekatplay Studio branding
+    so ComfyUI console output stays identifiable in multi-node setups.
+    """
+    text = f"{LOG_PREFIX} {message}"
+    print(f"\n{text}" if leading_newline else text)
+
+
 _DEFAULT_REGISTRY = {
     "version": 1,
     "checkpoints": [],
@@ -27,6 +45,7 @@ _DEFAULT_REGISTRY = {
 
 
 def _read_registry(registry_path: str) -> dict:
+    """Load the model registry JSON, returning a safe default if it is missing or invalid."""
     path = registry_path
     if not os.path.isabs(path):
         path = os.path.join(os.path.dirname(__file__), path)
@@ -43,6 +62,7 @@ def _read_registry(registry_path: str) -> dict:
 
 
 def _compact_registry(registry: dict, max_items: int = 50) -> dict:
+    """Trim registry payload before sending it to Ollama to keep prompts lightweight."""
     checkpoints = registry.get("checkpoints", [])[:max_items]
     loras = registry.get("loras", [])[:max_items]
     controlnets = registry.get("controlnets", [])[:max_items]
@@ -55,7 +75,7 @@ def _compact_registry(registry: dict, max_items: int = 50) -> dict:
                 "type": item.get("type", ""),
                 "tags": item.get("tags", []),
                 "recommended": bool(item.get("recommended", False)),
-                "enabled": item.get("enabled", True), 
+                "enabled": item.get("enabled", True),
             })
         return compact
 
@@ -77,42 +97,42 @@ def _score_tags(prompt: str, tags: list[str]) -> int:
     prompt = prompt.lower()
     # Normalize punctuation-heavy prompts
     prompt_search = " " + re.sub(r"[^a-z0-9]", " ", prompt) + " "
-    
+
     score = 0
     matched_tags = 0
-    
+
     # 1. Direct Tag Matching (Weighted by length/specificity)
     for tag in tags:
         t = tag.lower()
-        if not t: 
+        if not t:
             continue
-            
+
         # Check whole word match first (stronger)
         # e.g., tag "landscape" in "beautiful landscape photo"
         if f" {t} " in prompt_search:
             score += 5
             matched_tags += 1
-            
+
         # Check substring match (weaker)
         # e.g., tag "realism" in "photorealism"
         elif t in prompt:
             score += 2
             matched_tags += 1
-        
+
         # Check reverse substring (prompt word in tag)
         # e.g., prompt "photo" in tag "photorealism"
         elif any(w in t for w in prompt.split() if w and len(w) > 3):
             score += 1
-            
+
     # 2. Negative Constraints / Penalty
     # If prompt strongly implies style X, penalize model with style Y
     # Explicit Style Groups
     is_anime_prompt = any(x in prompt for x in ["anime", "cartoon", "illustration", "waifu", "2d"])
     is_photo_prompt = any(x in prompt for x in ["photo", "realis", "raw", "dslr", "4k"])
-    
+
     has_anime_tag = any("anime" in t or "cartoon" in t for t in tags)
     has_photo_tag = any("realis" in t or "photo" in t for t in tags)
-    
+
     if is_anime_prompt and has_photo_tag and not has_anime_tag:
         score -= 10
     if is_photo_prompt and has_anime_tag and not has_photo_tag:
@@ -128,6 +148,7 @@ def _score_tags(prompt: str, tags: list[str]) -> int:
 
 
 def _heuristic_plan(prompt: str, registry: dict) -> dict:
+    """Fallback planner used when Ollama is unreachable; picks best-matching assets from the registry."""
     prompt_l = prompt.lower()
     checkpoints = registry.get("checkpoints", [])
     loras = registry.get("loras", [])
@@ -215,6 +236,7 @@ def _heuristic_plan(prompt: str, registry: dict) -> dict:
 
 
 def _ollama_chat(model: str, system_prompt: str, user_prompt: str, host: str = "localhost", port: int = 11434, timeout: int = 40) -> str:
+    """Call a local Ollama model for text-only JSON responses."""
     url = f"http://{host}:{port}/api/chat"
     payload = {
         "model": model,
@@ -242,7 +264,7 @@ def _ollama_chat(model: str, system_prompt: str, user_prompt: str, host: str = "
 
 
 def _encode_image_base64(image) -> str:
-    # image is a ComfyUI IMAGE tensor (batch, height, width, channels) in 0..1
+    """Convert a ComfyUI IMAGE tensor (B,H,W,C float 0..1) into a base64 PNG string."""
     if image is None:
         return ""
     try:
@@ -263,6 +285,7 @@ def _encode_image_base64(image) -> str:
 
 
 def _ollama_chat_with_images(model: str, system_prompt: str, user_prompt: str, images: list[str], host: str = "localhost", port: int = 11434, timeout: int = 60) -> str:
+    """Call a local vision-enabled Ollama model with base64 image attachments."""
     url = f"http://{host}:{port}/api/chat"
     payload = {
         "model": model,
@@ -290,6 +313,7 @@ def _ollama_chat_with_images(model: str, system_prompt: str, user_prompt: str, i
 
 
 def _parse_plan(raw: str) -> dict | None:
+    """Extract JSON plan from Ollama output, tolerating extra text around the payload."""
     try:
         data = json.loads(raw)
         if isinstance(data, dict):
@@ -306,6 +330,7 @@ def _parse_plan(raw: str) -> dict | None:
 
 
 def _extract_keywords(prompt: str, top_k: int = 12) -> list[str]:
+    """Pick the most frequent non-stopword tokens to help score registry items."""
     stop = {
         "the","a","an","with","and","of","in","on","at","for","by","to","from","is","are","be",
         "this","that","these","those","it","as","over","under","into","onto","around","about",
@@ -322,6 +347,7 @@ def _extract_keywords(prompt: str, top_k: int = 12) -> list[str]:
 
 
 def _score_model(keywords: list[str], tags: list[str], recommended: bool) -> int:
+    """Score a registry entry by matching extracted keywords to its tags."""
     score = 0
     tag_set = {t.lower() for t in tags}
     for kw in keywords:
@@ -335,10 +361,11 @@ def _score_model(keywords: list[str], tags: list[str], recommended: bool) -> int
 
 
 def _pick_sampler(model_type: str, target_info: dict | None) -> tuple[str, str]:
+    """Pick a sampler/scheduler combination that aligns with the model type or registry hint."""
     # Default fallback
     sampler = "euler"
     scheduler = "normal"
-    
+
     # Check target_info first
     if target_info:
         s_try = target_info.get("sampler_name") or target_info.get("sampler")
@@ -347,7 +374,7 @@ def _pick_sampler(model_type: str, target_info: dict | None) -> tuple[str, str]:
             sampler = s_try
         if sch_try:
             scheduler = sch_try
-            
+
     # Heuristics if not set in registry
     else:
         mt = (model_type or "").lower()
@@ -358,7 +385,7 @@ def _pick_sampler(model_type: str, target_info: dict | None) -> tuple[str, str]:
             sampler = "dpmpp_2m"
             scheduler = "karras"
         elif "sd15" in mt or "sd1.5" in mt:
-            sampler = "euler_ancestral" 
+            sampler = "euler_ancestral"
             scheduler = "normal"
 
     # Validate against ComfyUI known types to ensure compatibility
@@ -366,15 +393,16 @@ def _pick_sampler(model_type: str, target_info: dict | None) -> tuple[str, str]:
     try:
         valid_samplers = comfy.samplers.KSampler.SAMPLERS
         valid_schedulers = comfy.samplers.KSampler.SCHEDULERS
-        
+
         if sampler not in valid_samplers:
             # Try close match or standard backup
-            if sampler == "euler_a": sampler = "euler_ancestral"
-            elif sampler == "dpm++_2m": sampler = "dpmpp_2m"
+            if sampler == "euler_a":
+                sampler = "euler_ancestral"
+            elif sampler == "dpm++_2m":
+                sampler = "dpmpp_2m"
             elif sampler not in valid_samplers:
-                # Keep it but warn? Or fallback. KSampler might error if invalid.
-                # Fallback to euler if completely unknown
-                 pass 
+                # Fallback to a safe default to avoid KSampler errors.
+                sampler = "euler"
 
         if scheduler not in valid_schedulers:
             if scheduler == "simple" and "simple" not in valid_schedulers:
@@ -388,12 +416,21 @@ def _pick_sampler(model_type: str, target_info: dict | None) -> tuple[str, str]:
 
 
 def _compute_resolution(aspect_ratio: str, base_size: int, model_type: str) -> tuple[int, int]:
+    """Calculate width/height snapped to multiples of 64 while respecting model limits."""
     ratios = {
         "1:1": (1, 1),
         "3:2": (3, 2),
         "2:3": (2, 3),
+        "4:3": (4, 3),
+        "3:4": (3, 4),
         "16:9": (16, 9),
         "9:16": (9, 16),
+        "21:9": (21, 9),
+        "9:21": (9, 21),
+        "2:1": (2, 1),
+        "1:2": (1, 2),
+        "5:3": (5, 3),
+        "3:5": (3, 5),
         "4:5": (4, 5),
         "5:4": (5, 4),
     }
@@ -412,6 +449,27 @@ def _compute_resolution(aspect_ratio: str, base_size: int, model_type: str) -> t
     return w, h
 
 
+def _normalize_base_size(model_type: str, base_size: int) -> int:
+    """
+    Pick a sensible long-side target for the chosen model family.
+    SDXL / Flux: default to 1024 long side (cap user values to 1536).
+    SD1.5: default to 768 and cap to 896 to avoid VRAM spikes.
+    """
+    mt = (model_type or "").lower()
+    if base_size is None or base_size <= 0:
+        base_size = 1024 if "sdxl" in mt or "flux" in mt else 768
+
+    if "sd15" in mt or "sd1.5" in mt or mt == "sd":
+        base_size = min(base_size, 896)
+        if base_size < 640:
+            base_size = 768  # keep a reasonable floor for quality
+    elif "sdxl" in mt or "flux" in mt:
+        base_size = min(base_size, 1536)
+        if base_size < 896:
+            base_size = 1024
+    return base_size
+
+
 class OllamaPromptPlanner:
     """
     Use local Ollama to pick checkpoint + LoRAs + params based on the prompt and registry.
@@ -426,7 +484,12 @@ class OllamaPromptPlanner:
                 "registry_path": ("STRING", {"default": "model_registry.json"}),
                 "task_hint": (["auto", "text2img", "img2img", "inpaint", "sdxl", "sd15", "flux"],),
                 "user_negative": ("STRING", {"multiline": True, "default": ""}),
-                "aspect_ratio": (["1:1", "3:2", "2:3", "16:9", "9:16", "4:5", "5:4"],),
+                "aspect_ratio": ([
+                    "1:1", "3:2", "2:3", "4:3", "3:4",
+                    "16:9", "9:16", "21:9", "9:21",
+                    "2:1", "1:2", "5:3", "3:5",
+                    "4:5", "5:4"
+                ],),
                 "base_size": ("INT", {"default": 1024, "min": 256, "max": 2048, "step": 64}),
                 "ollama_host": ("STRING", {"default": "localhost"}),
                 "ollama_port": ("INT", {"default": 11434, "min": 1, "max": 65535}),
@@ -491,15 +554,15 @@ class OllamaPromptPlanner:
 
     def plan(self, prompt, ollama_model, registry_path, task_hint, user_negative, aspect_ratio, base_size, max_vram=24, ollama_host="localhost", ollama_port=11434):
         registry = _read_registry(registry_path)
-        
-        # Filter by VRAM
+
+        # Keep only checkpoints that fit inside the requested VRAM budget.
         valid_ckpts = []
         for ckpt in registry.get("checkpoints", []):
             req = ckpt.get("min_vram", 0)
             if req <= max_vram:
                 valid_ckpts.append(ckpt)
         registry["checkpoints"] = valid_ckpts
-        
+
         compact = _compact_registry(registry)
         system_prompt = (
             "You are a routing planner for image generation. "
@@ -530,6 +593,7 @@ class OllamaPromptPlanner:
             plan = None
 
         if plan is None:
+            # Fall back to local heuristics when Ollama is offline or returns unusable JSON.
             plan = _heuristic_plan(prompt, registry)
 
         # Keywords + registry-driven selection if checkpoint missing
@@ -568,9 +632,10 @@ class OllamaPromptPlanner:
         else:
             sampler_name, scheduler = _pick_sampler(plan.get("model_type", ""), None)
 
+        base_for_model = _normalize_base_size(plan.get("model_type", "sdxl"), base_size)
         w, h = _compute_resolution(
             aspect_ratio=aspect_ratio,
-            base_size=base_size,
+            base_size=base_for_model,
             model_type=plan.get("model_type", "sdxl"),
         )
         plan["width"] = w
@@ -659,7 +724,7 @@ class DynamicCheckpointLoader:
     def load(self, checkpoint, model_type, registry_path, custom_path="", vae_override="", clip_override=""):
         registry = _read_registry(registry_path)
         log_lines = []
-        
+
         # Log Search Paths
         search_paths = folder_paths.get_folder_paths("checkpoints")
         log_lines.append(f"--- Search Context ---")
@@ -681,11 +746,11 @@ class DynamicCheckpointLoader:
                 target_info = ckpt
                 registry_idx = i
                 break
-        
+
         resolved_type = model_type
         if target_info and model_type == "auto":
              resolved_type = target_info.get("type", "sdxl")
-        
+
         # Determine Folder Type (default to checkpoints)
         preferred_folder = "checkpoints"
         if target_info and target_info.get("folder_type"):
@@ -701,7 +766,7 @@ class DynamicCheckpointLoader:
         # 2. Resolve Checkpoint Path (or Fallback)
         log_lines.append(f"--- Resolution ---")
         ckpt_path = self._find_path(preferred_folder, checkpoint, custom_path)
-        
+
         # Track Active Model Name for overrides
         active_model_name = checkpoint
         is_fallback = False
@@ -711,19 +776,19 @@ class DynamicCheckpointLoader:
         else:
             # Checkpoint Missing: logical fallback
             log_lines.append(f"primary lookup failed for '{checkpoint}'")
-            print(f"\\n[OllamaRouter] !!! MISSING MODEL: {checkpoint} !!!")
-            
+            _log(f"!!! MISSING MODEL: {checkpoint} !!!", leading_newline=True)
+
             # Find Fallback
-            # Update fallback search to respect preferred folder of CANDIDATES if possible, 
-            # but _find_fallback uses _find_path internally? No. 
+            # Update fallback search to respect preferred folder of CANDIDATES if possible,
+            # but _find_fallback uses _find_path internally? No.
             # _find_fallback returns a NAME. We need to resolve that name.
-            
+
             fallback_name = self._find_fallback(registry, target_info, resolved_type, custom_path, start_index=registry_idx, log_store=log_lines)
             if fallback_name:
                 msg = f"-> Fallback SUCCESS: Selected '{fallback_name}'"
                 log_lines.append(msg)
-                print(f"[OllamaRouter] {msg}")
-                
+                _log(msg)
+
                 # We need to determine the folder type for the FALLBACK model too!
                 fallback_info = None
                 for c in registry.get("checkpoints", []):
@@ -738,13 +803,13 @@ class DynamicCheckpointLoader:
                     # Also update resolved_type if it was generic 'auto' and now we have specific
                     if model_type == "auto":
                         resolved_type = fallback_info.get("type", "sdxl")
-                    
+
                     log_lines.append(f"-> Switched metadata context to '{fallback_name}' (Type: {resolved_type})")
-                
+
                 fallback_folder = "checkpoints"
                 if fallback_info and fallback_info.get("folder_type"):
                      fallback_folder = fallback_info.get("folder_type")
-                
+
                 ckpt_path = self._find_path(fallback_folder, fallback_name, custom_path)
                 log_lines.append(f"Fallback Path: {ckpt_path} (Type: {fallback_folder})")
                 active_model_name = fallback_name
@@ -754,7 +819,7 @@ class DynamicCheckpointLoader:
                 log_lines.append(error_msg)
                 full_log = "\n".join(log_lines)
                 raise FileNotFoundError(f"{error_msg}\n\nDEBUG LOG:\n{full_log}")
-        
+
         log_lines.append(f"--- Loading ---")
         # 3. Load Main Components
         out_model, out_clip, out_vae = comfy.sd.load_checkpoint_guess_config(
@@ -769,7 +834,7 @@ class DynamicCheckpointLoader:
         # Determine effective overrides (Use Native if Fallback)
         effective_vae = vae_override
         effective_clip = clip_override
-        
+
         # Mandatory Components Check (Flux, Wan, Hunyuan, etc)
         # Some models require explicit loading of separate CLIP/VAE files.
         # We check the registry info for the ACTIVE model (either requested or fallback).
@@ -780,17 +845,17 @@ class DynamicCheckpointLoader:
                  if ckpt.get("name") == active_model_name:
                      active_registry_info = ckpt
                      break
-        
+
         if active_registry_info:
              # Check for MANDATORY fields 'required_vae' or 'required_clip'
              # Or just standard 'vae'/'clip' fields which imply a preference
              reg_vae = active_registry_info.get("vae") or active_registry_info.get("required_vae")
              reg_clip = active_registry_info.get("clip") or active_registry_info.get("required_clip")
-             
+
              if reg_vae:
                  log_lines.append(f"-> Registry MANDATE: Model requires VAE '{reg_vae}'")
                  effective_vae = reg_vae
-             
+
              if reg_clip:
                  log_lines.append(f"-> Registry MANDATE: Model requires CLIP '{reg_clip}'")
                  effective_clip = reg_clip
@@ -822,9 +887,9 @@ class DynamicCheckpointLoader:
                 else:
                     msg = f"-> VAE '{effective_vae}' NOT FOUND in search paths!"
                     log_lines.append(msg)
-                    print(f"[OllamaRouter] WARNING: {msg}")
+                    _log(f"WARNING: {msg}")
                     if "flux" in str(active_model_name).lower() or reg_vae:
-                        print("[OllamaRouter] CRITICAL: Missing required VAE for this model. Rendering will likely fail.")
+                        _log("CRITICAL: Missing required VAE for this model. Rendering will likely fail.")
 
         if effective_clip:
              log_lines.append(f"Override CLIP: '{effective_clip}' ...")
@@ -845,7 +910,7 @@ class DynamicCheckpointLoader:
                          log_lines.append(f"-> CLIP candidate found: {path_res}")
                      else:
                          log_lines.append(f"-> Candidate '{c_cand}' missing.")
-                 
+
                  if clip_paths:
                       try:
                           # Determine clip_type based on resolved_type to ensure correct model loading (especially for Flux/SD3)
@@ -854,7 +919,7 @@ class DynamicCheckpointLoader:
                               clip_type_enum = comfy.sd.CLIPType.FLUX
                           elif str(resolved_type).lower() == "sd3":
                               clip_type_enum = comfy.sd.CLIPType.SD3
-                          
+
                           out_clip = comfy.sd.load_clip(
                                 clip_paths,
                                 embedding_directory=folder_paths.get_folder_paths("embeddings"),
@@ -864,11 +929,11 @@ class DynamicCheckpointLoader:
                       except Exception as e:
                           log_lines.append(f"-> CLIP Load Failed: {e}")
                  else:
-                     msg = f"-> CLIP components {clip_candidates} NOT FOUND!"
-                     log_lines.append(msg)
-                     print(f"[OllamaRouter] WARNING: {msg}")
-                     if "flux" in str(active_model_name).lower() or reg_clip:
-                        print("[OllamaRouter] CRITICAL: Missing required CLIP/T5 for this model. Rendering will likely fail.")
+                    msg = f"-> CLIP components {clip_candidates} NOT FOUND!"
+                    log_lines.append(msg)
+                    _log(f"WARNING: {msg}")
+                    if "flux" in str(active_model_name).lower() or reg_clip:
+                        _log("CRITICAL: Missing required CLIP/T5 for this model. Rendering will likely fail.")
 
         return (out_model, out_clip, out_vae, "\n".join(log_lines))
 
@@ -916,7 +981,7 @@ class DynamicCheckpointLoader:
                                 return os.path.join(r, lower_map[filename.lower()])
                 except Exception:
                     pass
-        
+
         # Checkpoint fallback (original behavior) if not covered above
         if folder_type != "checkpoints" and "checkpoints" not in folder_types:
              try:
@@ -944,19 +1009,19 @@ class DynamicCheckpointLoader:
                         return os.path.join(root, filename)
             except Exception:
                 pass
-        
+
         return None
 
     def _find_fallback(self, registry, target_info, resolved_type, custom_path, start_index=-1, log_store=None):
         if log_store is None: log_store = []
         candidates = registry.get("checkpoints", [])
-        if not candidates: 
+        if not candidates:
             log_store.append("Fallback: No candidates in registry.")
             return None
 
         idx_start = start_index if start_index >= 0 else 0
         ordered_candidates = candidates[idx_start:] + candidates[:idx_start]
-        
+
         # Add next-in-line logging
         log_store.append(f"Fallback Search: checking {len(ordered_candidates)} candidates starting from index {idx_start}")
         if len(ordered_candidates) > 1:
@@ -975,14 +1040,14 @@ class DynamicCheckpointLoader:
                      cand_folder = c.get("folder_type", "checkpoints")
                      found = self._find_path(cand_folder, c["name"], custom_path)
                      if found:
-                          log_store.append(f"-> Found candidate '{c['name']}' in {cand_folder}") 
+                          log_store.append(f"-> Found candidate '{c['name']}' in {cand_folder}")
                           return c["name"]
              return None
 
         grp = target_info.get("group")
         cat = target_info.get("category")
         log_store.append(f"Fallback Strategy: Match Group='{grp}' AND Category='{cat}' AND Type='{resolved_type}'")
-        
+
         # Priority 1: Same Group & Category
         for c in ordered_candidates:
             if c["name"] == target_info["name"]: continue
@@ -991,8 +1056,8 @@ class DynamicCheckpointLoader:
                  cand_folder = c.get("folder_type", "checkpoints")
                  found = self._find_path(cand_folder, c["name"], custom_path)
                  if found: return c["name"]
-                 # log_store.append(f"Candidate '{c['name']}' matched metadata but file not found.") 
-        
+                 # log_store.append(f"Candidate '{c['name']}' matched metadata but file not found.")
+
         # Priority 2: Same Group & Type
         log_store.append(f"Fallback Strategy: Relaxed -> Match Group='{grp}' AND Type='{resolved_type}'")
         for c in ordered_candidates:
@@ -1010,7 +1075,7 @@ class DynamicCheckpointLoader:
             if c.get("type") == resolved_type:
                  cand_folder = c.get("folder_type", "checkpoints")
                  if self._find_path(cand_folder, c["name"], custom_path): return c["name"]
-        
+
         log_store.append("Fallback: No suitable candidate found on disk.")
         return None
 
@@ -1040,7 +1105,7 @@ class DynamicLoraStack:
     def apply(self, model, clip, loras, lora_strengths, custom_path=""):
         log_lines = []
         log_lines.append(f"--- LoRA Stack Request ---")
-        
+
         lora_list = [l.strip() for l in loras.split(",") if l.strip()]
         strength_list = [s.strip() for s in lora_strengths.split(",") if s.strip()]
         strengths = []
@@ -1057,8 +1122,8 @@ class DynamicLoraStack:
         if not lora_list:
             log_lines.append("No LoRAs requested.")
             return (model, clip, "\n".join(log_lines))
-            
-        registry = {} 
+
+        registry = {}
         try:
            registry = _read_registry("model_registry.json")
         except:
@@ -1068,37 +1133,37 @@ class DynamicLoraStack:
         for idx, lora_name in enumerate(lora_list):
             strength = strengths[idx] if idx < len(strengths) else 0.7
             log_lines.append(f"\nProcessing '{lora_name}' (Strength: {strength})")
-            
+
             lora_path = self._find_path(lora_name, custom_path)
-            
+
             if not lora_path:
                 target_info = None
                 for l in registry.get("loras", []):
                     if l.get("name") == lora_name:
                         target_info = l
                         break
-                
+
                 log_lines.append(f"!!! MISSING LORA: {lora_name} !!!")
-                print(f"\\n[OllamaRouter] !!! MISSING LORA: {lora_name} !!!")
+                _log(f"!!! MISSING LORA: {lora_name} !!!", leading_newline=True)
                 if target_info:
                      info_str = f"Registry Info: Group={target_info.get('group')}, Category={target_info.get('category')}"
                      log_lines.append(info_str)
-                     print(f"[OllamaRouter] {info_str}")
-                
+                     _log(info_str)
+
                 # Try Fallback
                 fallback_name = None
                 if target_info:
                    fallback_name = self._find_fallback(registry, target_info, custom_path, log_store=log_lines)
-                
+
                 if fallback_name:
                     msg = f"-> Falling back to LoRA: {fallback_name}"
                     log_lines.append(msg)
-                    print(f"[OllamaRouter] {msg}")
+                    _log(msg)
                     lora_path = self._find_path(fallback_name, custom_path)
                 else:
                     msg = f"-> Skipping missing LoRA '{lora_name}' (No fallback found)"
                     log_lines.append(msg)
-                    print(f"[OllamaRouter] {msg}")
+                    _log(msg)
                     continue
 
             # Load
@@ -1107,11 +1172,11 @@ class DynamicLoraStack:
                 model_out, clip_out = comfy.sd.load_lora_for_models(model_out, clip_out, lora, strength, strength)
                 msg = f"Loaded: {lora_path}"
                 log_lines.append(msg)
-                print(f"[OllamaRouter] {msg}")
+                _log(msg)
             except Exception as e:
                 err = f"Error loading LoRA {lora_path}: {e}"
                 log_lines.append(err)
-                print(f"[OllamaRouter] {err}")
+                _log(err)
 
         return (model_out, clip_out, "\n".join(log_lines))
 
@@ -1129,21 +1194,21 @@ class DynamicLoraStack:
         if log_store is None: log_store = []
         target_grp = target_info.get("group", "")
         target_cat = target_info.get("category", "")
-        
+
         # Priority 1: Same Group & Category
         for l in registry.get("loras", []):
             if l["name"] == target_info["name"]: continue
             if l.get("enabled", True) is False: continue
             if l.get("group") == target_grp and l.get("category") == target_cat:
                 if self._find_path(l["name"], custom_path): return l["name"]
-        
+
         # Priority 2: Same Category only
         for l in registry.get("loras", []):
             if l["name"] == target_info["name"]: continue
             if l.get("enabled", True) is False: continue
             if l.get("category") == target_cat:
                 if self._find_path(l["name"], custom_path): return l["name"]
-        
+
         log_store.append("Fallback: No suitable LoRA candidate found.")
         return None
 
@@ -1185,7 +1250,12 @@ class OllamaVisionStylePlanner:
                 "registry_path": ("STRING", {"default": "model_registry.json"}),
                 "task_hint": (["auto", "img2img", "sdxl", "sd15", "flux"],),
                 "user_negative": ("STRING", {"multiline": True, "default": ""}),
-                "aspect_ratio": (["1:1", "3:2", "2:3", "16:9", "9:16", "4:5", "5:4"],),
+                "aspect_ratio": ([
+                    "1:1", "3:2", "2:3", "4:3", "3:4",
+                    "16:9", "9:16", "21:9", "9:21",
+                    "2:1", "1:2", "5:3", "3:5",
+                    "4:5", "5:4"
+                ],),
                 "base_size": ("INT", {"default": 1024, "min": 256, "max": 2048, "step": 64}),
                 "ollama_host": ("STRING", {"default": "localhost"}),
                 "ollama_port": ("INT", {"default": 11434, "min": 1, "max": 65535}),
@@ -1251,14 +1321,14 @@ class OllamaVisionStylePlanner:
     def plan(self, image, prompt, ollama_model, registry_path, task_hint, user_negative, aspect_ratio, base_size, max_vram=24, ollama_host="localhost", ollama_port=11434):
         registry = _read_registry(registry_path)
 
-        # Filter by VRAM
+        # Keep only checkpoints that fit inside the requested VRAM budget.
         valid_ckpts = []
         for ckpt in registry.get("checkpoints", []):
             req = ckpt.get("min_vram", 0)
             if req <= max_vram:
                 valid_ckpts.append(ckpt)
         registry["checkpoints"] = valid_ckpts
-        
+
         compact = _compact_registry(registry)
         system_prompt = (
             "You analyze an image style and select the best image generation setup. "
@@ -1297,6 +1367,7 @@ class OllamaVisionStylePlanner:
             plan = None
 
         if plan is None:
+            # Fall back to text-only heuristics when Ollama vision is unavailable.
             plan = _heuristic_plan(prompt, registry)
 
         # Keywords + registry-driven selection if checkpoint missing
@@ -1335,9 +1406,10 @@ class OllamaVisionStylePlanner:
         else:
             sampler_name, scheduler = _pick_sampler(plan.get("model_type", ""), None)
 
+        base_for_model = _normalize_base_size(plan.get("model_type", "sdxl"), base_size)
         w, h = _compute_resolution(
             aspect_ratio=aspect_ratio,
-            base_size=base_size,
+            base_size=base_for_model,
             model_type=plan.get("model_type", "sdxl"),
         )
         plan["width"] = w
@@ -1519,7 +1591,7 @@ class OllamaDebugInfo:
     OUTPUT_NODE = True
 
     def notify(self, text):
-        print(f"\n[Ollama Plan Debug]:\n{text}\n")
+        _log(f"Ollama Plan Debug:\n{text}\n", leading_newline=True)
         return {"ui": {"text": [text]}, "result": (text,)}
 
 
@@ -1602,7 +1674,7 @@ class LiveStatus:
 
     def emit(self, stage, message):
         text = f"[{stage}] {message}"
-        print(text)
+        _log(text)
         return {"ui": {"text": [text]}, "result": (text,)}
 
 
@@ -1622,7 +1694,7 @@ class OllamaRegistryInfo:
     RETURN_NAMES = ("json_content",)
     FUNCTION = "read_registry"
     CATEGORY = "Ollama/Debug"
-    
+
     def read_registry(self, registry_path):
         try:
            registry = _read_registry(registry_path)

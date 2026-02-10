@@ -2,6 +2,8 @@
 
 Ollama-driven routing nodes and curated workflows for ComfyUI.
 
+Maintained by Geekatplay Studio — the console logs and node helpers now surface the Geekatplay branding so you can spot them quickly in shared setups.
+
 This repo is cleaned to a focused setup:
 - four production workflows
 - checkpoint + LoRA flow
@@ -39,7 +41,9 @@ Details are documented in `docs/WORKFLOWS.md`.
 install.bat
 ```
 
-3. If gated Hugging Face models are required, set:
+3. The installer will show all checkpoints/VAEs/text encoders/LoRAs from `install_manifest.json` with descriptions and NSFW flags. Pick what you want via the checkbox selector (Out-GridView) or the console fallback.
+
+4. If gated Hugging Face models are required, set:
 
 ```bat
 set HF_TOKEN=your_hf_token
@@ -55,3 +59,4 @@ Installer behavior and model paths are documented in `docs/INSTALL.md`.
   - text encoders in `models/text_encoders/`
 - LoRA loading uses `models/loras/`.
 - `DynamicCheckpointLoader` fallback now respects per-model `folder_type` from `model_registry.json`.
+- Console logging is prefixed with `Geekatplay Studio | OllamaRouter` to make routing messages easy to spot.
