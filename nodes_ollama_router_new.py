@@ -1340,6 +1340,10 @@ class OllamaVisionStylePlanner:
             "controlnet_name, controlnet_strength (float), controlnet_start (float), controlnet_end (float), "
             "positive_prompt, negative_prompt, steps (int), cfg (float), sampler_name, scheduler, width (int), height (int), "
             "denoise (float), seed (int). "
+            "Important: If the task is 'img2img' or 'inpaint' (using the input image), adjust 'denoise': "
+            " - For minor edits (e.g. 'replace face', 'fix eyes', 'change makeup'), use LOW denoise (0.3 - 0.5). "
+            " - For style transfer or variations (e.g. 'make it anime', 'change style'), use HIGH denoise (0.6 - 0.9). "
+            " - If the task is 'text2img' (ignoring input image content for generation), use denoise 1.0. "
             "Use checkpoint, vae, clip and lora names exactly from the registry. "
             "If unsure, pick a recommended checkpoint."
         )
@@ -1451,6 +1455,249 @@ class OllamaVisionStylePlanner:
             int(plan.get("height", 1024)),
             int(plan.get("seed", int(time.time()) % 2_000_000_000)),
             str(plan.get("positive_prompt", prompt)),
+            negative,
+            json.dumps(plan, ensure_ascii=True),
+            str(plan.get("vae_name", "")),
+            str(plan.get("clip_name", "")),
+            str(plan.get("task", "img2img")),
+            float(plan.get("denoise", 0.7)),
+            bool(plan.get("use_refiner", False)),
+            str(plan.get("refiner_checkpoint", "")),
+            str(plan.get("controlnet_name", "")),
+            float(plan.get("controlnet_strength", 0.0)),
+            float(plan.get("controlnet_start", 0.0)),
+            float(plan.get("controlnet_end", 1.0)),
+        )
+
+
+class OllamaVisionDualPlanner:
+    """
+    Use local Ollama vision model to analyze an image with a specific vision prompt,
+    then plan generation based on a separate user generation prompt.
+    """
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "image": ("IMAGE",),
+                "vision_prompt": ("STRING", {"multiline": True, "default": "Describe the style, composition, lighting, and key elements of this image."}),
+                "generation_prompt": ("STRING", {"multiline": True, "default": ""}),
+                "ollama_model": ("STRING", {"default": "llava:7b"}),
+                "registry_path": ("STRING", {"default": "model_registry.json"}),
+                "task_hint": (["auto", "img2img", "text2img"],),
+                "user_negative": ("STRING", {"multiline": True, "default": ""}),
+                "aspect_ratio": ([
+                    "1:1", "3:2", "2:3", "4:3", "3:4",
+                    "16:9", "9:16", "21:9", "9:21",
+                    "2:1", "1:2", "5:3", "3:5",
+                    "4:5", "5:4"
+                ],),
+                "base_size": ("INT", {"default": 1024, "min": 256, "max": 2048, "step": 64}),
+                "ollama_host": ("STRING", {"default": "localhost"}),
+                "ollama_port": ("INT", {"default": 11434, "min": 1, "max": 65535}),
+                "max_vram": ([24, 16, 12, 8, 6], {"default": 24}),
+            }
+        }
+
+    RETURN_TYPES = (
+        "STRING",
+        "STRING",
+        "STRING",
+        "STRING",
+        "INT",
+        "FLOAT",
+        comfy.samplers.KSampler.SAMPLERS,
+        comfy.samplers.KSampler.SCHEDULERS,
+        "INT",
+        "INT",
+        "INT",
+        "STRING",
+        "STRING",
+        "STRING",
+        "STRING",
+        "STRING",
+        "STRING",
+        "FLOAT",
+        "BOOLEAN",
+        "STRING",
+        "STRING",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+    )
+    RETURN_NAMES = (
+        "checkpoint",
+        "loras",
+        "lora_strengths",
+        "model_type",
+        "steps",
+        "cfg",
+        "sampler_name",
+        "scheduler",
+        "width",
+        "height",
+        "seed",
+        "positive_prompt",
+        "negative_prompt",
+        "plan_json",
+        "vae_name",
+        "clip_name",
+        "task",
+        "denoise",
+        "use_refiner",
+        "refiner_checkpoint",
+        "controlnet_name",
+        "controlnet_strength",
+        "controlnet_start",
+        "controlnet_end",
+    )
+    FUNCTION = "plan"
+    CATEGORY = "Ollama/Planner"
+
+    def plan(self, image, vision_prompt, generation_prompt, ollama_model, registry_path, task_hint, user_negative, aspect_ratio, base_size, max_vram=24, ollama_host="localhost", ollama_port=11434):
+        registry = _read_registry(registry_path)
+
+        # Keep only checkpoints that fit inside the requested VRAM budget.
+        valid_ckpts = []
+        for ckpt in registry.get("checkpoints", []):
+            req = ckpt.get("min_vram", 0)
+            if req <= max_vram:
+                valid_ckpts.append(ckpt)
+        registry["checkpoints"] = valid_ckpts
+        compact = _compact_registry(registry)
+
+        system_prompt = (
+            "You are an expert AI Art Director. "
+            "1. First, analyze the attached image based on the user's vision prompt. "
+            "2. Then, creating a generation plan based on the user's generation prompt AND your analysis of the image. "
+            "Return ONLY valid JSON with keys: "
+            "task (text2img|img2img|inpaint), "
+            "model_type (sdxl|sd15|flux), checkpoint, vae_name (optional), clip_name (optional), "
+            "use_refiner (bool), refiner_checkpoint, "
+            "loras (array of names), lora_strengths (array of floats), "
+            "controlnet_name, controlnet_strength (float), controlnet_start (float), controlnet_end (float), "
+            "positive_prompt, negative_prompt, steps (int), cfg (float), sampler_name, scheduler, width (int), height (int), "
+            "denoise (float), seed (int). "
+            "Important: If the task is 'img2img' or 'inpaint' (using the input image), adjust 'denoise': "
+            " - For minor edits (e.g. 'replace face', 'fix eyes', 'change makeup'), use LOW denoise (0.3 - 0.5). "
+            " - For style transfer or variations (e.g. 'make it anime', 'change style'), use HIGH denoise (0.6 - 0.9). "
+            " - If the task is 'text2img' (ignoring input image content for generation), use denoise 1.0. "
+            "Use checkpoint, vae, clip and lora names exactly from the registry. "
+            "If unsure, pick a recommended checkpoint."
+        )
+
+        user_payload = {
+            "task_hint": task_hint,
+            "vision_instruction": vision_prompt,
+            "generation_request": generation_prompt,
+            "user_negative": user_negative,
+            "registry": compact,
+        }
+        
+        raw = ""
+        try:
+            img_b64 = _encode_image_base64(image)
+            raw = _ollama_chat_with_images(
+                ollama_model,
+                system_prompt,
+                json.dumps(user_payload, ensure_ascii=True),
+                [img_b64] if img_b64 else [],
+                host=ollama_host,
+                port=ollama_port
+            )
+            plan = _parse_plan(raw)
+        except urllib.error.URLError:
+            plan = None
+        except Exception:
+            plan = None
+
+        if plan is None:
+            # Fallback
+            prompt_combined = f"{vision_prompt} {generation_prompt}"
+            plan = _heuristic_plan(prompt_combined, registry)
+
+        # Keywords + registry-driven selection if checkpoint missing
+        keywords = _extract_keywords(generation_prompt)
+        if not plan.get("checkpoint"):
+            best_ckpt = None
+            best_score = -1
+            for ckpt in registry.get("checkpoints", []):
+                score = _score_model(keywords, ckpt.get("tags", []), ckpt.get("recommended", False))
+                if score > best_score:
+                    best_score = score
+                    best_ckpt = ckpt
+            if best_ckpt:
+                plan["checkpoint"] = best_ckpt.get("name", "")
+                plan["model_type"] = best_ckpt.get("type", "sdxl")
+                plan["vae_name"] = best_ckpt.get("required_vae", "")
+                plan["clip_name"] = best_ckpt.get("required_clip", "")
+
+        target_info = None
+        for ckpt in registry.get("checkpoints", []):
+            if ckpt.get("name") == plan.get("checkpoint"):
+                target_info = ckpt
+                break
+        if target_info:
+            if target_info.get("required_vae"):
+                plan["vae_name"] = target_info.get("required_vae", "")
+            if target_info.get("required_clip"):
+                plan["clip_name"] = target_info.get("required_clip", "")
+
+            if target_info.get("steps"):
+                plan["steps"] = target_info.get("steps")
+            if target_info.get("cfg"):
+                plan["cfg"] = target_info.get("cfg")
+
+            sampler_name, scheduler = _pick_sampler(plan.get("model_type", ""), target_info)
+        else:
+            sampler_name, scheduler = _pick_sampler(plan.get("model_type", ""), None)
+
+        base_for_model = _normalize_base_size(plan.get("model_type", "sdxl"), base_size)
+        w, h = _compute_resolution(
+            aspect_ratio=aspect_ratio,
+            base_size=base_for_model,
+            model_type=plan.get("model_type", "sdxl"),
+        )
+        plan["width"] = w
+        plan["height"] = h
+        plan["sampler_name"] = sampler_name
+        plan["scheduler"] = scheduler
+
+        negative = plan.get("negative_prompt", "") or ""
+        if user_negative.strip():
+            if negative.strip():
+                negative = f"{negative}, {user_negative.strip()}"
+            else:
+                negative = user_negative.strip()
+
+        loras = plan.get("loras", [])
+        if isinstance(loras, str):
+            loras = [l.strip() for l in loras.split(",") if l.strip()]
+        strengths = plan.get("lora_strengths", [])
+        if isinstance(strengths, str):
+            strengths = [s.strip() for s in strengths.split(",") if s.strip()]
+
+        lora_str = ",".join([l for l in loras if l])
+        strength_str = ",".join([str(s) for s in strengths if str(s).strip()])
+
+        if str(plan.get("model_type", "")).lower() == "flux":
+            negative = ""
+            plan["use_refiner"] = False
+
+        return (
+            str(plan.get("checkpoint", "")),
+            lora_str,
+            strength_str,
+            str(plan.get("model_type", "sdxl")),
+            int(plan.get("steps", 25)),
+            float(plan.get("cfg", 6.5)),
+            str(plan.get("sampler_name", "euler")),
+            str(plan.get("scheduler", "normal")),
+            int(plan.get("width", 1024)),
+            int(plan.get("height", 1024)),
+            int(plan.get("seed", int(time.time()) % 2_000_000_000)),
+            str(plan.get("positive_prompt", generation_prompt)), # Use generation prompt as basis if model doesn't override well
             negative,
             json.dumps(plan, ensure_ascii=True),
             str(plan.get("vae_name", "")),

@@ -83,6 +83,23 @@ try {
     exit
 }
 
+# --- Load VRAM Map ---
+$vramMap = @{}
+if (Test-Path "model_registry.json") {
+    try {
+        $reg = Get-Content -Raw "model_registry.json" | ConvertFrom-Json
+        foreach ($p in $reg.PSObject.Properties) {
+            if ($p.Value -is [System.Array]) {
+                foreach ($m in $p.Value) {
+                    if ($m.name -and $m.min_vram) {
+                        $vramMap[$m.name] = $m.min_vram
+                    }
+                }
+            }
+        }
+    } catch {}
+}
+
 $rootPath = Get-ModelRoot
 if (-not $rootPath) { exit }
 
@@ -111,12 +128,37 @@ $split.Orientation = "Horizontal"
 $split.SplitterDistance = 400
 $mainForm.Controls.Add($split)
 
-# Top: CheckBox List
+# Top: Filter & List
+$topPanelUser = New-Object System.Windows.Forms.Panel
+$topPanelUser.Dock = "Fill"
+$split.Panel1.Controls.Add($topPanelUser)
+
+$filterPanel = New-Object System.Windows.Forms.Panel
+$filterPanel.Dock = "Top"
+$filterPanel.Height = 35
+$topPanelUser.Controls.Add($filterPanel)
+
+$lblVram = New-Object System.Windows.Forms.Label
+$lblVram.Text = "Max VRAM:"
+$lblVram.AutoSize = $true
+$lblVram.Location = New-Object System.Drawing.Point(10, 8)
+$filterPanel.Controls.Add($lblVram)
+
+$cmbVram = New-Object System.Windows.Forms.ComboBox
+$cmbVram.Location = New-Object System.Drawing.Point(85, 5)
+$cmbVram.Width = 100
+$cmbVram.DropDownStyle = "DropDownList"
+$arr = @("Any", "24 GB", "16 GB", "12 GB", "8 GB", "6 GB")
+foreach($a in $arr) { $cmbVram.Items.Add($a) }
+$cmbVram.SelectedIndex = 0
+$filterPanel.Controls.Add($cmbVram)
+
 $chkList = New-Object System.Windows.Forms.CheckedListBox
 $chkList.Dock = "Fill"
 $chkList.CheckOnClick = $true
 $chkList.Font = New-Object System.Drawing.Font("Consolas", 10)
-$split.Panel1.Controls.Add($chkList)
+$topPanelUser.Controls.Add($chkList)
+$topPanelUser.Controls.SetChildIndex($filterPanel, 0)
 
 # Bottom: Log
 $progressPanel = New-Object System.Windows.Forms.Panel

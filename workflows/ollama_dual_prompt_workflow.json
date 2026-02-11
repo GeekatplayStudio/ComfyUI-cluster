@@ -1,0 +1,208 @@
+{
+  "1": {
+    "inputs": {
+      "image": "input.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "2": {
+    "inputs": {
+      "image": [
+        "1",
+        0
+      ],
+      "vision_prompt": "Describe the style, composition, lighting, and key elements of this image.",
+      "generation_prompt": "Make it cyberpunk style, neon lights, high contrast",
+      "ollama_model": "llava:7b",
+      "registry_path": "model_registry.json",
+      "task_hint": "img2img",
+      "user_negative": "blurry, oversmoothed, artifacts",
+      "aspect_ratio": "1:1",
+      "base_size": 1024,
+      "ollama_host": "localhost",
+      "ollama_port": 11434
+    },
+    "class_type": "OllamaVisionDualPlanner"
+  },
+  "3": {
+    "inputs": {
+      "checkpoint": [
+        "2",
+        0
+      ],
+      "model_type": "auto",
+      "registry_path": "model_registry.json",
+      "custom_path": ""
+    },
+    "class_type": "DynamicCheckpointLoader"
+  },
+  "4": {
+    "inputs": {
+      "model": [
+        "3",
+        0
+      ],
+      "clip": [
+        "3",
+        1
+      ],
+      "loras": [
+        "2",
+        1
+      ],
+      "lora_strengths": [
+        "2",
+        2
+      ],
+      "custom_path": ""
+    },
+    "class_type": "DynamicLoraStack"
+  },
+  "5": {
+    "inputs": {
+      "text": [
+        "2",
+        11
+      ],
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "6": {
+    "inputs": {
+      "text": [
+        "2",
+        12
+      ],
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "7": {
+    "inputs": {
+      "samples": [
+        "1",
+        0
+      ],
+      "vae": [
+        "3",
+        2
+      ]
+    },
+    "class_type": "VAEEncode"
+  },
+  "8": {
+    "inputs": {
+      "seed": [
+        "2",
+        10
+      ],
+      "steps": [
+        "2",
+        4
+      ],
+      "cfg": [
+        "2",
+        5
+      ],
+      "sampler_name": [
+        "2",
+        6
+      ],
+      "scheduler": [
+        "2",
+        7
+      ],
+      "denoise": [
+        "2",
+        17
+      ],
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "5",
+        0
+      ],
+      "negative": [
+        "6",
+        0
+      ],
+      "latent_image": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "KSampler"
+  },
+  "9": {
+    "inputs": {
+      "samples": [
+        "8",
+        0
+      ],
+      "vae": [
+        "3",
+        2
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "10": {
+    "inputs": {
+      "filename_prefix": "cluster_dual_prompt_workflow",
+      "images": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  },
+  "11": {
+    "inputs": {
+      "stage": "Vision Planner JSON",
+      "message": [
+        "2",
+        13
+      ]
+    },
+    "class_type": "LiveStatus"
+  },
+  "12": {
+    "inputs": {
+      "stage": "Selected Checkpoint",
+      "message": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "LiveStatus"
+  },
+  "13": {
+    "inputs": {
+      "stage": "Checkpoint Loader",
+      "message": [
+        "3",
+        3
+      ]
+    },
+    "class_type": "LiveStatus"
+  },
+  "14": {
+    "inputs": {
+      "stage": "LoRA Stack",
+      "message": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "LiveStatus"
+  }
+}

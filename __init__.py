@@ -3,6 +3,7 @@
 from .nodes_ollama_router_new import (
     OllamaPromptPlanner,
     OllamaVisionStylePlanner,
+    OllamaVisionDualPlanner,
     DynamicCheckpointLoader,
     DynamicLoraStack,
     PreviewTextMerge,
@@ -12,6 +13,7 @@ from .nodes_ollama_router_new import (
 NODE_CLASS_MAPPINGS = {
     "OllamaPromptPlanner": OllamaPromptPlanner,
     "OllamaVisionStylePlanner": OllamaVisionStylePlanner,
+    "OllamaVisionDualPlanner": OllamaVisionDualPlanner,
     "DynamicCheckpointLoader": DynamicCheckpointLoader,
     "DynamicLoraStack": DynamicLoraStack,
     "PreviewTextMerge": PreviewTextMerge,
@@ -21,6 +23,7 @@ NODE_CLASS_MAPPINGS = {
 NODE_DISPLAY_NAME_MAPPINGS = {
     "OllamaPromptPlanner": "Ollama Prompt Planner",
     "OllamaVisionStylePlanner": "Ollama Vision Style Planner",
+    "OllamaVisionDualPlanner": "Ollama Vision Dual Planner",
     "DynamicCheckpointLoader": "Dynamic Checkpoint Loader (Universal)",
     "DynamicLoraStack": "Dynamic LoRA Stack",
     "PreviewTextMerge": "Preview Text Merge",
