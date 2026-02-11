@@ -1,198 +1,1281 @@
 {
-  "1": {
-    "inputs": {
-      "prompt": "cinematic portrait, detailed skin texture, soft key light, 85mm lens",
-      "ollama_model": "qwen2.5:7b",
-      "registry_path": "model_registry.json",
-      "task_hint": "auto",
-      "user_negative": "blurry, deformed, extra fingers, low quality",
-      "aspect_ratio": "3:2",
-      "base_size": 1024,
-      "ollama_host": "localhost",
-      "ollama_port": 11434
-    },
-    "class_type": "OllamaPromptPlanner"
-  },
-  "2": {
-    "inputs": {
-      "checkpoint": [
-        "1",
-        0
+  "id": "00000000-0000-0000-0000-000000000000",
+  "revision": 0,
+  "last_node_id": 18,
+  "last_link_id": 64,
+  "nodes": [
+    {
+      "id": 4,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1600,
+        130
       ],
-      "model_type": "auto",
-      "registry_path": "model_registry.json",
-      "custom_path": ""
-    },
-    "class_type": "DynamicCheckpointLoader"
-  },
-  "3": {
-    "inputs": {
-      "model": [
-        "2",
-        0
+      "size": [
+        400,
+        200
       ],
-      "clip": [
-        "2",
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 33
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 32
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            43
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.12.3",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 5,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1600,
+        460
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 35
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 34
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            44
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.12.3",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 6,
+      "type": "EmptyLatentImage",
+      "pos": [
+        600,
+        828
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 36
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 37
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            45
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.12.3",
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        512,
         1
+      ]
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        2470,
+        130
       ],
-      "loras": [
-        "1",
+      "size": [
+        140,
+        46
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 46
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 47
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            48
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.12.3",
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 9,
+      "type": "SaveImage",
+      "pos": [
+        2710,
+        130
+      ],
+      "size": [
+        270,
+        270
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 48
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.12.3"
+      },
+      "widgets_values": [
+        "cluster_text_checkpoint_lora"
+      ]
+    },
+    {
+      "id": 13,
+      "type": "LiveStatus",
+      "pos": [
+        1600,
+        790
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "message",
+          "type": "STRING",
+          "widget": {
+            "name": "message"
+          },
+          "link": 52
+        }
+      ],
+      "outputs": [
+        {
+          "name": "status",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "GeekatplayStudio/ComfyUI-cluster",
+        "ver": "0fc37d0cc5d9c2093ed97a9f7864c56f2397b9bd",
+        "Node name for S&R": "LiveStatus"
+      },
+      "widgets_values": [
+        "LoRA Stack",
+        ""
+      ]
+    },
+    {
+      "id": 10,
+      "type": "LiveStatus",
+      "pos": [
+        611.5169641811466,
+        996.9922084006018
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "message",
+          "type": "STRING",
+          "widget": {
+            "name": "message"
+          },
+          "link": 49
+        }
+      ],
+      "outputs": [
+        {
+          "name": "status",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "GeekatplayStudio/ComfyUI-cluster",
+        "ver": "0fc37d0cc5d9c2093ed97a9f7864c56f2397b9bd",
+        "Node name for S&R": "LiveStatus"
+      },
+      "widgets_values": [
+        "Planner JSON",
+        ""
+      ]
+    },
+    {
+      "id": 16,
+      "type": "PreviewAny",
+      "pos": [
+        60.796002788251634,
+        1225.4211232733508
+      ],
+      "size": [
+        554.2621586616685,
+        254.435602473929
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 57
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.12.3",
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 12,
+      "type": "LiveStatus",
+      "pos": [
+        1044.314161303818,
+        405.52802550995887
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "message",
+          "type": "STRING",
+          "widget": {
+            "name": "message"
+          },
+          "link": 51
+        }
+      ],
+      "outputs": [
+        {
+          "name": "status",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "GeekatplayStudio/ComfyUI-cluster",
+        "ver": "0fc37d0cc5d9c2093ed97a9f7864c56f2397b9bd",
+        "Node name for S&R": "LiveStatus"
+      },
+      "widgets_values": [
+        "Checkpoint Loader",
+        ""
+      ]
+    },
+    {
+      "id": 3,
+      "type": "DynamicLoraStack",
+      "pos": [
+        1120.766877561797,
+        123.07770747940111
+      ],
+      "size": [
+        270,
+        146
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 28
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 29
+        },
+        {
+          "name": "loras",
+          "type": "STRING",
+          "widget": {
+            "name": "loras"
+          },
+          "link": 30
+        },
+        {
+          "name": "lora_strengths",
+          "type": "STRING",
+          "widget": {
+            "name": "lora_strengths"
+          },
+          "link": 31
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            42
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            33,
+            35
+          ]
+        },
+        {
+          "name": "debug_info",
+          "type": "STRING",
+          "links": [
+            52
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "GeekatplayStudio/ComfyUI-cluster",
+        "ver": "0fc37d0cc5d9c2093ed97a9f7864c56f2397b9bd",
+        "Node name for S&R": "DynamicLoraStack"
+      },
+      "widgets_values": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 17,
+      "type": "PreviewAny",
+      "pos": [
+        519.976320731766,
+        -502.9305795985257
+      ],
+      "size": [
+        500.30364258261943,
+        178.37359788057068
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 58
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.12.3",
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 14,
+      "type": "PreviewAny",
+      "pos": [
+        526.8553545579152,
+        -254.42542179556742
+      ],
+      "size": [
+        500.30364258261943,
+        178.37359788057068
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 55
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.12.3",
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 18,
+      "type": "PreviewAny",
+      "pos": [
+        1088.0063857439934,
+        -258.5303949269334
+      ],
+      "size": [
+        500.30364258261943,
+        178.37359788057068
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 59
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.12.3",
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 2,
+      "type": "DynamicCheckpointLoader",
+      "pos": [
+        440.05885806326296,
+        53.259307791810585
+      ],
+      "size": [
+        363.30234375,
+        238
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "checkpoint",
+          "type": "STRING",
+          "widget": {
+            "name": "checkpoint"
+          },
+          "link": 27
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            28
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            29
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            47
+          ]
+        },
+        {
+          "name": "debug_info",
+          "type": "STRING",
+          "links": [
+            51
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "GeekatplayStudio/ComfyUI-cluster",
+        "ver": "0fc37d0cc5d9c2093ed97a9f7864c56f2397b9bd",
+        "Node name for S&R": "DynamicCheckpointLoader"
+      },
+      "widgets_values": [
+        "",
+        "auto",
+        "model_registry.json",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 7,
+      "type": "KSampler",
+      "pos": [
+        2100,
+        130
+      ],
+      "size": [
+        270,
+        262
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 42
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 43
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 44
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 45
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 38
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": 61
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": 63
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": 60
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": 62
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "widget": {
+            "name": "denoise"
+          },
+          "link": 64
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            46
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.12.3",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        274186633145094,
+        "randomize",
+        20,
+        6.5,
+        "euler",
+        "simple",
         1
-      ],
-      "lora_strengths": [
-        "1",
-        2
-      ],
-      "custom_path": ""
-    },
-    "class_type": "DynamicLoraStack"
-  },
-  "4": {
-    "inputs": {
-      "text": [
-        "1",
-        11
-      ],
-      "clip": [
-        "3",
-        1
       ]
     },
-    "class_type": "CLIPTextEncode"
-  },
-  "5": {
-    "inputs": {
-      "text": [
-        "1",
-        12
+    {
+      "id": 1,
+      "type": "OllamaPromptPlanner",
+      "pos": [
+        -439.15064957204254,
+        53.52436913739102
       ],
-      "clip": [
-        "3",
-        1
+      "size": [
+        400,
+        794
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "checkpoint",
+          "type": "STRING",
+          "links": [
+            27,
+            50,
+            55
+          ]
+        },
+        {
+          "name": "loras",
+          "type": "STRING",
+          "links": [
+            30,
+            58
+          ]
+        },
+        {
+          "name": "lora_strengths",
+          "type": "STRING",
+          "links": [
+            31,
+            59
+          ]
+        },
+        {
+          "name": "model_type",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "links": [
+            61
+          ]
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "links": [
+            63
+          ]
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "links": [
+            60
+          ]
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "links": [
+            62
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            36
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            37
+          ]
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": [
+            38
+          ]
+        },
+        {
+          "name": "positive_prompt",
+          "type": "STRING",
+          "links": [
+            32,
+            56
+          ]
+        },
+        {
+          "name": "negative_prompt",
+          "type": "STRING",
+          "links": [
+            34
+          ]
+        },
+        {
+          "name": "plan_json",
+          "type": "STRING",
+          "links": [
+            49,
+            57
+          ]
+        },
+        {
+          "name": "vae_name",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "clip_name",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "task",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "links": [
+            64
+          ]
+        },
+        {
+          "name": "use_refiner",
+          "type": "BOOLEAN",
+          "links": null
+        },
+        {
+          "name": "refiner_checkpoint",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "controlnet_name",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "controlnet_strength",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "controlnet_start",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "controlnet_end",
+          "type": "FLOAT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "GeekatplayStudio/ComfyUI-cluster",
+        "ver": "0fc37d0cc5d9c2093ed97a9f7864c56f2397b9bd",
+        "Node name for S&R": "OllamaPromptPlanner"
+      },
+      "widgets_values": [
+        "photorealistic alley, cityscape, disney style",
+        "qwen2.5:7b",
+        "model_registry.json",
+        "auto",
+        "blurry, deformed, extra fingers, low quality",
+        "16:9",
+        1024,
+        "localhost",
+        11434,
+        24
       ]
     },
-    "class_type": "CLIPTextEncode"
-  },
-  "6": {
-    "inputs": {
-      "width": [
-        "1",
-        8
+    {
+      "id": 11,
+      "type": "LiveStatus",
+      "pos": [
+        582.7807973550099,
+        506.13369371170427
       ],
-      "height": [
-        "1",
-        9
+      "size": [
+        400,
+        200
       ],
-      "batch_size": 1
-    },
-    "class_type": "EmptyLatentImage"
-  },
-  "7": {
-    "inputs": {
-      "seed": [
-        "1",
-        10
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "message",
+          "type": "STRING",
+          "widget": {
+            "name": "message"
+          },
+          "link": 50
+        }
       ],
-      "steps": [
-        "1",
-        4
+      "outputs": [
+        {
+          "name": "status",
+          "type": "STRING",
+          "links": null
+        }
       ],
-      "cfg": [
-        "1",
-        5
-      ],
-      "sampler_name": [
-        "1",
-        6
-      ],
-      "scheduler": [
-        "1",
-        7
-      ],
-      "denoise": [
-        "1",
-        17
-      ],
-      "model": [
-        "3",
-        0
-      ],
-      "positive": [
-        "4",
-        0
-      ],
-      "negative": [
-        "5",
-        0
-      ],
-      "latent_image": [
-        "6",
-        0
+      "properties": {
+        "aux_id": "GeekatplayStudio/ComfyUI-cluster",
+        "ver": "0fc37d0cc5d9c2093ed97a9f7864c56f2397b9bd",
+        "Node name for S&R": "LiveStatus"
+      },
+      "widgets_values": [
+        "Selected Checkpoint",
+        ""
       ]
     },
-    "class_type": "KSampler"
-  },
-  "8": {
-    "inputs": {
-      "samples": [
-        "7",
-        0
+    {
+      "id": 15,
+      "type": "PreviewAny",
+      "pos": [
+        108.57848325781877,
+        945.2599955795417
       ],
-      "vae": [
-        "2",
-        2
+      "size": [
+        500.30364258261943,
+        178.37359788057068
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 56
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.12.3",
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "links": [
+    [
+      27,
+      1,
+      0,
+      2,
+      0,
+      "STRING"
+    ],
+    [
+      28,
+      2,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      29,
+      2,
+      1,
+      3,
+      1,
+      "CLIP"
+    ],
+    [
+      30,
+      1,
+      1,
+      3,
+      2,
+      "STRING"
+    ],
+    [
+      31,
+      1,
+      2,
+      3,
+      3,
+      "STRING"
+    ],
+    [
+      32,
+      1,
+      11,
+      4,
+      1,
+      "STRING"
+    ],
+    [
+      33,
+      3,
+      1,
+      4,
+      0,
+      "CLIP"
+    ],
+    [
+      34,
+      1,
+      12,
+      5,
+      1,
+      "STRING"
+    ],
+    [
+      35,
+      3,
+      1,
+      5,
+      0,
+      "CLIP"
+    ],
+    [
+      36,
+      1,
+      8,
+      6,
+      0,
+      "INT"
+    ],
+    [
+      37,
+      1,
+      9,
+      6,
+      1,
+      "INT"
+    ],
+    [
+      38,
+      1,
+      10,
+      7,
+      4,
+      "INT"
+    ],
+    [
+      42,
+      3,
+      0,
+      7,
+      0,
+      "MODEL"
+    ],
+    [
+      43,
+      4,
+      0,
+      7,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      44,
+      5,
+      0,
+      7,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      45,
+      6,
+      0,
+      7,
+      3,
+      "LATENT"
+    ],
+    [
+      46,
+      7,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      47,
+      2,
+      2,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      48,
+      8,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ],
+    [
+      49,
+      1,
+      13,
+      10,
+      0,
+      "STRING"
+    ],
+    [
+      50,
+      1,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      51,
+      2,
+      3,
+      12,
+      0,
+      "STRING"
+    ],
+    [
+      52,
+      3,
+      2,
+      13,
+      0,
+      "STRING"
+    ],
+    [
+      55,
+      1,
+      0,
+      14,
+      0,
+      "STRING"
+    ],
+    [
+      56,
+      1,
+      11,
+      15,
+      0,
+      "STRING"
+    ],
+    [
+      57,
+      1,
+      13,
+      16,
+      0,
+      "STRING"
+    ],
+    [
+      58,
+      1,
+      1,
+      17,
+      0,
+      "STRING"
+    ],
+    [
+      59,
+      1,
+      2,
+      18,
+      0,
+      "STRING"
+    ],
+    [
+      60,
+      1,
+      6,
+      7,
+      7,
+      "COMBO"
+    ],
+    [
+      61,
+      1,
+      4,
+      7,
+      5,
+      "INT"
+    ],
+    [
+      62,
+      1,
+      7,
+      7,
+      8,
+      "COMBO"
+    ],
+    [
+      63,
+      1,
+      5,
+      7,
+      6,
+      "FLOAT"
+    ],
+    [
+      64,
+      1,
+      17,
+      7,
+      9,
+      "FLOAT"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.271255147599386,
+      "offset": [
+        779.0616137948138,
+        7.158238642162814
       ]
     },
-    "class_type": "VAEDecode"
+    "workflowRendererVersion": "LG",
+    "frontendVersion": "1.38.13",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
   },
-  "9": {
-    "inputs": {
-      "filename_prefix": "cluster_text_checkpoint_lora",
-      "images": [
-        "8",
-        0
-      ]
-    },
-    "class_type": "SaveImage"
-  },
-  "10": {
-    "inputs": {
-      "stage": "Planner JSON",
-      "message": [
-        "1",
-        13
-      ]
-    },
-    "class_type": "LiveStatus"
-  },
-  "11": {
-    "inputs": {
-      "stage": "Selected Checkpoint",
-      "message": [
-        "1",
-        0
-      ]
-    },
-    "class_type": "LiveStatus"
-  },
-  "12": {
-    "inputs": {
-      "stage": "Checkpoint Loader",
-      "message": [
-        "2",
-        3
-      ]
-    },
-    "class_type": "LiveStatus"
-  },
-  "13": {
-    "inputs": {
-      "stage": "LoRA Stack",
-      "message": [
-        "3",
-        2
-      ]
-    },
-    "class_type": "LiveStatus"
-  }
+  "version": 0.4
 }

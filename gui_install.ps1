@@ -157,6 +157,28 @@ foreach ($item in $items) {
     $fullPath = Join-Path $targetPath $item.filename
     
     $exists = Test-Path $fullPath
+    
+    # Smart Fallback: Check other common folders if not found in strict location
+    # Many users (or older ComfyUI setups) mix checkpoints/diffusion_models/unet
+    if (-not $exists) {
+        $fallbacks = @()
+        if ($subdir -in @("diffusion_models", "unet", "checkpoints")) {
+            $fallbacks += "checkpoints"
+            $fallbacks += "diffusion_models"
+            $fallbacks += "unet"
+        }
+        
+        foreach ($fb in $fallbacks) {
+            if ($fb -eq $subdir) { continue }
+            $altPath = Join-Path (Join-Path $rootPath $fb) $item.filename
+            if (Test-Path $altPath) {
+                $exists = $true
+                $fullPath = $altPath # Use the found path so we don't re-download
+                break
+            }
+        }
+    }
+
     $prefix = if ($exists) { "[INSTALLED]" } else { "[MISSING]  " }
     
     $display = "{0} {1} ({2})" -f $prefix, $item.filename, $item.subdir
@@ -246,6 +268,12 @@ $btnInstall.Add_Click({
     $btnExit.Enabled = $false
     $btnSelectMissing.Enabled = $false
     
+    $failedDownloads = @()
+    $errorLogPath = Join-Path $PWD "install_errors.log"
+    # Append header to log instead of overwriting
+    $dateStr = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
+    "`r`n[$dateStr] --- Starting New Download Batch ---" | Out-File -FilePath $errorLogPath -Append -Encoding utf8
+
     foreach ($f in $filesToDownload) {
         if ($script:cancelRequested) { break }
         
@@ -286,7 +314,17 @@ $btnInstall.Add_Click({
                 $mainForm.Refresh()
                 try {
                     $apiUri = "https://civitai.com/api/v1/models/$civitaiId"
-                    $meta = Invoke-RestMethod -Uri $apiUri -ErrorAction Stop
+                    
+                    # Use WebRequest for Timeout control (10s)
+                    $req = [System.Net.WebRequest]::Create($apiUri)
+                    $req.Timeout = 10000 
+                    $resp = $req.GetResponse()
+                    $reader = New-Object System.IO.StreamReader($resp.GetResponseStream())
+                    $jsonContent = $reader.ReadToEnd()
+                    $reader.Close()
+                    $resp.Close()
+
+                    $meta = $jsonContent | ConvertFrom-Json
                     
                     # Attempt to find the correct file
                     if ($meta.modelVersions -and $meta.modelVersions.Count -gt 0) {
@@ -330,6 +368,10 @@ $btnInstall.Add_Click({
                     # Start job
                     $job = Start-BitsTransfer -Source $url -Destination $dest -Asynchronous -DisplayName "ComfyUI_Cluster_DL" -Priority Foreground
                     
+                    $bitsLastCheck = [DateTime]::Now
+                    $bitsLastBytes = 0
+                    $bitsMaxStallSec = 60 # Timeout if no progress for 60s
+
                     # Monitoring loop
                     while ($job.JobState -eq "Transferring" -or $job.JobState -eq "Connecting" -or $job.JobState -eq "Queued") {
                         [System.Windows.Forms.Application]::DoEvents()
@@ -339,6 +381,26 @@ $btnInstall.Add_Click({
                             Remove-BitsTransfer -BitsJob $job -ErrorAction SilentlyContinue
                             break 
                         }
+                        
+                        # Timeout logic
+                        $currentBytes = 0
+                        if ($job.BytesTransferred) { $currentBytes = $job.BytesTransferred }
+                        
+                        # Reset timeout if progress made OR if state changed from Connecting/Queued
+                        if ($currentBytes -gt $bitsLastBytes) {
+                            $bitsLastBytes = $currentBytes
+                            $bitsLastCheck = [DateTime]::Now
+                        } elseif ($job.JobState -ne "Connecting" -and $job.JobState -ne "Queued" -and $currentBytes -eq 0) {
+                            # Just started transferring but 0 bytes?
+                        }
+                        
+                        if (((Get-Date) - $bitsLastCheck).TotalSeconds -gt $bitsMaxStallSec) {
+                             $logBox.AppendText("BITS Timeout: No progress for $bitsMaxStallSec seconds. Killing job.`r`n")
+                             Remove-BitsTransfer -BitsJob $job -ErrorAction SilentlyContinue
+                             break
+                        }
+
+                        # Update visual progress if possible
                         
                         # Update visual progress if possible
                         if ($job.BytesTotal -gt 0) {
@@ -373,13 +435,19 @@ $btnInstall.Add_Click({
         
         # --- Method 2: Fallback (WebClient) ---
         if (-not $downloadSuccess -and -not $script:cancelRequested) {
+            # Force TLS 1.2 which is required by most modern servers (Civitai, HuggingFace)
+            [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
             $logBox.AppendText(">> Starting Download (WebClient)...`r`n")
             $mainForm.Refresh()
 
             try {
                 $wc = New-Object System.Net.WebClient
                 $wc.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
-                ; "BytesIn" = 0; "TotalBytes" = 0 })
+                $wc.Headers.Add("Referer", $url)
+                
+                # Event based async to prevent total freeze, keeping DoEvents active
+                $paramSync = [hashtable]::Synchronized(@{ "Complete" = $false; "Error" = $null; "BytesIn" = 0; "TotalBytes" = 0 })
                 
                 $wc.Add_DownloadFileCompleted({
                     param($sender, $e)
@@ -395,8 +463,25 @@ $btnInstall.Add_Click({
                 
                 $wc.DownloadFileAsync($url, $dest)
                 
+                $webLastCheck = [DateTime]::Now
+                $webLastBytes = 0
+                $webMaxStallSec = 60
+
                 while (-not $paramSync["Complete"]) {
                     [System.Windows.Forms.Application]::DoEvents()
+                    
+                    # Timeout / Stall Detection
+                    $curr = $paramSync["BytesIn"]
+                    if ($curr -gt $webLastBytes) {
+                        $webLastBytes = $curr
+                        $webLastCheck = [DateTime]::Now
+                    }
+                    if (((Get-Date) - $webLastCheck).TotalSeconds -gt $webMaxStallSec) {
+                        $logBox.AppendText("WebClient Timeout: No progress for $webMaxStallSec seconds.`r`n")
+                        $wc.CancelAsync()
+                        break
+                    }
+
                     if ($script:cancelRequested) {
                         $wc.CancelAsync()
                         $logBox.AppendText("Download CANCELLED by user.`r`n")
@@ -407,12 +492,11 @@ $btnInstall.Add_Click({
                         $curr = $paramSync["BytesIn"]
                         $tot = $paramSync["TotalBytes"]
                         $pct = [math]::Round(($curr / $tot) * 100)
+                        if ($pct -gt 100) { $pct = 100 }
                         $progressBar.Value = $pct
                         $lblProgress.Text = "WebClient: {0:N2} MB / {1:N2} MB" -f ($curr / 1MB), ($tot / 1MB)
                     }
-   $logBox.AppendText("Download CANCELLED by user.`r`n")
-                        break
-                    }
+
                     Start-Sleep -Milliseconds 100
                 }
                 
@@ -423,11 +507,19 @@ $btnInstall.Add_Click({
                 }
                 
                 $downloadSuccess = $true
+                $progressBar.Value = 100
                 $logBox.AppendText("Download DONE.`r`n")
                 
             } catch {
-                $logBox.AppendText("Download FAILED: $_`r`n")
+                $err = $_
+                $logBox.AppendText("Download FAILED: $err`r`n")
+                
+                # Cleanup failed partial file
                 if (Test-Path $dest) { Remove-Item $dest -Force -ErrorAction SilentlyContinue }
+                
+                $msg = "File: $($f.Filename) | URL: $url | Error: $err"
+                $failedDownloads += $msg
+                $msg | Out-File -FilePath $errorLogPath -Append -Encoding utf8
             }
         }
         
@@ -438,10 +530,40 @@ $btnInstall.Add_Click({
                 $logBox.AppendText("VERIFIED. Size: $finalSize bytes.`r`n")
              } else {
                 $logBox.AppendText("ERROR: Reported success but file is missing!`r`n")
+                $msg = "File: $($f.Filename) | URL: $url | Error: Verification Failed (Missing)"
+                $failedDownloads += $msg
+                $msg | Out-File -FilePath $errorLogPath -Append -Encoding utf8
+             }
+        } else {
+             # Check if we already logged a specific error (via WebClient catch)
+             # Easier way: check if the last failure matches current file
+             $alreadyLogged = $false
+             if ($failedDownloads.Count -gt 0) {
+                 $lastFail = $failedDownloads[$failedDownloads.Count - 1]
+                 if ($lastFail -match [regex]::Escape($f.Filename)) { $alreadyLogged = $true }
+             }
+             
+             if (-not $alreadyLogged -and -not $script:cancelRequested) {
+                 $msg = "File: $($f.Filename) | URL: $url | Error: General Failure (BITS/WebClient)"
+                 $failedDownloads += $msg
+                 $msg | Out-File -FilePath $errorLogPath -Append -Encoding utf8
+                 
+                 # Final safety cleanup for any leftover 0-byte placeholders
+                 try {
+                     if (Test-Path $dest) { Remove-Item $dest -Force -ErrorAction SilentlyContinue }
+                 } catch {
+                     $logBox.AppendText("WARNING: Cleanup failed for $dest`r`n")
+                 }
              }
         }
 
         $mainForm.Refresh()
+    }
+    
+    if ($failedDownloads.Count -gt 0) {
+        $logBox.AppendText("`r`nWARNING: $($failedDownloads.Count) downloads failed. See 'install_errors.log'`r`n")
+        # We already appended errors one-by-one inside the loop, so no need to dump them all again here.
+        # This prevents double logging and overwriting.
     }
     
     if ($script:cancelRequested) {

@@ -9,3 +9,8 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+
+
+# Local Config & Logs
+cluster_config.json
+*.log
