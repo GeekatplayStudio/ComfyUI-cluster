@@ -108,5 +108,43 @@ def sync_models():
     else:
         print("\nAll model statuses are up to date.")
 
+def reset_registry():
+    registry_path = os.path.join(current_dir, REGISTRY_FILE)
+    registry = load_registry(registry_path)
+    
+    if not registry:
+        print(f"Registry not found at {registry_path}")
+        return
+
+    print("Resetting all models to ENABLED...")
+    count = 0
+
+    for category in ["checkpoints", "loras", "controlnets", "vae", "text_encoders", "diffusion_models", "clip", "embeddings"]:
+        if category in registry:
+            for item in registry[category]:
+                item["enabled"] = True
+                count += 1
+    
+    save_registry(registry_path, registry)
+    print(f"Done. {count} items enabled.")
+
 if __name__ == "__main__":
-    sync_models()
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "--sync":
+            sync_models()
+        elif sys.argv[1] == "--reset":
+            reset_registry()
+        else:
+            print("Usage: sync_registry.py [--sync | --reset]")
+    else:
+        print("\n--- Model Registry Manager ---")
+        print("1. Sync with Disk (Enable installed, Disable missing)")
+        print("2. Reset Registry (Enable ALL models)")
+        print("3. Exit")
+        choice = input("Select option (1-3): ").strip()
+        
+        if choice == "1":
+            sync_models()
+        elif choice == "2":
+            reset_registry()
+

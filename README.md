@@ -41,13 +41,18 @@ Details are documented in `docs/WORKFLOWS.md`.
 install.bat
 ```
 
-3. The installer will show all checkpoints/VAEs/text encoders/LoRAs from `install_manifest.json` with descriptions and NSFW flags. Pick what you want via the checkbox selector (Out-GridView) or the console fallback.
+3. The installer will show all checkpoints/VAEs/text encoders/LoRAs from `install_manifest.json`. Pick what you want via the checkbox selector.
+   - **Update:** The installer now uses BITS for responsive background downloads and supports cancellation.
 
-4. If gated Hugging Face models are required, set:
+4. If gated Hugging Face models are required, set `HF_TOKEN` environment variable before running.
 
-```bat
-set HF_TOKEN=your_hf_token
-```
+## Managing Models
+
+Included `manage_models.bat` allows you to sync `model_registry.json` with your disk state:
+- **Sync**: Disables models in the registry that are missing from disk.
+- **Reset**: Re-enables all models in the registry.
+
+Use this if you want the ComfyUI nodes to only offer models you actually have installed.
 
 Installer behavior and model paths are documented in `docs/INSTALL.md`.
 

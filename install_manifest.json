@@ -48,6 +48,1392 @@
       "filename": "lcm_lora_sdxl.safetensors",
       "description": "LCM LoRA for SDXL to speed sampling.",
       "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/black-forest-labs/FLUX.2-dev/resolve/main/Flux.2-dev-fp16.safetensors",
+      "subdir": "checkpoints",
+      "filename": "Flux.2-dev-fp16.safetensors",
+      "description": "[flux] Photorealism - flux, hyper-realism, extreme-detail",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/150629",
+      "subdir": "checkpoints",
+      "filename": "RealVisXL_V6.0_B1.safetensors",
+      "description": "[sdxl] Photorealism - photorealism, portrait, human-focus",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/133005",
+      "subdir": "checkpoints",
+      "filename": "Juggernaut_XL_v10.safetensors",
+      "description": "[sdxl] Photorealism - photorealism, cinematic, landscape",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo/resolve/main/Z-Image-Turbo-v1.safetensors",
+      "subdir": "checkpoints",
+      "filename": "Z-Image-Turbo-v1.safetensors",
+      "description": "[sdxl] Photorealism - photorealism, architecture, interior-design",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/132632",
+      "subdir": "checkpoints",
+      "filename": "epiCPhotoGasm_v2.safetensors",
+      "description": "[sd15] Photorealism - photorealism, portrait, artistic-nude",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/4201",
+      "subdir": "checkpoints",
+      "filename": "Realistic_Vision_V7.0.safetensors",
+      "description": "[sd15] Photorealism - photorealism, portrait, analog-film",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/lllyasviel/ic-light/resolve/main/IC-Light-XL-Realistic.safetensors",
+      "subdir": "checkpoints",
+      "filename": "IC-Light-XL-Realistic.safetensors",
+      "description": "[sdxl] Photorealism - photorealism, relighting, light-control",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/sateluco",
+      "subdir": "checkpoints",
+      "filename": "Sateluco-IOR-XL.safetensors",
+      "description": "[sdxl] Photorealism - photorealism, landscape, nature",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/analog-xl",
+      "subdir": "checkpoints",
+      "filename": "AnalogMadness_XL_v4.safetensors",
+      "description": "[sdxl] Photorealism - photorealism, film-stock, kodak-portra",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/photopedia",
+      "subdir": "checkpoints",
+      "filename": "Photopedia_XL_v2.safetensors",
+      "description": "[sdxl] Photorealism - photorealism, documentary, journalism",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/mobius",
+      "subdir": "checkpoints",
+      "filename": "Mobius_XL_v1.safetensors",
+      "description": "[sdxl] Photorealism - photorealism, fantasy-realism, cinematic-character",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/81458",
+      "subdir": "checkpoints",
+      "filename": "AbsoluteReality_v1.8.safetensors",
+      "description": "[sd15] Photorealism - photorealism, portrait, sharp-focus",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/thinkdiffusion",
+      "subdir": "checkpoints",
+      "filename": "ThinkDiffusionXL_v1.safetensors",
+      "description": "[sdxl] Photorealism - photorealism, advertisement, commercial-product",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/nightvision",
+      "subdir": "checkpoints",
+      "filename": "NightVision_XL_v9.safetensors",
+      "description": "[sdxl] Photorealism - photorealism, night-photography, low-light",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/cyberrealistic",
+      "subdir": "checkpoints",
+      "filename": "CyberRealistic_XL_v6.safetensors",
+      "description": "[sdxl] Photorealism - photorealism, portrait, face-detail",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/illustrious",
+      "subdir": "checkpoints",
+      "filename": "Illustrious-XL-v1.0.safetensors",
+      "description": "[sdxl] Anime - anime, illustration, vibrant-color",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/257",
+      "subdir": "checkpoints",
+      "filename": "PonyDiffusion_V7_XL.safetensors",
+      "description": "[sdxl] Anime - anime, western-style, cartoon",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/anime-mix",
+      "subdir": "checkpoints",
+      "filename": "AAM_XL_AnimeMix_v2.safetensors",
+      "description": "[sdxl] Anime - anime, scenery, detailed-background",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/meinamix",
+      "subdir": "checkpoints",
+      "filename": "MeinaMix_V11.safetensors",
+      "description": "[sd15] Anime - anime, soft-shading, pastel-colors",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/cetus",
+      "subdir": "checkpoints",
+      "filename": "Cetus-Mix-Final.safetensors",
+      "description": "[sd15] Anime - anime, semi-realistic, 2.5D",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/noobai",
+      "subdir": "checkpoints",
+      "filename": "NoobAI-XL-v1.safetensors",
+      "description": "[sdxl] Anime - anime, tag-adherence, danbooru-style",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/animagine",
+      "subdir": "checkpoints",
+      "filename": "Animagine_XL_v4.0.safetensors",
+      "description": "[sdxl] Anime - anime, official-art-style, media-franchise",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/abyssorangemix",
+      "subdir": "checkpoints",
+      "filename": "AbyssOrangeMix3_AOM3.safetensors",
+      "description": "[sd15] Anime - anime, dark-fantasy, gothic-style",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/counterfeit",
+      "subdir": "checkpoints",
+      "filename": "Counterfeit-V3.0.safetensors",
+      "description": "[sd15] Anime - anime, landscape-anime, scenic",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/blueberry",
+      "subdir": "checkpoints",
+      "filename": "BlueberryMix_XL.safetensors",
+      "description": "[sdxl] Anime - anime, cute-style, kawaii",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/mistoon",
+      "subdir": "checkpoints",
+      "filename": "Mistoon_Anime_v2.safetensors",
+      "description": "[sd15] Anime - anime, flat-color, western-cartoon-mix",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/pastel-mix",
+      "subdir": "checkpoints",
+      "filename": "Pastel-Mix-Stylized.safetensors",
+      "description": "[sd15] Anime - pastel-colors, soft-lighting, artistic-anime",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/real-anime",
+      "subdir": "checkpoints",
+      "filename": "Real-Anime-XL.safetensors",
+      "description": "[sdxl] Anime - semi-realistic, 3d-anime-hybrid, thick-shading",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/holodayo",
+      "subdir": "checkpoints",
+      "filename": "HoloDayo_XL_v1.safetensors",
+      "description": "[sdxl] Anime - hololive-consistent, fanart-style, vibrant",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/waifu-diffusion/resolve/main/Waifu-Diffusion-XL.safetensors",
+      "subdir": "checkpoints",
+      "filename": "Waifu-Diffusion-XL.safetensors",
+      "description": "[sdxl] Anime - base-anime, massive-dataset, legacy",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/painterly",
+      "subdir": "checkpoints",
+      "filename": "Painterly_XL_Check_v2.safetensors",
+      "description": "[sdxl] Artistic - oil-painting, canvas, impasto",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/112902",
+      "subdir": "checkpoints",
+      "filename": "DreamShaper_XL_Turbo.safetensors",
+      "description": "[sdxl] Artistic - digital-art, fantasy, concept-art",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/watercolor",
+      "subdir": "checkpoints",
+      "filename": "Watercolor_Stylized_v3.safetensors",
+      "description": "[sdxl] Artistic - water-wash, ink-bleed, traditional-media",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/timeless",
+      "subdir": "checkpoints",
+      "filename": "Copax_TimeLess_XL_v9.safetensors",
+      "description": "[sdxl] Artistic - atmospheric, ethereal, fine-art",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/oilbrush",
+      "subdir": "checkpoints",
+      "filename": "Oil_Brush_Pro_v2.safetensors",
+      "description": "[sdxl] Artistic - thick-paint, museum-quality, traditional",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/arcane",
+      "subdir": "checkpoints",
+      "filename": "Arcane_Style_XL.safetensors",
+      "description": "[sdxl] Artistic - stylized, neon, paint-splatter",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/inkpunk",
+      "subdir": "checkpoints",
+      "filename": "Inkpunk_Diffusion_v2.safetensors",
+      "description": "[sd15] Artistic - ink-sketch, messy-lines, cyberpunk-art",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/abstract",
+      "subdir": "checkpoints",
+      "filename": "Abstract_Master_XL.safetensors",
+      "description": "[sdxl] Artistic - geometric, non-representative, fine-art-abstract",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/charcoal",
+      "subdir": "checkpoints",
+      "filename": "Charcoal_Pro_v1.safetensors",
+      "description": "[sdxl] Artistic - black-and-white, hand-drawn, smudge-texture",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/ukiyoe",
+      "subdir": "checkpoints",
+      "filename": "Ukiyo-e_XL_v2.safetensors",
+      "description": "[sdxl] Artistic - japanese-print, woodblock, historical-art",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/comicmix",
+      "subdir": "checkpoints",
+      "filename": "ComicMix_XL_v3.safetensors",
+      "description": "[sdxl] Artistic - western-comic, marvel-style, clean-inking",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/gouache",
+      "subdir": "checkpoints",
+      "filename": "Gouache_Style_XL.safetensors",
+      "description": "[sdxl] Artistic - matte-paint, thick-wash, opaque-watercolor",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/pencil-sketch",
+      "subdir": "checkpoints",
+      "filename": "Pencil-Sketch-XL.safetensors",
+      "description": "[sdxl] Artistic - graphite, cross-hatching, realistic-sketch",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/synthwave",
+      "subdir": "checkpoints",
+      "filename": "Synthwave_Master_XL.safetensors",
+      "description": "[sdxl] Artistic - 80s-aesthetic, retro-future, vibrant-pink-blue",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/dark-vibe",
+      "subdir": "checkpoints",
+      "filename": "Dark-Vibe-XL.safetensors",
+      "description": "[sdxl] Artistic - gothic, macabre, detailed-darkness",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/arch",
+      "subdir": "checkpoints",
+      "filename": "Modern_Architecture_XL.safetensors",
+      "description": "[sdxl] Architecture - blueprints, glass, minimalism",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/interior",
+      "subdir": "checkpoints",
+      "filename": "Interior_Design_Flux_v2.safetensors",
+      "description": "[flux] Architecture - home-staging, photorealistic-rooms, furniture-detail",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/overgrown",
+      "subdir": "checkpoints",
+      "filename": "Abandoned_Places_XL.safetensors",
+      "description": "[sdxl] Architecture - ruins, nature-reclaimed, moss",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/cybercity",
+      "subdir": "checkpoints",
+      "filename": "CyberCity_XL_Pro.safetensors",
+      "description": "[sdxl] Architecture - skyscrapers, neon, futuristic-urbanism",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/brutalist",
+      "subdir": "checkpoints",
+      "filename": "Brutalist_Logic_XL.safetensors",
+      "description": "[sdxl] Architecture - concrete, geometric, stark-shadows",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/gothic",
+      "subdir": "checkpoints",
+      "filename": "Gothic_Stone_Carving.safetensors",
+      "description": "[sdxl] Architecture - cathedral, intricate-stone, historical",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/tinyhouse",
+      "subdir": "checkpoints",
+      "filename": "TinyHouse_Master_XL.safetensors",
+      "description": "[sdxl] Architecture - compact-living, modular, wood-texture",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/steamcity",
+      "subdir": "checkpoints",
+      "filename": "Steampunk_City_v2.safetensors",
+      "description": "[sdxl] Architecture - brass, pipes, smoke",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/skyscraper",
+      "subdir": "checkpoints",
+      "filename": "Skyscraper_High_Angle.safetensors",
+      "description": "[sdxl] Architecture - aerial-view, glass-reflections, urban-density",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/japanesehouse",
+      "subdir": "checkpoints",
+      "filename": "Japanese_Traditional_House.safetensors",
+      "description": "[sdxl] Architecture - tatami, sliding-doors, zen-garden",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/93931",
+      "subdir": "checkpoints",
+      "filename": "Landscape_Anime_Max.safetensors",
+      "description": "[sdxl] Landscape - ghibli-style, lush-scenery, cloud-formations",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/canyon",
+      "subdir": "checkpoints",
+      "filename": "GrandCanyon_RedRock_XL.safetensors",
+      "description": "[sdxl] Landscape - desert-textures, utah-scenery, sandstone",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/misty",
+      "subdir": "checkpoints",
+      "filename": "Misty_Forest_XL_v3.safetensors",
+      "description": "[sdxl] Landscape - atmospheric-fog, pine-trees, moody-lighting",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/arctic",
+      "subdir": "checkpoints",
+      "filename": "Arctic_Tundra_Pro.safetensors",
+      "description": "[sdxl] Landscape - snow-ice, blue-hour, aurora-borealis",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/biolume",
+      "subdir": "checkpoints",
+      "filename": "Biolume_Jungle_XL.safetensors",
+      "description": "[sdxl] Landscape - glowing-plants, bioluminescence, exotic-nature",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/volcano",
+      "subdir": "checkpoints",
+      "filename": "Volcano_Fury_XL.safetensors",
+      "description": "[sdxl] Landscape - lava, volcanic-smoke, dark-ash-sky",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/alpine",
+      "subdir": "checkpoints",
+      "filename": "Alpine_Valley_v2.safetensors",
+      "description": "[sdxl] Landscape - mountains, green-valley, sharp-horizons",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/lavender",
+      "subdir": "checkpoints",
+      "filename": "Lavender_Sunset_XL.safetensors",
+      "description": "[sdxl] Landscape - floral-fields, soft-sunset, horizon-line",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/ocean",
+      "subdir": "checkpoints",
+      "filename": "Ocean_Deep_Pro.safetensors",
+      "description": "[sdxl] Landscape - underwater, coral-reefs, caustic-lighting",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/mars",
+      "subdir": "checkpoints",
+      "filename": "Martian_Colony_XL.safetensors",
+      "description": "[sdxl] Landscape - red-dust, alien-sky, crater-landscape",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/Wan-AI/Wan2.1-T2V-14B/resolve/main/Wan_2.1_T2V_14B.safetensors",
+      "subdir": "diffusion_models",
+      "filename": "Wan_2.1_T2V_14B.safetensors",
+      "description": "[wan] Video - text-to-video, cinematic-motion, high-consistency",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/Wan-AI/Wan2.1-T2V-1.3B/resolve/main/Wan2.1-t2v-1.3B.safetensors",
+      "subdir": "diffusion_models",
+      "filename": "Wan2.1-t2v-1.3B.safetensors",
+      "description": "[wan] Video - text-to-video, efficient, fast",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/tencent/HunyuanVideo/resolve/main/HunyuanVideo_v1.safetensors",
+      "subdir": "diffusion_models",
+      "filename": "HunyuanVideo_v1.safetensors",
+      "description": "[hunyuan] Video - ai-video, long-duration, high-fps",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/stabilityai/stable-video-diffusion/resolve/main/SVD-XT-1.1.safetensors",
+      "subdir": "checkpoints",
+      "filename": "SVD-XT-1.1.safetensors",
+      "description": "[svd] Video - image-to-video, professional-motion",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/liveportrait",
+      "subdir": "checkpoints",
+      "filename": "LivePortrait_XL_v2.safetensors",
+      "description": "[sdxl] Video - facial-animation, vlog-automation, lip-sync",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/75650",
+      "subdir": "checkpoints",
+      "filename": "Disney_Pixar_Cartoon_XL.safetensors",
+      "description": "[sdxl] 3D Render - 3d-animation, subsurface-scattering, toy-like",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/blender",
+      "subdir": "checkpoints",
+      "filename": "Blender-Style-XL.safetensors",
+      "description": "[sdxl] 3D Render - cycles-render, hard-surface, pbr-textures",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/clay",
+      "subdir": "checkpoints",
+      "filename": "Clay-Aardman-Style.safetensors",
+      "description": "[sdxl] 3D Render - stop-motion, fingerprint-texture, handmade",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/ue5",
+      "subdir": "checkpoints",
+      "filename": "Unreal-Engine-5-XL.safetensors",
+      "description": "[sdxl] 3D Render - game-engine-lighting, high-poly, nanite-detail",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/zbrush",
+      "subdir": "checkpoints",
+      "filename": "ZBrush-Sculpt-XL.safetensors",
+      "description": "[sdxl] 3D Render - digital-sculpt, grey-clay, intricate-carving",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/xinsir/controlnet-union/resolve/main/ControlNet-Union-SDXL.safetensors",
+      "subdir": "checkpoints",
+      "filename": "ControlNet-Union-SDXL.safetensors",
+      "description": "[sdxl] Utility - depth, canny, pose",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/faceid",
+      "subdir": "checkpoints",
+      "filename": "IP-Adapter-FaceID-XL.safetensors",
+      "description": "[sdxl] Utility - face-preservation, identity-consistency",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/BectorSpaceLab/OmniGen-v2/resolve/main/OmniGen-v2.safetensors",
+      "subdir": "checkpoints",
+      "filename": "OmniGen-v2.safetensors",
+      "description": "[sdxl] Utility - multi-image-composition, instruct-editing",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/ByteDance/Hyper-SD/resolve/main/Hyper-SDXL-Lightning.safetensors",
+      "subdir": "checkpoints",
+      "filename": "Hyper-SDXL-Lightning.safetensors",
+      "description": "[sdxl] Utility - 1-step-generation, real-time-previews",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/facebook/sam2/resolve/main/Segment-Anything-2.safetensors",
+      "subdir": "checkpoints",
+      "filename": "Segment-Anything-2.safetensors",
+      "description": "[sdxl] Utility - object-masking, surgical-selection, video-tracking",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/food",
+      "subdir": "checkpoints",
+      "filename": "Food-Photography-XL.safetensors",
+      "description": "[sdxl] Photography - restaurant-lighting, macro-food, professional-plating",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/macro",
+      "subdir": "checkpoints",
+      "filename": "Macro-Nature-XL.safetensors",
+      "description": "[sdxl] Photography - insect-detail, shallow-depth, dew-drops",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/product",
+      "subdir": "checkpoints",
+      "filename": "Product-Commercial-XL.safetensors",
+      "description": "[sdxl] Photography - clean-background, product-lighting, minimalist",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/silver",
+      "subdir": "checkpoints",
+      "filename": "Mature-Faces-XL-v2.safetensors",
+      "description": "[sdxl] Portrait - elderly, silver-hair, character-wrinkles",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/fashion",
+      "subdir": "checkpoints",
+      "filename": "Fashion-Editorial-XL.safetensors",
+      "description": "[sdxl] Portrait - vogue-style, high-contrast, model-poses",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/tarot",
+      "subdir": "checkpoints",
+      "filename": "Tarot-Card-Check-XL.safetensors",
+      "description": "[sdxl] Niche - mystical-border, symbolic-art, gold-leaf",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/glass",
+      "subdir": "checkpoints",
+      "filename": "Stained-Glass-v4.safetensors",
+      "description": "[sdxl] Niche - backlit, translucent, religious-art",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/blueprint",
+      "subdir": "checkpoints",
+      "filename": "Blueprint-Draft-XL.safetensors",
+      "description": "[sdxl] Niche - technical-drawing, grid-lines, industrial-design",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/pixelart",
+      "subdir": "checkpoints",
+      "filename": "Pixel-Art-Ultra-XL.safetensors",
+      "description": "[sdxl] Niche - retro-gaming, 64-bit, sprites",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/graffiti",
+      "subdir": "checkpoints",
+      "filename": "Graffiti-Wall-Pro-XL.safetensors",
+      "description": "[sdxl] Niche - spray-paint, street-art, tag-style",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/chalk",
+      "subdir": "checkpoints",
+      "filename": "Chalkboard-Menu-XL.safetensors",
+      "description": "[sdxl] Niche - dusty-chalk, handwritten, slate-texture",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/embroidery",
+      "subdir": "checkpoints",
+      "filename": "Embroidery-Craft-XL.safetensors",
+      "description": "[sdxl] Niche - sewn-texture, thread-patterns, fabric-art",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/neonsign",
+      "subdir": "checkpoints",
+      "filename": "Neon-Signs-XL.safetensors",
+      "description": "[sdxl] Niche - glowing-tubes, dark-city-streets",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/info",
+      "subdir": "checkpoints",
+      "filename": "Infographic-Clean-XL.safetensors",
+      "description": "[sdxl] Niche - charts, clean-typography, icons",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/Qwen/Qwen2.5-VL/resolve/main/Qwen2.5-VL-7B-Instruct.safetensors",
+      "subdir": "checkpoints",
+      "filename": "Qwen2.5-VL-7B-Instruct.safetensors",
+      "description": "[sdxl] Logic - vlm, image-understanding, prompt-logic",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/meta-llama/Llama-4/resolve/main/Llama-4-8B-Vision.safetensors",
+      "subdir": "checkpoints",
+      "filename": "Llama-4-8B-Vision.safetensors",
+      "description": "[sdxl] Logic - reasoning, captioning, visual-logic",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/medical",
+      "subdir": "checkpoints",
+      "filename": "Medical-Anatomy-XL.safetensors",
+      "description": "[sdxl] Niche - scientific-illustration, biological-accuracy",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/jewelry",
+      "subdir": "checkpoints",
+      "filename": "Jewelry-Detail-XL.safetensors",
+      "description": "[sdxl] Niche - gold-reflections, gems, high-macro",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/inker",
+      "subdir": "checkpoints",
+      "filename": "Comic-Book-Inker-XL.safetensors",
+      "description": "[sdxl] Niche - thick-black-lines, cross-hatching",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/vcr",
+      "subdir": "checkpoints",
+      "filename": "Retro-VCR-XL.safetensors",
+      "description": "[sdxl] Niche - glitch-art, tracking-lines, 80s-video",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/miniature",
+      "subdir": "checkpoints",
+      "filename": "Miniature-World-XL.safetensors",
+      "description": "[sdxl] Niche - tilt-shift, toy-figures, macro-landscape",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/kudzueye/Boreal/resolve/main/Boreal_Realism_Flux.safetensors",
+      "subdir": "loras",
+      "filename": "Boreal_Realism_Flux.safetensors",
+      "description": "[LoRA] Realism",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/652699",
+      "subdir": "loras",
+      "filename": "Smartphone_Snap_v2.safetensors",
+      "description": "[LoRA] Realism",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/114321",
+      "subdir": "loras",
+      "filename": "RealLife_Skin_Fix.safetensors",
+      "description": "[LoRA] Realism",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/16543",
+      "subdir": "loras",
+      "filename": "Mature_Faces_Slider.safetensors",
+      "description": "[LoRA] Realism",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/alvdansen/flux-koda/resolve/main/Fashion_Editorial_Flux.safetensors",
+      "subdir": "loras",
+      "filename": "Fashion_Editorial_Flux.safetensors",
+      "description": "[LoRA] Realism",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/cinematic",
+      "subdir": "loras",
+      "filename": "Cinematic_Shot_XL.safetensors",
+      "description": "[LoRA] Realism",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/mccurry",
+      "subdir": "loras",
+      "filename": "Steve_McCurry_Photography.safetensors",
+      "description": "[LoRA] Realism",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/nightphoto",
+      "subdir": "loras",
+      "filename": "Low-Light_Night_Photography.safetensors",
+      "description": "[LoRA] Realism",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/prithivMLmods/Canopus/resolve/main/8k_Ultra_Detail_Flux.safetensors",
+      "subdir": "loras",
+      "filename": "8k_Ultra_Detail_Flux.safetensors",
+      "description": "[LoRA] Realism",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/amateur",
+      "subdir": "loras",
+      "filename": "Amateur_Style_Snapshot.safetensors",
+      "description": "[LoRA] Realism",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/extreme-face",
+      "subdir": "loras",
+      "filename": "Facial_Expression_Extreme.safetensors",
+      "description": "[LoRA] Realism",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/macro-skin",
+      "subdir": "loras",
+      "filename": "Skin_Texture_Macro_Flux.safetensors",
+      "description": "[LoRA] Realism",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/streetphoto",
+      "subdir": "loras",
+      "filename": "Candid_Street_Photography.safetensors",
+      "description": "[LoRA] Realism",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/kodak",
+      "subdir": "loras",
+      "filename": "Kodak_Portra_400_XL.safetensors",
+      "description": "[LoRA] Realism",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/handfix",
+      "subdir": "loras",
+      "filename": "Hand_Fixer_v2.safetensors",
+      "description": "[LoRA] Realism",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/459655",
+      "subdir": "loras",
+      "filename": "Disney_Pixar_Style_v2.safetensors",
+      "description": "[LoRA] Anime",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/21133",
+      "subdir": "loras",
+      "filename": "Sakimi-Chan_Style_Flux.safetensors",
+      "description": "[LoRA] Anime",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/shinkai",
+      "subdir": "loras",
+      "filename": "Makoto_Shinkai_Vibe.safetensors",
+      "description": "[LoRA] Anime",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/arcane-lora",
+      "subdir": "loras",
+      "filename": "Arcane_Texture_XL.safetensors",
+      "description": "[LoRA] Anime",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/spiderverse",
+      "subdir": "loras",
+      "filename": "Spider-Verse_VFX.safetensors",
+      "description": "[LoRA] Anime",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/retro90s",
+      "subdir": "loras",
+      "filename": "Retro_Anime_90s.safetensors",
+      "description": "[LoRA] Anime",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/8876",
+      "subdir": "loras",
+      "filename": "Claymation_Stop_Motion.safetensors",
+      "description": "[LoRA] Anime",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/9987",
+      "subdir": "loras",
+      "filename": "Papercraft_Origami_XL.safetensors",
+      "description": "[LoRA] Anime",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/lineart",
+      "subdir": "loras",
+      "filename": "Comic_Ink_Lineart.safetensors",
+      "description": "[LoRA] Anime",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/ghibliback",
+      "subdir": "loras",
+      "filename": "Ghibli_Background_Artist.safetensors",
+      "description": "[LoRA] Anime",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/neoncloth",
+      "subdir": "loras",
+      "filename": "Neon_Cyberpunk_Fashion.safetensors",
+      "description": "[LoRA] Anime",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/elfears",
+      "subdir": "loras",
+      "filename": "Elf_Ears_Fantasy.safetensors",
+      "description": "[LoRA] Anime",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/supersuit",
+      "subdir": "loras",
+      "filename": "Super_Hero_Suit_Texture.safetensors",
+      "description": "[LoRA] Anime",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/cybertech",
+      "subdir": "loras",
+      "filename": "Cybernetic_Implants.safetensors",
+      "description": "[LoRA] Anime",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/animeface",
+      "subdir": "loras",
+      "filename": "Expressions_Anime_XL.safetensors",
+      "description": "[LoRA] Anime",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/3030",
+      "subdir": "loras",
+      "filename": "Oil_Impasto_Texture.safetensors",
+      "description": "[LoRA] Painting",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/4040",
+      "subdir": "loras",
+      "filename": "Watercolor_Wash_Pro.safetensors",
+      "description": "[LoRA] Painting",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/b_lora/charcoal/resolve/main/Charcoal_Sketch_Flux.safetensors",
+      "subdir": "loras",
+      "filename": "Charcoal_Sketch_Flux.safetensors",
+      "description": "[LoRA] Painting",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/5050",
+      "subdir": "loras",
+      "filename": "Ukiyo-e_Traditional.safetensors",
+      "description": "[LoRA] Painting",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/6060",
+      "subdir": "loras",
+      "filename": "Art_Nouveau_Mucha.safetensors",
+      "description": "[LoRA] Painting",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/synthglow",
+      "subdir": "loras",
+      "filename": "Synthwave_Grid_Vibe.safetensors",
+      "description": "[LoRA] Painting",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/noir",
+      "subdir": "loras",
+      "filename": "Gothic_Noir_XL.safetensors",
+      "description": "[LoRA] Painting",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/renderartist/vector/resolve/main/Minimalist_Vector_Art.safetensors",
+      "subdir": "loras",
+      "filename": "Minimalist_Vector_Art.safetensors",
+      "description": "[LoRA] Painting",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/9090",
+      "subdir": "loras",
+      "filename": "Steampunk_Gears_Brass.safetensors",
+      "description": "[LoRA] Painting",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/3236",
+      "subdir": "loras",
+      "filename": "Chalkboard_Art_Texture.safetensors",
+      "description": "[LoRA] Painting",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/4347",
+      "subdir": "loras",
+      "filename": "Embroidery_Sewn_Art.safetensors",
+      "description": "[LoRA] Painting",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/2125",
+      "subdir": "loras",
+      "filename": "Graffiti_Drip_Style.safetensors",
+      "description": "[LoRA] Painting",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/2020",
+      "subdir": "loras",
+      "filename": "Inkpunk_Splash_Art.safetensors",
+      "description": "[LoRA] Painting",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/pastel",
+      "subdir": "loras",
+      "filename": "Pastel_Dream_Vibe.safetensors",
+      "description": "[LoRA] Painting",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/popart",
+      "subdir": "loras",
+      "filename": "Pop_Art_Lichtenstein.safetensors",
+      "description": "[LoRA] Painting",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/1111",
+      "subdir": "loras",
+      "filename": "Modern_Interior_Design.safetensors",
+      "description": "[LoRA] Architecture",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/abandoned",
+      "subdir": "loras",
+      "filename": "Abandoned_Overgrown_Flux.safetensors",
+      "description": "[LoRA] Architecture",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/2222",
+      "subdir": "loras",
+      "filename": "Cyber_City_Neon_Grid.safetensors",
+      "description": "[LoRA] Architecture",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/3333",
+      "subdir": "loras",
+      "filename": "Cozy_Cottage_Garden.safetensors",
+      "description": "[LoRA] Architecture",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/4444",
+      "subdir": "loras",
+      "filename": "Brutalist_Concrete_Flux.safetensors",
+      "description": "[LoRA] Architecture",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/5555",
+      "subdir": "loras",
+      "filename": "Gothic_Stone_Cathedral.safetensors",
+      "description": "[LoRA] Architecture",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/6666",
+      "subdir": "loras",
+      "filename": "Treehouse_Natural_Build.safetensors",
+      "description": "[LoRA] Architecture",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/7777",
+      "subdir": "loras",
+      "filename": "Martian_Base_Modular.safetensors",
+      "description": "[LoRA] Architecture",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/8888",
+      "subdir": "loras",
+      "filename": "Underwater_Biosphere.safetensors",
+      "description": "[LoRA] Architecture",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/9999",
+      "subdir": "loras",
+      "filename": "Tiny_House_Organization.safetensors",
+      "description": "[LoRA] Architecture",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/4345",
+      "subdir": "loras",
+      "filename": "Kitchen_Luxury_Flux.safetensors",
+      "description": "[LoRA] Environment",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/5456",
+      "subdir": "loras",
+      "filename": "Gamer_Room_RGB.safetensors",
+      "description": "[LoRA] Environment",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/6567",
+      "subdir": "loras",
+      "filename": "Old_Library_Mahogany.safetensors",
+      "description": "[LoRA] Environment",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/7678",
+      "subdir": "loras",
+      "filename": "Zen_Garden_Tranquil.safetensors",
+      "description": "[LoRA] Environment",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/8789",
+      "subdir": "loras",
+      "filename": "Industrial_Loft_Flux.safetensors",
+      "description": "[LoRA] Environment",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/1020",
+      "subdir": "loras",
+      "filename": "Arctic_Ice_Tundra.safetensors",
+      "description": "[LoRA] Landscape",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/2030",
+      "subdir": "loras",
+      "filename": "Tropical_Island_Beach.safetensors",
+      "description": "[LoRA] Landscape",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/3040",
+      "subdir": "loras",
+      "filename": "Grand_Canyon_Utah_XL.safetensors",
+      "description": "[LoRA] Landscape",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/4050",
+      "subdir": "loras",
+      "filename": "Misty_Forest_Flux_Atmo.safetensors",
+      "description": "[LoRA] Landscape",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/5060",
+      "subdir": "loras",
+      "filename": "Volcano_Eruption_Fire.safetensors",
+      "description": "[LoRA] Landscape",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/6070",
+      "subdir": "loras",
+      "filename": "Lavender_Field_Horizon.safetensors",
+      "description": "[LoRA] Landscape",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/7080",
+      "subdir": "loras",
+      "filename": "Space_Nebula_Starfield.safetensors",
+      "description": "[LoRA] Landscape",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/8090",
+      "subdir": "loras",
+      "filename": "Swiss_Alps_Summit.safetensors",
+      "description": "[LoRA] Landscape",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/9001",
+      "subdir": "loras",
+      "filename": "Autumn_Fall_Colors.safetensors",
+      "description": "[LoRA] Landscape",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/1002",
+      "subdir": "loras",
+      "filename": "Biolume_Crystal_Cave.safetensors",
+      "description": "[LoRA] Landscape",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/126343",
+      "subdir": "loras",
+      "filename": "Detailifier_Enhance_XL.safetensors",
+      "description": "[LoRA] Utility",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/2002",
+      "subdir": "loras",
+      "filename": "Lighting_Master_Pro.safetensors",
+      "description": "[LoRA] Utility",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/3003",
+      "subdir": "loras",
+      "filename": "No-Background_Sticker.safetensors",
+      "description": "[LoRA] Utility",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/4004",
+      "subdir": "loras",
+      "filename": "Text_Spelling_Fixer.safetensors",
+      "description": "[LoRA] Utility",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/1011",
+      "subdir": "loras",
+      "filename": "Color_Pop_Vibrant.safetensors",
+      "description": "[LoRA] Utility",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/2022",
+      "subdir": "loras",
+      "filename": "Tactical_Armor_XL.safetensors",
+      "description": "[LoRA] Clothing",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/3033",
+      "subdir": "loras",
+      "filename": "Victorian_Lace_Dress.safetensors",
+      "description": "[LoRA] Clothing",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/2233",
+      "subdir": "loras",
+      "filename": "Silk_Satin_Flow_Flux.safetensors",
+      "description": "[LoRA] Clothing",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/5055",
+      "subdir": "loras",
+      "filename": "Diamond_Gold_Macro.safetensors",
+      "description": "[LoRA] Jewelry",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/magic",
+      "subdir": "loras",
+      "filename": "Magic_Spell_Particles.safetensors",
+      "description": "[LoRA] VFX",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/glitch",
+      "subdir": "loras",
+      "filename": "Glitch_Digital_Artifacts.safetensors",
+      "description": "[LoRA] VFX",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/smokefx",
+      "subdir": "loras",
+      "filename": "Smoke_Fog_Volumetric.safetensors",
+      "description": "[LoRA] VFX",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/5457",
+      "subdir": "loras",
+      "filename": "Tarot_Card_Frame.safetensors",
+      "description": "[LoRA] Niche",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/6568",
+      "subdir": "loras",
+      "filename": "Blueprint_Technical.safetensors",
+      "description": "[LoRA] Niche",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/8790",
+      "subdir": "loras",
+      "filename": "Stained_Glass_Effect.safetensors",
+      "description": "[LoRA] Niche",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/9891",
+      "subdir": "loras",
+      "filename": "Origami_Paper_Fold.safetensors",
+      "description": "[LoRA] Niche",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/1014",
+      "subdir": "loras",
+      "filename": "Tattoo_Traditional_Flash.safetensors",
+      "description": "[LoRA] Niche",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/5458",
+      "subdir": "loras",
+      "filename": "Neon_Sign_Glow.safetensors",
+      "description": "[LoRA] Niche",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/tiltshift",
+      "subdir": "loras",
+      "filename": "Miniature_Tilt_Shift.safetensors",
+      "description": "[LoRA] Niche",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/holo",
+      "subdir": "loras",
+      "filename": "Hologram_Projection.safetensors",
+      "description": "[LoRA] Niche",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/icons",
+      "subdir": "loras",
+      "filename": "Infographic_Icon_Set.safetensors",
+      "description": "[LoRA] Niche",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/plating",
+      "subdir": "loras",
+      "filename": "Food_Plating_Gourmet.safetensors",
+      "description": "[LoRA] Niche",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/hud",
+      "subdir": "loras",
+      "filename": "Sci-Fi_HUD_Overlay.safetensors",
+      "description": "[LoRA] Niche",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/dust",
+      "subdir": "loras",
+      "filename": "Post-Apocalypse_Dust.safetensors",
+      "description": "[LoRA] Niche",
+      "nsfw": false
+    },
+    {
+      "url": "https://civitai.com/models/biolumecreature",
+      "subdir": "loras",
+      "filename": "Bioluminescent_Creatures.safetensors",
+      "description": "[LoRA] Niche",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/StableDiffusionVN/Prunedcontrolnet/resolve/main/control_v11p_sd15_canny.safetensors",
+      "subdir": "controlnet",
+      "filename": "control_v11p_sd15_canny.safetensors",
+      "description": "[ControlNet] Edges",
+      "nsfw": false
+    },
+    {
+      "url": "https://huggingface.co/StableDiffusionVN/Prunedcontrolnet/resolve/main/control_v11p_sd15_openpose.safetensors",
+      "subdir": "controlnet",
+      "filename": "control_v11p_sd15_openpose.safetensors",
+      "description": "[ControlNet] Pose",
+      "nsfw": false
     }
   ]
 }

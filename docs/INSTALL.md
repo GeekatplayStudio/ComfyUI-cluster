@@ -19,7 +19,21 @@ install.bat
 The installer:
 - reads `install_manifest.json`
 - downloads model files into your selected model root
+  - **New:** Uses BITS for background downloading; UI remains responsive.
+  - **New:** Supports pausing/cancelling mid-download.
 - appends an `ollama_cluster` section to ComfyUI `extra_model_paths.yaml` if missing
+
+## Managing Model Registry
+
+To keep your `model_registry.json` in sync with what you have actually downloaded (so the node system knows which models are available), run:
+
+```bat
+manage_models.bat
+```
+
+This utility offers two modes:
+1. **Sync with Disk**: Scans your model folders, enables found models, and disables missing ones in the registry.
+2. **Reset Registry**: Re-enables ALL models in the registry (useful if you plan to download more or just want to see everything in the node options).
 
 ## Model Path Mapping Added by Installer
 
