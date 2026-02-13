@@ -4,7 +4,7 @@
     {
       "name": "Flux.1-dev-fp8.safetensors",
       "category": "Photorealism",
-      "url": "https://huggingface.co/black-forest-labs/FLUX.1-dev",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/Flux.1-dev-fp8.safetensors",
       "tags": [
         "flux",
         "realism",
@@ -29,7 +29,7 @@
     {
       "name": "Flux.2-dev-fp16.safetensors",
       "category": "Photorealism",
-      "url": "https://huggingface.co/black-forest-labs/FLUX.2-dev",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.2-dev/resolve/main/Flux.2-dev-fp16.safetensors",
       "tags": [
         "flux",
         "hyper-realism",
@@ -97,7 +97,7 @@
     {
       "name": "Z-Image-Turbo-v1.safetensors",
       "category": "Photorealism",
-      "url": "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo",
+      "url": "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo/resolve/main/Z-Image-Turbo-v1.safetensors",
       "tags": [
         "photorealism",
         "architecture",
@@ -165,7 +165,7 @@
     {
       "name": "IC-Light-XL-Realistic.safetensors",
       "category": "Photorealism",
-      "url": "https://huggingface.co/lllyasviel/ic-light",
+      "url": "https://huggingface.co/lllyasviel/ic-light/resolve/main/IC-Light-XL-Realistic.safetensors",
       "tags": [
         "photorealism",
         "relighting",
@@ -253,7 +253,7 @@
     {
       "name": "Mobius_XL_v1.safetensors",
       "category": "Photorealism",
-      "url": "https://civitai.com/models/mobius",
+      "url": "https://civitai.com/models/17589",
       "tags": [
         "photorealism",
         "fantasy-realism",
@@ -296,7 +296,7 @@
     {
       "name": "ThinkDiffusionXL_v1.safetensors",
       "category": "Photorealism",
-      "url": "https://civitai.com/models/thinkdiffusion",
+      "url": "https://civitai.com/models/926617",
       "tags": [
         "photorealism",
         "advertisement",
@@ -317,7 +317,7 @@
     {
       "name": "NightVision_XL_v9.safetensors",
       "category": "Photorealism",
-      "url": "https://civitai.com/models/nightvision",
+      "url": "https://civitai.com/models/586010",
       "tags": [
         "photorealism",
         "night-photography",
@@ -339,7 +339,7 @@
     {
       "name": "CyberRealistic_XL_v6.safetensors",
       "category": "Photorealism",
-      "url": "https://civitai.com/models/cyberrealistic",
+      "url": "https://civitai.com/models/1531982",
       "tags": [
         "photorealism",
         "portrait",
@@ -361,7 +361,7 @@
     {
       "name": "Illustrious-XL-v1.0.safetensors",
       "category": "Anime",
-      "url": "https://civitai.com/models/illustrious",
+      "url": "https://civitai.com/models/2384857",
       "tags": [
         "anime",
         "illustration",
@@ -405,7 +405,7 @@
     {
       "name": "AAM_XL_AnimeMix_v2.safetensors",
       "category": "Anime",
-      "url": "https://civitai.com/models/anime-mix",
+      "url": "https://civitai.com/models/269232",
       "tags": [
         "anime",
         "scenery",
@@ -426,7 +426,7 @@
     {
       "name": "MeinaMix_V11.safetensors",
       "category": "Anime",
-      "url": "https://civitai.com/models/meinamix",
+      "url": "https://civitai.com/models/153831",
       "tags": [
         "anime",
         "soft-shading",
@@ -447,7 +447,7 @@
     {
       "name": "Cetus-Mix-Final.safetensors",
       "category": "Anime",
-      "url": "https://civitai.com/models/cetus",
+      "url": "https://civitai.com/models/1947515",
       "tags": [
         "anime",
         "semi-realistic",
@@ -468,7 +468,7 @@
     {
       "name": "NoobAI-XL-v1.safetensors",
       "category": "Anime",
-      "url": "https://civitai.com/models/noobai",
+      "url": "https://civitai.com/models/2339056",
       "tags": [
         "anime",
         "tag-adherence",
@@ -489,7 +489,7 @@
     {
       "name": "Animagine_XL_v4.0.safetensors",
       "category": "Anime",
-      "url": "https://civitai.com/models/animagine",
+      "url": "https://civitai.com/models/1564077",
       "tags": [
         "anime",
         "official-art-style",
@@ -510,7 +510,7 @@
     {
       "name": "AbyssOrangeMix3_AOM3.safetensors",
       "category": "Anime",
-      "url": "https://civitai.com/models/abyssorangemix",
+      "url": "https://civitai.com/models/21503",
       "tags": [
         "anime",
         "dark-fantasy",
@@ -531,7 +531,7 @@
     {
       "name": "Counterfeit-V3.0.safetensors",
       "category": "Anime",
-      "url": "https://civitai.com/models/counterfeit",
+      "url": "https://civitai.com/models/4468",
       "tags": [
         "anime",
         "landscape-anime",
@@ -552,7 +552,7 @@
     {
       "name": "BlueberryMix_XL.safetensors",
       "category": "Anime",
-      "url": "https://civitai.com/models/blueberry",
+      "url": "https://civitai.com/models/329642",
       "tags": [
         "anime",
         "cute-style",
@@ -573,7 +573,7 @@
     {
       "name": "Mistoon_Anime_v2.safetensors",
       "category": "Anime",
-      "url": "https://civitai.com/models/mistoon",
+      "url": "https://civitai.com/models/32022",
       "tags": [
         "anime",
         "flat-color",
@@ -651,7 +651,7 @@
     {
       "name": "Waifu-Diffusion-XL.safetensors",
       "category": "Anime",
-      "url": "https://huggingface.co/waifu-diffusion",
+      "url": "https://huggingface.co/waifu-diffusion/resolve/main/Waifu-Diffusion-XL.safetensors",
       "tags": [
         "base-anime",
         "massive-dataset",
@@ -670,7 +670,7 @@
     {
       "name": "Painterly_XL_Check_v2.safetensors",
       "category": "Artistic",
-      "url": "https://civitai.com/models/painterly",
+      "url": "https://civitai.com/models/2326354",
       "tags": [
         "oil-painting",
         "canvas",
@@ -710,7 +710,7 @@
     {
       "name": "Watercolor_Stylized_v3.safetensors",
       "category": "Artistic",
-      "url": "https://civitai.com/models/watercolor",
+      "url": "https://civitai.com/models/2289270",
       "tags": [
         "water-wash",
         "ink-bleed",
@@ -729,7 +729,7 @@
     {
       "name": "Copax_TimeLess_XL_v9.safetensors",
       "category": "Artistic",
-      "url": "https://civitai.com/models/timeless",
+      "url": "https://civitai.com/models/118111",
       "tags": [
         "atmospheric",
         "ethereal",
@@ -748,7 +748,7 @@
     {
       "name": "Oil_Brush_Pro_v2.safetensors",
       "category": "Artistic",
-      "url": "https://civitai.com/models/oilbrush",
+      "url": "https://civitai.com/models/118223",
       "tags": [
         "thick-paint",
         "museum-quality",
@@ -767,7 +767,7 @@
     {
       "name": "Arcane_Style_XL.safetensors",
       "category": "Artistic",
-      "url": "https://civitai.com/models/arcane",
+      "url": "https://civitai.com/models/2183167",
       "tags": [
         "stylized",
         "neon",
@@ -787,7 +787,7 @@
     {
       "name": "Inkpunk_Diffusion_v2.safetensors",
       "category": "Artistic",
-      "url": "https://civitai.com/models/inkpunk",
+      "url": "https://civitai.com/models/2124568",
       "tags": [
         "ink-sketch",
         "messy-lines",
@@ -806,7 +806,7 @@
     {
       "name": "Abstract_Master_XL.safetensors",
       "category": "Artistic",
-      "url": "https://civitai.com/models/abstract",
+      "url": "https://civitai.com/models/2149089",
       "tags": [
         "geometric",
         "non-representative",
@@ -825,7 +825,7 @@
     {
       "name": "Charcoal_Pro_v1.safetensors",
       "category": "Artistic",
-      "url": "https://civitai.com/models/charcoal",
+      "url": "https://civitai.com/models/2100594",
       "tags": [
         "black-and-white",
         "hand-drawn",
@@ -844,7 +844,7 @@
     {
       "name": "Ukiyo-e_XL_v2.safetensors",
       "category": "Artistic",
-      "url": "https://civitai.com/models/ukiyoe",
+      "url": "https://civitai.com/models/1018901",
       "tags": [
         "japanese-print",
         "woodblock",
@@ -863,7 +863,7 @@
     {
       "name": "ComicMix_XL_v3.safetensors",
       "category": "Artistic",
-      "url": "https://civitai.com/models/comicmix",
+      "url": "https://civitai.com/models/631262",
       "tags": [
         "western-comic",
         "marvel-style",
@@ -882,7 +882,7 @@
     {
       "name": "Gouache_Style_XL.safetensors",
       "category": "Artistic",
-      "url": "https://civitai.com/models/gouache",
+      "url": "https://civitai.com/models/330040",
       "tags": [
         "matte-paint",
         "thick-wash",
@@ -920,7 +920,7 @@
     {
       "name": "Synthwave_Master_XL.safetensors",
       "category": "Artistic",
-      "url": "https://civitai.com/models/synthwave",
+      "url": "https://civitai.com/models/1463207",
       "tags": [
         "80s-aesthetic",
         "retro-future",
@@ -958,7 +958,7 @@
     {
       "name": "Modern_Architecture_XL.safetensors",
       "category": "Architecture",
-      "url": "https://civitai.com/models/arch",
+      "url": "https://civitai.com/models/2380151",
       "tags": [
         "blueprints",
         "glass",
@@ -978,7 +978,7 @@
     {
       "name": "Interior_Design_Flux_v2.safetensors",
       "category": "Architecture",
-      "url": "https://civitai.com/models/interior",
+      "url": "https://civitai.com/models/2373956",
       "tags": [
         "home-staging",
         "photorealistic-rooms",
@@ -997,7 +997,7 @@
     {
       "name": "Abandoned_Places_XL.safetensors",
       "category": "Architecture",
-      "url": "https://civitai.com/models/overgrown",
+      "url": "https://civitai.com/models/304561",
       "tags": [
         "ruins",
         "nature-reclaimed",
@@ -1017,7 +1017,7 @@
     {
       "name": "CyberCity_XL_Pro.safetensors",
       "category": "Architecture",
-      "url": "https://civitai.com/models/cybercity",
+      "url": "https://civitai.com/models/1731924",
       "tags": [
         "skyscrapers",
         "neon",
@@ -1036,7 +1036,7 @@
     {
       "name": "Brutalist_Logic_XL.safetensors",
       "category": "Architecture",
-      "url": "https://civitai.com/models/brutalist",
+      "url": "https://civitai.com/models/1636847",
       "tags": [
         "concrete",
         "geometric",
@@ -1055,7 +1055,7 @@
     {
       "name": "Gothic_Stone_Carving.safetensors",
       "category": "Architecture",
-      "url": "https://civitai.com/models/gothic",
+      "url": "https://civitai.com/models/2268702",
       "tags": [
         "cathedral",
         "intricate-stone",
@@ -1093,7 +1093,7 @@
     {
       "name": "Steampunk_City_v2.safetensors",
       "category": "Architecture",
-      "url": "https://civitai.com/models/steamcity",
+      "url": "https://civitai.com/models/2357299",
       "tags": [
         "brass",
         "pipes",
@@ -1113,7 +1113,7 @@
     {
       "name": "Skyscraper_High_Angle.safetensors",
       "category": "Architecture",
-      "url": "https://civitai.com/models/skyscraper",
+      "url": "https://civitai.com/models/1170746",
       "tags": [
         "aerial-view",
         "glass-reflections",
@@ -1170,7 +1170,7 @@
     {
       "name": "GrandCanyon_RedRock_XL.safetensors",
       "category": "Landscape",
-      "url": "https://civitai.com/models/canyon",
+      "url": "https://civitai.com/models/901560",
       "tags": [
         "desert-textures",
         "utah-scenery",
@@ -1189,7 +1189,7 @@
     {
       "name": "Misty_Forest_XL_v3.safetensors",
       "category": "Landscape",
-      "url": "https://civitai.com/models/misty",
+      "url": "https://civitai.com/models/1447721",
       "tags": [
         "atmospheric-fog",
         "pine-trees",
@@ -1208,7 +1208,7 @@
     {
       "name": "Arctic_Tundra_Pro.safetensors",
       "category": "Landscape",
-      "url": "https://civitai.com/models/arctic",
+      "url": "https://civitai.com/models/1632372",
       "tags": [
         "snow-ice",
         "blue-hour",
@@ -1246,7 +1246,7 @@
     {
       "name": "Volcano_Fury_XL.safetensors",
       "category": "Landscape",
-      "url": "https://civitai.com/models/volcano",
+      "url": "https://civitai.com/models/160763",
       "tags": [
         "lava",
         "volcanic-smoke",
@@ -1265,7 +1265,7 @@
     {
       "name": "Alpine_Valley_v2.safetensors",
       "category": "Landscape",
-      "url": "https://civitai.com/models/alpine",
+      "url": "https://civitai.com/models/852086",
       "tags": [
         "mountains",
         "green-valley",
@@ -1284,7 +1284,7 @@
     {
       "name": "Lavender_Sunset_XL.safetensors",
       "category": "Landscape",
-      "url": "https://civitai.com/models/lavender",
+      "url": "https://civitai.com/models/2268947",
       "tags": [
         "floral-fields",
         "soft-sunset",
@@ -1303,7 +1303,7 @@
     {
       "name": "Ocean_Deep_Pro.safetensors",
       "category": "Landscape",
-      "url": "https://civitai.com/models/ocean",
+      "url": "https://civitai.com/models/2385281",
       "tags": [
         "underwater",
         "coral-reefs",
@@ -1322,7 +1322,7 @@
     {
       "name": "Martian_Colony_XL.safetensors",
       "category": "Landscape",
-      "url": "https://civitai.com/models/mars",
+      "url": "https://civitai.com/models/2242763",
       "tags": [
         "red-dust",
         "alien-sky",
@@ -1341,7 +1341,7 @@
     {
       "name": "Wan_2.1_T2V_14B.safetensors",
       "category": "Video",
-      "url": "https://huggingface.co/Wan-AI/Wan2.1-T2V-14B",
+      "url": "https://huggingface.co/Wan-AI/Wan2.1-T2V-14B/resolve/main/Wan_2.1_T2V_14B.safetensors",
       "tags": [
         "text-to-video",
         "cinematic-motion",
@@ -1359,7 +1359,7 @@
     {
       "name": "Wan2.1-t2v-1.3B.safetensors",
       "category": "Video",
-      "url": "https://huggingface.co/Wan-AI/Wan2.1-T2V-1.3B",
+      "url": "https://huggingface.co/Wan-AI/Wan2.1-T2V-1.3B/resolve/main/Wan2.1-t2v-1.3B.safetensors",
       "tags": [
         "text-to-video",
         "efficient",
@@ -1377,7 +1377,7 @@
     {
       "name": "HunyuanVideo_v1.safetensors",
       "category": "Video",
-      "url": "https://huggingface.co/tencent/HunyuanVideo",
+      "url": "https://huggingface.co/tencent/HunyuanVideo/resolve/main/HunyuanVideo_v1.safetensors",
       "tags": [
         "ai-video",
         "long-duration",
@@ -1395,7 +1395,7 @@
     {
       "name": "SVD-XT-1.1.safetensors",
       "category": "Video",
-      "url": "https://huggingface.co/stabilityai/stable-video-diffusion",
+      "url": "https://huggingface.co/stabilityai/stable-video-diffusion/resolve/main/SVD-XT-1.1.safetensors",
       "tags": [
         "image-to-video",
         "professional-motion"
@@ -1409,7 +1409,7 @@
     {
       "name": "LivePortrait_XL_v2.safetensors",
       "category": "Video",
-      "url": "https://civitai.com/models/liveportrait",
+      "url": "https://civitai.com/models/736694",
       "tags": [
         "facial-animation",
         "vlog-automation",
@@ -1447,7 +1447,7 @@
     {
       "name": "Blender-Style-XL.safetensors",
       "category": "3D Render",
-      "url": "https://civitai.com/models/blender",
+      "url": "https://civitai.com/models/1448527",
       "tags": [
         "cycles-render",
         "hard-surface",
@@ -1466,7 +1466,7 @@
     {
       "name": "Clay-Aardman-Style.safetensors",
       "category": "3D Render",
-      "url": "https://civitai.com/models/clay",
+      "url": "https://civitai.com/models/2171802",
       "tags": [
         "stop-motion",
         "fingerprint-texture",
@@ -1485,7 +1485,7 @@
     {
       "name": "Unreal-Engine-5-XL.safetensors",
       "category": "3D Render",
-      "url": "https://civitai.com/models/ue5",
+      "url": "https://civitai.com/models/111551",
       "tags": [
         "game-engine-lighting",
         "high-poly",
@@ -1504,7 +1504,7 @@
     {
       "name": "ZBrush-Sculpt-XL.safetensors",
       "category": "3D Render",
-      "url": "https://civitai.com/models/zbrush",
+      "url": "https://civitai.com/models/938778",
       "tags": [
         "digital-sculpt",
         "grey-clay",
@@ -1523,7 +1523,7 @@
     {
       "name": "ControlNet-Union-SDXL.safetensors",
       "category": "Utility",
-      "url": "https://huggingface.co/xinsir/controlnet-union",
+      "url": "https://huggingface.co/xinsir/controlnet-union/resolve/main/ControlNet-Union-SDXL.safetensors",
       "tags": [
         "depth",
         "canny",
@@ -1543,7 +1543,7 @@
     {
       "name": "IP-Adapter-FaceID-XL.safetensors",
       "category": "Utility",
-      "url": "https://civitai.com/models/faceid",
+      "url": "https://civitai.com/models/301776",
       "tags": [
         "face-preservation",
         "identity-consistency"
@@ -1561,7 +1561,7 @@
     {
       "name": "OmniGen-v2.safetensors",
       "category": "Utility",
-      "url": "https://huggingface.co/BectorSpaceLab/OmniGen-v2",
+      "url": "https://huggingface.co/BectorSpaceLab/OmniGen-v2/resolve/main/OmniGen-v2.safetensors",
       "tags": [
         "multi-image-composition",
         "instruct-editing"
@@ -1579,7 +1579,7 @@
     {
       "name": "Hyper-SDXL-Lightning.safetensors",
       "category": "Utility",
-      "url": "https://huggingface.co/ByteDance/Hyper-SD",
+      "url": "https://huggingface.co/ByteDance/Hyper-SD/resolve/main/Hyper-SDXL-Lightning.safetensors",
       "tags": [
         "1-step-generation",
         "real-time-previews"
@@ -1597,7 +1597,7 @@
     {
       "name": "Segment-Anything-2.safetensors",
       "category": "Utility",
-      "url": "https://huggingface.co/facebook/sam2",
+      "url": "https://huggingface.co/facebook/sam2/resolve/main/Segment-Anything-2.safetensors",
       "tags": [
         "object-masking",
         "surgical-selection",
@@ -1616,7 +1616,7 @@
     {
       "name": "Food-Photography-XL.safetensors",
       "category": "Photography",
-      "url": "https://civitai.com/models/food",
+      "url": "https://civitai.com/models/2300106",
       "tags": [
         "restaurant-lighting",
         "macro-food",
@@ -1635,7 +1635,7 @@
     {
       "name": "Macro-Nature-XL.safetensors",
       "category": "Photography",
-      "url": "https://civitai.com/models/macro",
+      "url": "https://civitai.com/models/1501570",
       "tags": [
         "insect-detail",
         "shallow-depth",
@@ -1654,7 +1654,7 @@
     {
       "name": "Product-Commercial-XL.safetensors",
       "category": "Photography",
-      "url": "https://civitai.com/models/product",
+      "url": "https://civitai.com/models/2366596",
       "tags": [
         "clean-background",
         "product-lighting",
@@ -1673,7 +1673,7 @@
     {
       "name": "Mature-Faces-XL-v2.safetensors",
       "category": "Portrait",
-      "url": "https://civitai.com/models/silver",
+      "url": "https://civitai.com/models/2364595",
       "tags": [
         "elderly",
         "silver-hair",
@@ -1692,7 +1692,7 @@
     {
       "name": "Fashion-Editorial-XL.safetensors",
       "category": "Portrait",
-      "url": "https://civitai.com/models/fashion",
+      "url": "https://civitai.com/models/2302224",
       "tags": [
         "vogue-style",
         "high-contrast",
@@ -1711,7 +1711,7 @@
     {
       "name": "Tarot-Card-Check-XL.safetensors",
       "category": "Niche",
-      "url": "https://civitai.com/models/tarot",
+      "url": "https://civitai.com/models/1743070",
       "tags": [
         "mystical-border",
         "symbolic-art",
@@ -1730,7 +1730,7 @@
     {
       "name": "Stained-Glass-v4.safetensors",
       "category": "Niche",
-      "url": "https://civitai.com/models/glass",
+      "url": "https://civitai.com/models/2378571",
       "tags": [
         "backlit",
         "translucent",
@@ -1749,7 +1749,7 @@
     {
       "name": "Blueprint-Draft-XL.safetensors",
       "category": "Niche",
-      "url": "https://civitai.com/models/blueprint",
+      "url": "https://civitai.com/models/236991",
       "tags": [
         "technical-drawing",
         "grid-lines",
@@ -1768,7 +1768,7 @@
     {
       "name": "Pixel-Art-Ultra-XL.safetensors",
       "category": "Niche",
-      "url": "https://civitai.com/models/pixelart",
+      "url": "https://civitai.com/models/2355675",
       "tags": [
         "retro-gaming",
         "64-bit",
@@ -1787,7 +1787,7 @@
     {
       "name": "Graffiti-Wall-Pro-XL.safetensors",
       "category": "Niche",
-      "url": "https://civitai.com/models/graffiti",
+      "url": "https://civitai.com/models/1690260",
       "tags": [
         "spray-paint",
         "street-art",
@@ -1806,7 +1806,7 @@
     {
       "name": "Chalkboard-Menu-XL.safetensors",
       "category": "Niche",
-      "url": "https://civitai.com/models/chalk",
+      "url": "https://civitai.com/models/1269967",
       "tags": [
         "dusty-chalk",
         "handwritten",
@@ -1825,7 +1825,7 @@
     {
       "name": "Embroidery-Craft-XL.safetensors",
       "category": "Niche",
-      "url": "https://civitai.com/models/embroidery",
+      "url": "https://civitai.com/models/2333323",
       "tags": [
         "sewn-texture",
         "thread-patterns",
@@ -1844,7 +1844,7 @@
     {
       "name": "Neon-Signs-XL.safetensors",
       "category": "Niche",
-      "url": "https://civitai.com/models/neonsign",
+      "url": "https://civitai.com/models/190785",
       "tags": [
         "glowing-tubes",
         "dark-city-streets"
@@ -1862,7 +1862,7 @@
     {
       "name": "Infographic-Clean-XL.safetensors",
       "category": "Niche",
-      "url": "https://civitai.com/models/info",
+      "url": "https://civitai.com/models/1606567",
       "tags": [
         "charts",
         "clean-typography",
@@ -1881,7 +1881,7 @@
     {
       "name": "Qwen2.5-VL-7B-Instruct.safetensors",
       "category": "Logic",
-      "url": "https://huggingface.co/Qwen/Qwen2.5-VL",
+      "url": "https://huggingface.co/Qwen/Qwen2.5-VL/resolve/main/Qwen2.5-VL-7B-Instruct.safetensors",
       "tags": [
         "vlm",
         "image-understanding",
@@ -1900,7 +1900,7 @@
     {
       "name": "Llama-4-8B-Vision.safetensors",
       "category": "Logic",
-      "url": "https://huggingface.co/meta-llama/Llama-4",
+      "url": "https://huggingface.co/meta-llama/Llama-4/resolve/main/Llama-4-8B-Vision.safetensors",
       "tags": [
         "reasoning",
         "captioning",
@@ -1919,7 +1919,7 @@
     {
       "name": "Medical-Anatomy-XL.safetensors",
       "category": "Niche",
-      "url": "https://civitai.com/models/medical",
+      "url": "https://civitai.com/models/1854950",
       "tags": [
         "scientific-illustration",
         "biological-accuracy"
@@ -1956,7 +1956,7 @@
     {
       "name": "Comic-Book-Inker-XL.safetensors",
       "category": "Niche",
-      "url": "https://civitai.com/models/inker",
+      "url": "https://civitai.com/models/326264",
       "tags": [
         "thick-black-lines",
         "cross-hatching"
@@ -1974,7 +1974,7 @@
     {
       "name": "Retro-VCR-XL.safetensors",
       "category": "Niche",
-      "url": "https://civitai.com/models/vcr",
+      "url": "https://civitai.com/models/1421406",
       "tags": [
         "glitch-art",
         "tracking-lines",
@@ -1993,7 +1993,7 @@
     {
       "name": "Miniature-World-XL.safetensors",
       "category": "Niche",
-      "url": "https://civitai.com/models/miniature",
+      "url": "https://civitai.com/models/2081244",
       "tags": [
         "tilt-shift",
         "toy-figures",
