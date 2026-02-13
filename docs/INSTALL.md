@@ -35,6 +35,38 @@ This utility offers two modes:
 1. **Sync with Disk**: Scans your model folders, enables found models, and disables missing ones in the registry.
 2. **Reset Registry**: Re-enables ALL models in the registry (useful if you plan to download more or just want to see everything in the node options).
 
+CLI equivalents:
+
+```bat
+python sync_registry.py --sync
+python sync_registry.py --dry-run
+python sync_registry.py --reset
+```
+
+This script validates local install paths, updates `enabled`, and can repair `path` / `folder_type` metadata.
+
+## Source URL Validation (Download Origins)
+
+To validate and repair the original source URLs in `model_registry.json` (for example Civitai slugs to canonical IDs), run:
+
+```bat
+python sync_source_urls.py --checkpoints-only --check-live
+```
+
+Useful options:
+1. `--dry-run` preview changes without writing.
+2. `--name-filter <regex>` limit to specific models (example: `nightvision`).
+3. `--offline` skip network resolution and only normalize obvious URL formats.
+4. `--timeout <seconds>` adjust request timeout.
+
+Convenience launcher:
+
+```bat
+fix_missed_checkpoints.bat
+```
+
+By default this launcher runs source URL repair for checkpoints with live URL checks.
+
 ## Model Path Mapping Added by Installer
 
 `install.bat` now writes these folders under `ollama_cluster`:

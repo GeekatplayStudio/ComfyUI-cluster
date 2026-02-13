@@ -57,24 +57,60 @@ install.bat
 
 ## Managing Models
 
-If you manage your models in a custom directory (e.g., external drive), `sync_registry.py` now supports interactive configuration.
+If you manage your models in a custom directory (e.g., external drive), `sync_registry.py` supports interactive configuration and path repair.
 
 ```bat
 python sync_registry.py --sync
 ```
 
 - **First Run**: It will ask for your models root path if not found, and save it to `cluster_config.json`.
-- **Scanning**: It checks `checkpoints`, `diffusion_models`, `loras`, etc., and updates `model_registry.json` enabled status.
+- **Scanning**: It checks `checkpoints`, `diffusion_models`, `loras`, etc.
+- **Repair**: It fixes each registry item's `path` and `folder_type` when files moved or were registered incorrectly.
+- **Status Sync**: It updates `enabled` based on whether the model file is currently found.
 - **Logging**: A detailed scan report is written to `model_scan.log`.
+
+Preview changes without writing:
+
+```bat
+python sync_registry.py --dry-run
+```
 
 Use `manage_models.bat` (wraps the python script) to quickly enable/disable nodes in the registry based on what you actually have installed.
 
 
 Included `manage_models.bat` allows you to sync `model_registry.json` with your disk state:
-- **Sync**: Disables models in the registry that are missing from disk.
+- **Sync**: Repairs paths/types and disables models missing from disk.
 - **Reset**: Re-enables all models in the registry.
 
 Use this if you want the ComfyUI nodes to only offer models you actually have installed.
+
+### Source URL Repair (Download Locations)
+
+If you need to validate/fix where models should be downloaded from (registry `url` fields), use `sync_source_urls.py`:
+
+```bat
+python sync_source_urls.py --checkpoints-only --check-live
+```
+
+This checks and repairs source URLs (Civitai/HuggingFace) instead of local installed paths.
+
+Useful options:
+- `--dry-run`: preview URL fixes without writing.
+- `--name-filter nightvision`: target a single model or pattern.
+- `--checkpoints-only`: only process checkpoint entries.
+- `--check-live`: verify each final URL with HTTP checks.
+
+The convenience launcher `fix_missed_checkpoints.bat` now runs source URL repair by default:
+
+```bat
+fix_missed_checkpoints.bat
+```
+
+Example targeted check:
+
+```bat
+fix_missed_checkpoints.bat --dry-run --name-filter nightvision --checkpoints-only --check-live
+```
 
 Installer behavior and model paths are documented in `docs/INSTALL.md`.
 
