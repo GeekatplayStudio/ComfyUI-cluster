@@ -1,3367 +1,454 @@
 {
-  "version": 1,
+  "version": 2,
+  "about": "ComfyUI-Cluster model registry by Geekatplay Studio. Every file name, URL and sampler setting below is taken from the official ComfyUI workflow templates. min_vram values are estimates.",
   "checkpoints": [
     {
-      "name": "Flux.1-dev-fp8.safetensors",
-      "category": "Photorealism",
-      "url": "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/Flux.1-dev-fp8.safetensors",
-      "tags": [
-        "flux",
-        "realism",
-        "general-purpose",
-        "best-overall-quality",
-        "text-rendering",
-        "complex-composition"
-      ],
-      "type": "flux",
-      "group": "Group A (Flux VAE / T5-CLIP)",
-      "recommended": true,
-      "required_vae": "ae.safetensors",
-      "required_clip": "clip_l.safetensors, t5xxl_fp8_e4m3fn.safetensors",
+      "name": "moss_image_sft_int8_convrot.safetensors",
+      "title": "MOSS-Image SFT (int8)",
+      "type": "moss_image",
+      "media": "image",
       "folder_type": "diffusion_models",
-      "steps": 20,
-      "cfg": 3.5,
-      "sampler_name": "euler",
+      "url": "https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/diffusion_models/moss_image_sft_int8_convrot.safetensors",
+      "size_gb": 5.4,
+      "required_clip": "qwen3.5_9b_w4a8_gptq.safetensors",
+      "required_vae": "flux2-vae_small.safetensors",
+      "clip_type": "moss_image",
+      "steps": 25,
+      "cfg": 2.5,
+      "sampler_name": "er_sde",
       "scheduler": "simple",
+      "negative_prompt": "nsfw, worst quality, bad anatomy, watermark, jpeg artifact",
+      "license": "Apache-2.0",
+      "gated": false,
       "min_vram": 12,
-      "enabled": true
-    },
-    {
-      "name": "Flux.2-dev-fp16.safetensors",
-      "category": "Photorealism",
-      "url": "https://huggingface.co/black-forest-labs/FLUX.2-dev/resolve/main/Flux.2-dev-fp16.safetensors",
+      "category": "General",
+      "group": "MOSS-Image",
       "tags": [
-        "flux",
-        "hyper-realism",
-        "extreme-detail",
-        "macro-photography",
-        "ultimate-fidelity",
-        "heavy-vram"
-      ],
-      "type": "flux",
-      "group": "Group A (Flux VAE / T5-CLIP)",
-      "recommended": true,
-      "steps": 20,
-      "cfg": 3.5,
-      "sampler_name": "euler",
-      "scheduler": "simple",
-      "min_vram": 32,
-      "enabled": false
-    },
-    {
-      "name": "RealVisXL_V6.0_B1.safetensors",
-      "category": "Photorealism",
-      "url": "https://civitai.com/models/150629",
-      "tags": [
+        "typography",
+        "text",
+        "poster",
+        "layout",
+        "graphic design",
         "photorealism",
-        "portrait",
-        "human-focus",
-        "dslr",
-        "raw-photo",
-        "social-media-style",
-        "interview-lighting"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE / CLIP-L)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Juggernaut_XL_v10.safetensors",
-      "category": "Photorealism",
-      "url": "https://civitai.com/models/133005",
-      "tags": [
-        "photorealism",
-        "cinematic",
-        "landscape",
-        "movie-still",
-        "lighting-heavy",
-        "atmospheric",
-        "wide-angle"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": true
-    },
-    {
-      "name": "Z-Image-Turbo-v1.safetensors",
-      "category": "Photorealism",
-      "url": "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo/resolve/main/Z-Image-Turbo-v1.safetensors",
-      "tags": [
-        "photorealism",
-        "architecture",
-        "interior-design",
-        "fast-render",
-        "sharp-lines",
-        "modern-style"
-      ],
-      "type": "sdxl",
-      "group": "Group B (Z-VAE / Z-CLIP)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "epiCPhotoGasm_v2.safetensors",
-      "category": "Photorealism",
-      "url": "https://civitai.com/models/132632",
-      "tags": [
-        "photorealism",
-        "portrait",
-        "artistic-nude",
-        "soft-lighting",
-        "bokeh",
-        "intimate-shot",
-        "feminine-focus"
-      ],
-      "type": "sd15",
-      "group": "Group D (SD1.5 VAE)",
-      "recommended": true,
-      "steps": 25,
-      "cfg": 7.0,
-      "sampler_name": "euler_ancestral",
-      "scheduler": "normal",
-      "min_vram": 6,
-      "enabled": true
-    },
-    {
-      "name": "Realistic_Vision_V7.0.safetensors",
-      "category": "Photorealism",
-      "url": "https://civitai.com/models/4201",
-      "tags": [
-        "photorealism",
-        "portrait",
-        "analog-film",
-        "film-grain",
-        "vintage-style",
-        "90s-photo",
-        "imperfect-realism"
-      ],
-      "type": "sd15",
-      "group": "Group D (SD1.5 VAE)",
-      "recommended": true,
-      "steps": 25,
-      "cfg": 7.0,
-      "sampler_name": "euler_ancestral",
-      "scheduler": "normal",
-      "min_vram": 6,
-      "enabled": false
-    },
-    {
-      "name": "IC-Light-XL-Realistic.safetensors",
-      "category": "Photorealism",
-      "url": "https://huggingface.co/lllyasviel/ic-light/resolve/main/IC-Light-XL-Realistic.safetensors",
-      "tags": [
-        "photorealism",
-        "relighting",
-        "light-control",
-        "studio-setup",
-        "background-replacement"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Sateluco-IOR-XL.safetensors",
-      "category": "Photorealism",
-      "url": "https://civitai.com/models/sateluco",
-      "tags": [
-        "photorealism",
-        "landscape",
-        "nature",
-        "hdr",
-        "travel-photography",
-        "high-contrast",
-        "outdoor-focus"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "AnalogMadness_XL_v4.safetensors",
-      "category": "Photorealism",
-      "url": "https://civitai.com/models/analog-xl",
-      "tags": [
-        "photorealism",
-        "film-stock",
-        "kodak-portra",
-        "fujifilm",
-        "street-photography",
-        "nostalgic"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Photopedia_XL_v2.safetensors",
-      "category": "Photorealism",
-      "url": "https://civitai.com/models/photopedia",
-      "tags": [
-        "photorealism",
-        "documentary",
-        "journalism",
-        "stock-photo",
-        "neutral-style",
-        "everyday-life"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Mobius_XL_v1.safetensors",
-      "category": "Photorealism",
-      "url": "https://civitai.com/models/17589",
-      "tags": [
-        "photorealism",
-        "fantasy-realism",
-        "cinematic-character",
-        "digital-art",
-        "clean-render",
-        "game-cinematic"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "AbsoluteReality_v1.8.safetensors",
-      "category": "Photorealism",
-      "url": "https://civitai.com/models/81458",
-      "tags": [
-        "photorealism",
-        "portrait",
-        "sharp-focus",
-        "reality-engine",
-        "uncanny-valley-avoidance"
-      ],
-      "type": "sd15",
-      "group": "Group D (SD1.5 VAE)",
-      "recommended": true,
-      "steps": 25,
-      "cfg": 7.0,
-      "sampler_name": "euler_ancestral",
-      "scheduler": "normal",
-      "min_vram": 6,
-      "enabled": true
-    },
-    {
-      "name": "ThinkDiffusionXL_v1.safetensors",
-      "category": "Photorealism",
-      "url": "https://civitai.com/models/926617",
-      "tags": [
-        "photorealism",
-        "advertisement",
-        "commercial-product",
-        "4k-render",
-        "clean-background"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "NightVision_XL_v9.safetensors",
-      "category": "Photorealism",
-      "url": "https://civitai.com/models/586010",
-      "tags": [
-        "photorealism",
-        "night-photography",
-        "low-light",
-        "cyberpunk",
-        "neon-lights",
-        "dark-atmosphere"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "CyberRealistic_XL_v6.safetensors",
-      "category": "Photorealism",
-      "url": "https://civitai.com/models/1531982",
-      "tags": [
-        "photorealism",
-        "portrait",
-        "face-detail",
-        "headshot",
-        "studio-portrait",
-        "skin-pores"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Illustrious-XL-v1.0.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/2384857",
-      "tags": [
+        "photo",
         "anime",
         "illustration",
-        "vibrant-color",
-        "modern-anime",
-        "cel-shaded",
-        "digital-painting"
+        "cinematic",
+        "portrait",
+        "product"
       ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
       "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
       "enabled": true
     },
     {
-      "name": "PonyDiffusion_V7_XL.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/257",
-      "tags": [
-        "anime",
-        "western-style",
-        "cartoon",
-        "variable-style",
-        "furry-compatible",
-        "concept-art"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "AAM_XL_AnimeMix_v2.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/269232",
-      "tags": [
-        "anime",
-        "scenery",
-        "detailed-background",
-        "wallpaper-art",
-        "visual-novel-style"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "MeinaMix_V11.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/153831",
-      "tags": [
-        "anime",
-        "soft-shading",
-        "pastel-colors",
-        "romantic-anime",
-        "character-illustration"
-      ],
-      "type": "sd15",
-      "group": "Group D (SD1.5 VAE)",
-      "recommended": true,
+      "name": "moss_image_base_int8_convrot.safetensors",
+      "title": "MOSS-Image Base (int8)",
+      "type": "moss_image",
+      "media": "image",
+      "folder_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/diffusion_models/moss_image_base_int8_convrot.safetensors",
+      "size_gb": 5.4,
+      "required_clip": "qwen3.5_9b_w4a8_gptq.safetensors",
+      "required_vae": "flux2-vae_small.safetensors",
+      "clip_type": "moss_image",
       "steps": 25,
-      "cfg": 7.0,
-      "sampler_name": "euler_ancestral",
-      "scheduler": "normal",
-      "min_vram": 6,
-      "enabled": false
+      "cfg": 2.5,
+      "sampler_name": "er_sde",
+      "scheduler": "simple",
+      "negative_prompt": "nsfw, worst quality, bad anatomy, watermark, jpeg artifact",
+      "license": "Apache-2.0",
+      "gated": false,
+      "min_vram": 12,
+      "category": "General",
+      "group": "MOSS-Image",
+      "tags": [
+        "photorealism",
+        "photo",
+        "natural",
+        "documentary",
+        "landscape",
+        "lora training"
+      ],
+      "recommended": false,
+      "enabled": true
     },
     {
-      "name": "Cetus-Mix-Final.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/1947515",
-      "tags": [
-        "anime",
-        "semi-realistic",
-        "2.5D",
-        "painterly-style",
-        "concept-art"
-      ],
-      "type": "sd15",
-      "group": "Group D (SD1.5 VAE)",
-      "recommended": true,
+      "name": "moss_image_sft_bf16.safetensors",
+      "title": "MOSS-Image SFT (bf16, full precision)",
+      "type": "moss_image",
+      "media": "image",
+      "folder_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/diffusion_models/moss_image_sft_bf16.safetensors",
+      "size_gb": 10.2,
+      "required_clip": "qwen3.5_9b_w4a8_gptq.safetensors",
+      "required_vae": "flux2-vae_small.safetensors",
+      "clip_type": "moss_image",
       "steps": 25,
-      "cfg": 7.0,
-      "sampler_name": "euler_ancestral",
-      "scheduler": "normal",
-      "min_vram": 6,
-      "enabled": false
-    },
-    {
-      "name": "NoobAI-XL-v1.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/2339056",
+      "cfg": 2.5,
+      "sampler_name": "er_sde",
+      "scheduler": "simple",
+      "negative_prompt": "nsfw, worst quality, bad anatomy, watermark, jpeg artifact",
+      "license": "Apache-2.0",
+      "gated": false,
+      "min_vram": 24,
+      "category": "General",
+      "group": "MOSS-Image",
       "tags": [
+        "typography",
+        "text",
+        "poster",
+        "layout",
+        "graphic design",
+        "photorealism",
+        "photo",
         "anime",
-        "tag-adherence",
-        "danbooru-style",
-        "technical-precision",
-        "clean-lines"
+        "illustration",
+        "maximum quality"
       ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
+      "recommended": false,
+      "enabled": true
     },
     {
-      "name": "Animagine_XL_v4.0.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/1564077",
-      "tags": [
-        "anime",
-        "official-art-style",
-        "media-franchise",
-        "consistent-character",
-        "high-res-anime"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "AbyssOrangeMix3_AOM3.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/21503",
-      "tags": [
-        "anime",
-        "dark-fantasy",
-        "gothic-style",
-        "detailed-eyes",
-        "atmospheric-anime"
-      ],
-      "type": "sd15",
-      "group": "Group D (SD1.5 VAE)",
-      "recommended": true,
-      "steps": 25,
-      "cfg": 7.0,
-      "sampler_name": "euler_ancestral",
-      "scheduler": "normal",
-      "min_vram": 6,
-      "enabled": false
-    },
-    {
-      "name": "Counterfeit-V3.0.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/4468",
-      "tags": [
-        "anime",
-        "landscape-anime",
-        "scenic",
-        "makoto-shinkai-style",
-        "high-detail-background"
-      ],
-      "type": "sd15",
-      "group": "Group D (SD1.5 VAE)",
-      "recommended": true,
-      "steps": 25,
-      "cfg": 7.0,
-      "sampler_name": "euler_ancestral",
-      "scheduler": "normal",
-      "min_vram": 6,
-      "enabled": false
-    },
-    {
-      "name": "BlueberryMix_XL.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/329642",
-      "tags": [
-        "anime",
-        "cute-style",
-        "kawaii",
-        "chibi-compatible",
-        "moe"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Mistoon_Anime_v2.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/32022",
-      "tags": [
-        "anime",
-        "flat-color",
-        "western-cartoon-mix",
-        "vector-art",
-        "simple-shading"
-      ],
-      "type": "sd15",
-      "group": "Group D (SD1.5 VAE)",
-      "recommended": true,
-      "steps": 25,
-      "cfg": 7.0,
-      "sampler_name": "euler_ancestral",
-      "scheduler": "normal",
-      "min_vram": 6,
-      "enabled": false
-    },
-    {
-      "name": "Pastel-Mix-Stylized.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/pastel-mix",
-      "tags": [
-        "pastel-colors",
-        "soft-lighting",
-        "artistic-anime"
-      ],
-      "type": "sd15",
-      "group": "Group D (SD1.5 VAE)",
-      "recommended": true,
-      "steps": 25,
-      "cfg": 7.0,
-      "sampler_name": "euler_ancestral",
-      "scheduler": "normal",
-      "min_vram": 6,
-      "enabled": false
-    },
-    {
-      "name": "Real-Anime-XL.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/real-anime",
-      "tags": [
-        "semi-realistic",
-        "3d-anime-hybrid",
-        "thick-shading"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "HoloDayo_XL_v1.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/holodayo",
-      "tags": [
-        "hololive-consistent",
-        "fanart-style",
-        "vibrant"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Waifu-Diffusion-XL.safetensors",
-      "category": "Anime",
-      "url": "https://huggingface.co/waifu-diffusion/resolve/main/Waifu-Diffusion-XL.safetensors",
-      "tags": [
-        "base-anime",
-        "massive-dataset",
-        "legacy"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Painterly_XL_Check_v2.safetensors",
-      "category": "Artistic",
-      "url": "https://civitai.com/models/2326354",
-      "tags": [
-        "oil-painting",
-        "canvas",
-        "impasto",
-        "brushstrokes"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "DreamShaper_XL_Turbo.safetensors",
-      "category": "Artistic",
-      "url": "https://civitai.com/models/112902",
-      "tags": [
-        "digital-art",
-        "fantasy",
-        "concept-art",
-        "versatile"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Watercolor_Stylized_v3.safetensors",
-      "category": "Artistic",
-      "url": "https://civitai.com/models/2289270",
-      "tags": [
-        "water-wash",
-        "ink-bleed",
-        "traditional-media"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Copax_TimeLess_XL_v9.safetensors",
-      "category": "Artistic",
-      "url": "https://civitai.com/models/118111",
-      "tags": [
-        "atmospheric",
-        "ethereal",
-        "fine-art"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Oil_Brush_Pro_v2.safetensors",
-      "category": "Artistic",
-      "url": "https://civitai.com/models/118223",
-      "tags": [
-        "thick-paint",
-        "museum-quality",
-        "traditional"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Arcane_Style_XL.safetensors",
-      "category": "Artistic",
-      "url": "https://civitai.com/models/2183167",
-      "tags": [
-        "stylized",
-        "neon",
-        "paint-splatter",
-        "arcane-tv-style"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Inkpunk_Diffusion_v2.safetensors",
-      "category": "Artistic",
-      "url": "https://civitai.com/models/2124568",
-      "tags": [
-        "ink-sketch",
-        "messy-lines",
-        "cyberpunk-art"
-      ],
-      "type": "sd15",
-      "group": "Group D (SD1.5 VAE)",
-      "recommended": true,
-      "steps": 25,
-      "cfg": 7.0,
-      "sampler_name": "euler_ancestral",
-      "scheduler": "normal",
-      "min_vram": 6,
-      "enabled": false
-    },
-    {
-      "name": "Abstract_Master_XL.safetensors",
-      "category": "Artistic",
-      "url": "https://civitai.com/models/2149089",
-      "tags": [
-        "geometric",
-        "non-representative",
-        "fine-art-abstract"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Charcoal_Pro_v1.safetensors",
-      "category": "Artistic",
-      "url": "https://civitai.com/models/2100594",
-      "tags": [
-        "black-and-white",
-        "hand-drawn",
-        "smudge-texture"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Ukiyo-e_XL_v2.safetensors",
-      "category": "Artistic",
-      "url": "https://civitai.com/models/1018901",
-      "tags": [
-        "japanese-print",
-        "woodblock",
-        "historical-art"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "ComicMix_XL_v3.safetensors",
-      "category": "Artistic",
-      "url": "https://civitai.com/models/631262",
-      "tags": [
-        "western-comic",
-        "marvel-style",
-        "clean-inking"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Gouache_Style_XL.safetensors",
-      "category": "Artistic",
-      "url": "https://civitai.com/models/330040",
-      "tags": [
-        "matte-paint",
-        "thick-wash",
-        "opaque-watercolor"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Pencil-Sketch-XL.safetensors",
-      "category": "Artistic",
-      "url": "https://civitai.com/models/pencil-sketch",
-      "tags": [
-        "graphite",
-        "cross-hatching",
-        "realistic-sketch"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Synthwave_Master_XL.safetensors",
-      "category": "Artistic",
-      "url": "https://civitai.com/models/1463207",
-      "tags": [
-        "80s-aesthetic",
-        "retro-future",
-        "vibrant-pink-blue"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Dark-Vibe-XL.safetensors",
-      "category": "Artistic",
-      "url": "https://civitai.com/models/dark-vibe",
-      "tags": [
-        "gothic",
-        "macabre",
-        "detailed-darkness"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Modern_Architecture_XL.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/2380151",
-      "tags": [
-        "blueprints",
-        "glass",
-        "minimalism",
-        "luxury-homes"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Interior_Design_Flux_v2.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/2373956",
-      "tags": [
-        "home-staging",
-        "photorealistic-rooms",
-        "furniture-detail"
-      ],
-      "type": "flux",
-      "group": "Group A (Flux VAE)",
-      "recommended": true,
-      "steps": 20,
-      "cfg": 3.5,
+      "name": "flux3-image-klein-int8-convrot.safetensors",
+      "title": "FLUX.3 Image Klein distilled (int8)",
+      "type": "flux3",
+      "media": "image",
+      "folder_type": "diffusion_models",
+      "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy/resolve/main/diffusion_models/flux3-image-klein-int8-convrot.safetensors",
+      "size_gb": 5.8,
+      "required_clip": "qwen3vl_4b_int8_convrot.safetensors",
+      "required_vae": "flux2-vae.safetensors",
+      "clip_type": "flux3",
+      "steps": 16,
+      "cfg": 1.0,
       "sampler_name": "euler",
       "scheduler": "simple",
-      "min_vram": 16,
-      "enabled": false
-    },
-    {
-      "name": "Abandoned_Places_XL.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/304561",
+      "license": "FLUX non-commercial (see model page)",
+      "gated": true,
+      "min_vram": 12,
+      "category": "Photorealism",
+      "group": "FLUX.3",
       "tags": [
-        "ruins",
-        "nature-reclaimed",
-        "moss",
-        "urban-decay"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "CyberCity_XL_Pro.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/1731924",
-      "tags": [
-        "skyscrapers",
-        "neon",
-        "futuristic-urbanism"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Brutalist_Logic_XL.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/1636847",
-      "tags": [
-        "concrete",
-        "geometric",
-        "stark-shadows"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Gothic_Stone_Carving.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/2268702",
-      "tags": [
-        "cathedral",
-        "intricate-stone",
-        "historical"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "TinyHouse_Master_XL.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/tinyhouse",
-      "tags": [
-        "compact-living",
-        "modular",
-        "wood-texture"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Steampunk_City_v2.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/2357299",
-      "tags": [
-        "brass",
-        "pipes",
-        "smoke",
-        "industrial-victorian"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Skyscraper_High_Angle.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/1170746",
-      "tags": [
-        "aerial-view",
-        "glass-reflections",
-        "urban-density"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Japanese_Traditional_House.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/japanesehouse",
-      "tags": [
-        "tatami",
-        "sliding-doors",
-        "zen-garden"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Landscape_Anime_Max.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/93931",
-      "tags": [
-        "ghibli-style",
-        "lush-scenery",
-        "cloud-formations"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "GrandCanyon_RedRock_XL.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/901560",
-      "tags": [
-        "desert-textures",
-        "utah-scenery",
-        "sandstone"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Misty_Forest_XL_v3.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/1447721",
-      "tags": [
-        "atmospheric-fog",
-        "pine-trees",
-        "moody-lighting"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Arctic_Tundra_Pro.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/1632372",
-      "tags": [
-        "snow-ice",
-        "blue-hour",
-        "aurora-borealis"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Biolume_Jungle_XL.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/biolume",
-      "tags": [
-        "glowing-plants",
-        "bioluminescence",
-        "exotic-nature"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Volcano_Fury_XL.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/160763",
-      "tags": [
-        "lava",
-        "volcanic-smoke",
-        "dark-ash-sky"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Alpine_Valley_v2.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/852086",
-      "tags": [
-        "mountains",
-        "green-valley",
-        "sharp-horizons"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Lavender_Sunset_XL.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/2268947",
-      "tags": [
-        "floral-fields",
-        "soft-sunset",
-        "horizon-line"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Ocean_Deep_Pro.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/2385281",
-      "tags": [
-        "underwater",
-        "coral-reefs",
-        "caustic-lighting"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Martian_Colony_XL.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/2242763",
-      "tags": [
-        "red-dust",
-        "alien-sky",
-        "crater-landscape"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Wan_2.1_T2V_14B.safetensors",
-      "category": "Video",
-      "url": "https://huggingface.co/Wan-AI/Wan2.1-T2V-14B/resolve/main/Wan_2.1_T2V_14B.safetensors",
-      "tags": [
-        "text-to-video",
-        "cinematic-motion",
-        "high-consistency"
-      ],
-      "type": "wan",
-      "group": "Group V (Wan VAE)",
-      "recommended": true,
-      "required_vae": "wan_2.1_vae.safetensors",
-      "required_clip": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
-      "folder_type": "diffusion_models",
-      "min_vram": 6,
-      "enabled": false
-    },
-    {
-      "name": "Wan2.1-t2v-1.3B.safetensors",
-      "category": "Video",
-      "url": "https://huggingface.co/Wan-AI/Wan2.1-T2V-1.3B/resolve/main/Wan2.1-t2v-1.3B.safetensors",
-      "tags": [
-        "text-to-video",
-        "efficient",
+        "photorealism",
+        "photo",
+        "portrait",
+        "fashion",
+        "editorial",
+        "product",
+        "commercial",
+        "macro",
         "fast"
       ],
-      "type": "wan",
-      "group": "Group V (Wan VAE)",
       "recommended": true,
-      "required_vae": "wan_2.1_vae.safetensors",
-      "required_clip": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "enabled": true
+    },
+    {
+      "name": "krea2_turbo_fp8_scaled.safetensors",
+      "title": "Krea-2 Turbo (fp8)",
+      "type": "krea2",
+      "media": "image",
       "folder_type": "diffusion_models",
-      "min_vram": 6,
-      "enabled": false
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors",
+      "size_gb": 13.1,
+      "required_clip": "qwen3vl_4b_fp8_scaled.safetensors",
+      "required_vae": "qwen_image_vae.safetensors",
+      "clip_type": "krea2",
+      "steps": 8,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "gated": false,
+      "min_vram": 16,
+      "category": "Artistic",
+      "group": "Krea-2",
+      "tags": [
+        "artistic",
+        "aesthetic",
+        "illustration",
+        "painting",
+        "concept art",
+        "surreal",
+        "stylized",
+        "fantasy",
+        "digital art",
+        "fast"
+      ],
+      "recommended": true,
+      "enabled": true
     },
     {
-      "name": "HunyuanVideo_v1.safetensors",
-      "category": "Video",
-      "url": "https://huggingface.co/tencent/HunyuanVideo/resolve/main/HunyuanVideo_v1.safetensors",
-      "tags": [
-        "ai-video",
-        "long-duration",
-        "high-fps"
-      ],
-      "type": "hunyuan",
-      "group": "Group V (Hunyuan VAE)",
-      "recommended": true,
-      "required_vae": "hunyuan_video_vae.safetensors",
-      "required_clip": "llava_llama3_fp8_scaled.safetensors, clip_l.safetensors",
+      "name": "z_image_turbo_int8_convrot.safetensors",
+      "title": "Z-Image-Turbo (int8, low VRAM)",
+      "type": "z_image",
+      "media": "image",
       "folder_type": "diffusion_models",
-      "min_vram": 6,
-      "enabled": false
+      "url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_int8_convrot.safetensors",
+      "size_gb": 6.2,
+      "required_clip": "qwen_3_4b_fp8_mixed.safetensors",
+      "required_vae": "ae.safetensors",
+      "license": "Apache-2.0",
+      "clip_type": "lumina2",
+      "steps": 8,
+      "cfg": 1.0,
+      "sampler_name": "res_multistep",
+      "scheduler": "simple",
+      "gated": false,
+      "min_vram": 8,
+      "category": "Photorealism",
+      "group": "Z-Image",
+      "tags": [
+        "photorealism",
+        "photo",
+        "portrait",
+        "people",
+        "street",
+        "architecture",
+        "interior",
+        "fast",
+        "low vram"
+      ],
+      "recommended": true,
+      "enabled": true
     },
     {
-      "name": "SVD-XT-1.1.safetensors",
+      "name": "z_image_turbo_bf16.safetensors",
+      "title": "Z-Image-Turbo (bf16, full precision)",
+      "type": "z_image",
+      "media": "image",
+      "folder_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_bf16.safetensors",
+      "size_gb": 12.3,
+      "required_clip": "qwen_3_4b.safetensors",
+      "required_vae": "ae.safetensors",
+      "license": "Apache-2.0",
+      "clip_type": "lumina2",
+      "steps": 8,
+      "cfg": 1.0,
+      "sampler_name": "res_multistep",
+      "scheduler": "simple",
+      "gated": false,
+      "min_vram": 16,
+      "category": "Photorealism",
+      "group": "Z-Image",
+      "tags": [
+        "photorealism",
+        "photo",
+        "portrait",
+        "people",
+        "street",
+        "architecture",
+        "interior",
+        "fast"
+      ],
+      "recommended": false,
+      "enabled": true
+    },
+    {
+      "name": "z_image_int8_convrot.safetensors",
+      "title": "Z-Image Base (int8)",
+      "type": "z_image",
+      "media": "image",
+      "folder_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/z_image/resolve/main/split_files/diffusion_models/z_image_int8_convrot.safetensors",
+      "size_gb": 6.2,
+      "required_clip": "qwen_3_4b.safetensors",
+      "required_vae": "ae.safetensors",
+      "clip_type": "lumina2",
+      "steps": 25,
+      "cfg": 4.0,
+      "sampler_name": "res_multistep",
+      "scheduler": "simple",
+      "license": "Apache-2.0",
+      "gated": false,
+      "min_vram": 8,
+      "category": "General",
+      "group": "Z-Image",
+      "tags": [
+        "photorealism",
+        "photo",
+        "surreal",
+        "artistic",
+        "negative prompt",
+        "detailed"
+      ],
+      "recommended": false,
+      "enabled": true
+    },
+    {
+      "name": "minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+      "title": "MiniMax H3 video + audio (int8)",
+      "type": "minimax_h3",
+      "media": "video",
+      "folder_type": "diffusion_models",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+      "size_gb": 21.0,
+      "required_clip": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "required_vae": "minimax_h3_video_vae_int8_convrot.safetensors",
+      "steps": 20,
+      "clip_type": "minimax",
+      "required_audio_vae": "minimax_h3_audio_vae_fp32.safetensors",
+      "cfg": 1.0,
+      "sampler_name": "res_multistep",
+      "scheduler": "simple",
+      "gated": false,
+      "min_vram": 24,
       "category": "Video",
-      "url": "https://huggingface.co/stabilityai/stable-video-diffusion/resolve/main/SVD-XT-1.1.safetensors",
+      "group": "MiniMax H3",
       "tags": [
-        "image-to-video",
-        "professional-motion"
+        "video",
+        "audio",
+        "sound",
+        "dialogue",
+        "music",
+        "cinematic",
+        "animation",
+        "motion"
       ],
-      "type": "svd",
-      "group": "Group V (SVD VAE)",
       "recommended": true,
-      "min_vram": 6,
-      "enabled": false
+      "enabled": true
     },
     {
-      "name": "LivePortrait_XL_v2.safetensors",
+      "name": "fastvideo_fasth3_8step_v2_pruned_int8_convrot.safetensors",
+      "title": "FastVideo FastH3 8-step (int8, text-to-video only)",
+      "type": "minimax_h3",
+      "media": "video",
+      "folder_type": "diffusion_models",
+      "url": "https://huggingface.co/FastVideo/FastVideo-FastH3-Comfy/resolve/main/diffusion_models/fastvideo_fasth3_8step_v2_pruned_int8_convrot.safetensors",
+      "size_gb": 22.1,
+      "required_clip": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "required_vae": "minimax_h3_video_vae_int8_convrot.safetensors",
+      "steps": 8,
+      "shift_video": 10,
+      "shift_audio": 3,
+      "clip_type": "minimax",
+      "required_audio_vae": "minimax_h3_audio_vae_fp32.safetensors",
+      "cfg": 1.0,
+      "sampler_name": "res_multistep",
+      "scheduler": "simple",
+      "gated": false,
+      "min_vram": 24,
       "category": "Video",
-      "url": "https://civitai.com/models/736694",
+      "group": "MiniMax H3",
       "tags": [
-        "facial-animation",
-        "vlog-automation",
-        "lip-sync"
+        "video",
+        "audio",
+        "fast",
+        "draft",
+        "preview"
       ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Disney_Pixar_Cartoon_XL.safetensors",
-      "category": "3D Render",
-      "url": "https://civitai.com/models/75650",
-      "tags": [
-        "3d-animation",
-        "subsurface-scattering",
-        "toy-like"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Blender-Style-XL.safetensors",
-      "category": "3D Render",
-      "url": "https://civitai.com/models/1448527",
-      "tags": [
-        "cycles-render",
-        "hard-surface",
-        "pbr-textures"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Clay-Aardman-Style.safetensors",
-      "category": "3D Render",
-      "url": "https://civitai.com/models/2171802",
-      "tags": [
-        "stop-motion",
-        "fingerprint-texture",
-        "handmade"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Unreal-Engine-5-XL.safetensors",
-      "category": "3D Render",
-      "url": "https://civitai.com/models/111551",
-      "tags": [
-        "game-engine-lighting",
-        "high-poly",
-        "nanite-detail"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "ZBrush-Sculpt-XL.safetensors",
-      "category": "3D Render",
-      "url": "https://civitai.com/models/938778",
-      "tags": [
-        "digital-sculpt",
-        "grey-clay",
-        "intricate-carving"
-      ],
-      "type": "sdxl",
-      "group": "Group C (SDXL VAE)",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "ControlNet-Union-SDXL.safetensors",
-      "category": "Utility",
-      "url": "https://huggingface.co/xinsir/controlnet-union/resolve/main/ControlNet-Union-SDXL.safetensors",
-      "tags": [
-        "depth",
-        "canny",
-        "pose",
-        "all-in-one-control"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "IP-Adapter-FaceID-XL.safetensors",
-      "category": "Utility",
-      "url": "https://civitai.com/models/301776",
-      "tags": [
-        "face-preservation",
-        "identity-consistency"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "OmniGen-v2.safetensors",
-      "category": "Utility",
-      "url": "https://huggingface.co/BectorSpaceLab/OmniGen-v2/resolve/main/OmniGen-v2.safetensors",
-      "tags": [
-        "multi-image-composition",
-        "instruct-editing"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Hyper-SDXL-Lightning.safetensors",
-      "category": "Utility",
-      "url": "https://huggingface.co/ByteDance/Hyper-SD/resolve/main/Hyper-SDXL-Lightning.safetensors",
-      "tags": [
-        "1-step-generation",
-        "real-time-previews"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Segment-Anything-2.safetensors",
-      "category": "Utility",
-      "url": "https://huggingface.co/facebook/sam2/resolve/main/Segment-Anything-2.safetensors",
-      "tags": [
-        "object-masking",
-        "surgical-selection",
-        "video-tracking"
-      ],
-      "type": "sdxl",
-      "group": "Group ALL",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Food-Photography-XL.safetensors",
-      "category": "Photography",
-      "url": "https://civitai.com/models/2300106",
-      "tags": [
-        "restaurant-lighting",
-        "macro-food",
-        "professional-plating"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Macro-Nature-XL.safetensors",
-      "category": "Photography",
-      "url": "https://civitai.com/models/1501570",
-      "tags": [
-        "insect-detail",
-        "shallow-depth",
-        "dew-drops"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Product-Commercial-XL.safetensors",
-      "category": "Photography",
-      "url": "https://civitai.com/models/2366596",
-      "tags": [
-        "clean-background",
-        "product-lighting",
-        "minimalist"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Mature-Faces-XL-v2.safetensors",
-      "category": "Portrait",
-      "url": "https://civitai.com/models/2364595",
-      "tags": [
-        "elderly",
-        "silver-hair",
-        "character-wrinkles"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Fashion-Editorial-XL.safetensors",
-      "category": "Portrait",
-      "url": "https://civitai.com/models/2302224",
-      "tags": [
-        "vogue-style",
-        "high-contrast",
-        "model-poses"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Tarot-Card-Check-XL.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/1743070",
-      "tags": [
-        "mystical-border",
-        "symbolic-art",
-        "gold-leaf"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Stained-Glass-v4.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/2378571",
-      "tags": [
-        "backlit",
-        "translucent",
-        "religious-art"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Blueprint-Draft-XL.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/236991",
-      "tags": [
-        "technical-drawing",
-        "grid-lines",
-        "industrial-design"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Pixel-Art-Ultra-XL.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/2355675",
-      "tags": [
-        "retro-gaming",
-        "64-bit",
-        "sprites"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Graffiti-Wall-Pro-XL.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/1690260",
-      "tags": [
-        "spray-paint",
-        "street-art",
-        "tag-style"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Chalkboard-Menu-XL.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/1269967",
-      "tags": [
-        "dusty-chalk",
-        "handwritten",
-        "slate-texture"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Embroidery-Craft-XL.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/2333323",
-      "tags": [
-        "sewn-texture",
-        "thread-patterns",
-        "fabric-art"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Neon-Signs-XL.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/190785",
-      "tags": [
-        "glowing-tubes",
-        "dark-city-streets"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Infographic-Clean-XL.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/1606567",
-      "tags": [
-        "charts",
-        "clean-typography",
-        "icons"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Qwen2.5-VL-7B-Instruct.safetensors",
-      "category": "Logic",
-      "url": "https://huggingface.co/Qwen/Qwen2.5-VL/resolve/main/Qwen2.5-VL-7B-Instruct.safetensors",
-      "tags": [
-        "vlm",
-        "image-understanding",
-        "prompt-logic"
-      ],
-      "type": "sdxl",
-      "group": "Group L",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Llama-4-8B-Vision.safetensors",
-      "category": "Logic",
-      "url": "https://huggingface.co/meta-llama/Llama-4/resolve/main/Llama-4-8B-Vision.safetensors",
-      "tags": [
-        "reasoning",
-        "captioning",
-        "visual-logic"
-      ],
-      "type": "sdxl",
-      "group": "Group L",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Medical-Anatomy-XL.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/1854950",
-      "tags": [
-        "scientific-illustration",
-        "biological-accuracy"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Jewelry-Detail-XL.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/jewelry",
-      "tags": [
-        "gold-reflections",
-        "gems",
-        "high-macro"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Comic-Book-Inker-XL.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/326264",
-      "tags": [
-        "thick-black-lines",
-        "cross-hatching"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Retro-VCR-XL.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/1421406",
-      "tags": [
-        "glitch-art",
-        "tracking-lines",
-        "80s-video"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
-    },
-    {
-      "name": "Miniature-World-XL.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/2081244",
-      "tags": [
-        "tilt-shift",
-        "toy-figures",
-        "macro-landscape"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "steps": 30,
-      "cfg": 7.0,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "min_vram": 8,
-      "enabled": false
+      "recommended": false,
+      "enabled": true
     }
   ],
   "loras": [
     {
-      "name": "Boreal_Realism_Flux.safetensors",
-      "category": "Realism",
-      "url": "https://huggingface.co/kudzueye/Boreal",
-      "tags": [
-        "hyper-realism",
-        "candid",
-        "natural-skin"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Smartphone_Snap_v2.safetensors",
-      "category": "Realism",
-      "url": "https://civitai.com/models/652699",
-      "tags": [
-        "iphone-photo",
-        "grainy",
-        "vertical",
-        "casual"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "RealLife_Skin_Fix.safetensors",
-      "category": "Realism",
-      "url": "https://civitai.com/models/114321",
-      "tags": [
-        "detailed-pores",
-        "realistic-lighting"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Mature_Faces_Slider.safetensors",
-      "category": "Realism",
-      "url": "https://civitai.com/models/16543",
-      "tags": [
-        "wrinkles",
-        "aging",
-        "silver-hair",
-        "character"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Fashion_Editorial_Flux.safetensors",
-      "category": "Realism",
-      "url": "https://huggingface.co/alvdansen/flux-koda",
-      "tags": [
-        "vogue",
-        "high-fashion",
-        "studio-lighting"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Cinematic_Shot_XL.safetensors",
-      "category": "Realism",
-      "url": "https://civitai.com/models/cinematic",
-      "tags": [
-        "anamorphic",
-        "color-grade",
-        "movie-look"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Steve_McCurry_Photography.safetensors",
-      "category": "Realism",
-      "url": "https://civitai.com/models/mccurry",
-      "tags": [
-        "nat-geo",
-        "sharp-eyes",
-        "travel-photography"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Low-Light_Night_Photography.safetensors",
-      "category": "Realism",
-      "url": "https://civitai.com/models/nightphoto",
-      "tags": [
-        "night-vision",
-        "low-noise",
-        "street-ambient"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "8k_Ultra_Detail_Flux.safetensors",
-      "category": "Realism",
-      "url": "https://huggingface.co/prithivMLmods/Canopus",
-      "tags": [
-        "sharpness",
-        "intricate",
-        "masterpiece"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Amateur_Style_Snapshot.safetensors",
-      "category": "Realism",
-      "url": "https://civitai.com/models/amateur",
-      "tags": [
-        "shaky-cam",
-        "low-quality-aesthetic",
-        "real-photo"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Facial_Expression_Extreme.safetensors",
-      "category": "Realism",
-      "url": "https://civitai.com/models/extreme-face",
-      "tags": [
-        "angry",
-        "happy",
-        "crying",
-        "slider"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Skin_Texture_Macro_Flux.safetensors",
-      "category": "Realism",
-      "url": "https://civitai.com/models/macro-skin",
-      "tags": [
-        "extreme-close-up",
-        "pores",
-        "hair-follicles"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Candid_Street_Photography.safetensors",
-      "category": "Realism",
-      "url": "https://civitai.com/models/streetphoto",
-      "tags": [
-        "urban",
-        "crowd",
-        "natural-lighting"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Kodak_Portra_400_XL.safetensors",
-      "category": "Realism",
-      "url": "https://civitai.com/models/kodak",
-      "tags": [
-        "warm-tones",
-        "film-grain",
-        "analog-photography"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Hand_Fixer_v2.safetensors",
-      "category": "Realism",
-      "url": "https://civitai.com/models/handfix",
-      "tags": [
-        "perfect-fingers",
-        "anatomy-correction"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Disney_Pixar_Style_v2.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/459655",
-      "tags": [
-        "disney",
-        "pixar",
-        "3d-render",
-        "cartoon"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Sakimi-Chan_Style_Flux.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/21133",
-      "tags": [
-        "digital-painting",
-        "vibrant",
-        "stylized-eyes"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Makoto_Shinkai_Vibe.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/shinkai",
-      "tags": [
-        "vibrant-sky",
-        "lens-flare",
-        "ghibli-hybrid"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Arcane_Texture_XL.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/arcane-lora",
-      "tags": [
-        "thick-paint",
-        "neon-accents",
-        "arcane-art"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Spider-Verse_VFX.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/spiderverse",
-      "tags": [
-        "chromatic-aberration",
-        "comic-dots"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Retro_Anime_90s.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/retro90s",
-      "tags": [
-        "vhs-aesthetic",
-        "scanlines",
-        "soft-colors"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Claymation_Stop_Motion.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/8876",
-      "tags": [
-        "handmade",
-        "fingerprints",
-        "clay-texture"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Papercraft_Origami_XL.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/9987",
-      "tags": [
-        "layered-paper",
-        "crafting",
-        "3d-depth"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Comic_Ink_Lineart.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/lineart",
-      "tags": [
-        "manga-lineart",
-        "clean-inking",
-        "b&w"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Ghibli_Background_Artist.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/ghibliback",
-      "tags": [
-        "scenic",
-        "nature",
-        "watercolor-anime"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Neon_Cyberpunk_Fashion.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/neoncloth",
-      "tags": [
-        "glowing-fabric",
-        "techwear",
-        "futuristic"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Elf_Ears_Fantasy.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/elfears",
-      "tags": [
-        "pointed-ears",
-        "lotr-style",
-        "fantasy"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Super_Hero_Suit_Texture.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/supersuit",
-      "tags": [
-        "spandex",
-        "mask",
-        "metallic-armor"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Cybernetic_Implants.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/cybertech",
-      "tags": [
-        "augmented-parts",
-        "wires",
-        "metal-skin"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Expressions_Anime_XL.safetensors",
-      "category": "Anime",
-      "url": "https://civitai.com/models/animeface",
-      "tags": [
-        "exaggerated",
-        "comedy",
-        "expressive"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Oil_Impasto_Texture.safetensors",
-      "category": "Painting",
-      "url": "https://civitai.com/models/3030",
-      "tags": [
-        "thick-paint",
-        "palette-knife",
-        "heavy-texture"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Watercolor_Wash_Pro.safetensors",
-      "category": "Painting",
-      "url": "https://civitai.com/models/4040",
-      "tags": [
-        "soft-edges",
-        "paper-texture",
-        "artistic-wash"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Charcoal_Sketch_Flux.safetensors",
-      "category": "Painting",
-      "url": "https://huggingface.co/b_lora/charcoal",
-      "tags": [
-        "dark-lines",
-        "smudged",
-        "hand-drawn"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Ukiyo-e_Traditional.safetensors",
-      "category": "Painting",
-      "url": "https://civitai.com/models/5050",
-      "tags": [
-        "japanese-woodblock",
-        "flat-colors"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Art_Nouveau_Mucha.safetensors",
-      "category": "Painting",
-      "url": "https://civitai.com/models/6060",
-      "tags": [
-        "ornate",
-        "flowing-hair",
-        "organic-patterns"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Synthwave_Grid_Vibe.safetensors",
-      "category": "Painting",
-      "url": "https://civitai.com/models/synthglow",
-      "tags": [
-        "80s-retro",
-        "pink-grid",
-        "laser-beams"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Gothic_Noir_XL.safetensors",
-      "category": "Painting",
-      "url": "https://civitai.com/models/noir",
-      "tags": [
-        "high-contrast",
-        "dark-mystery",
-        "moody"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Minimalist_Vector_Art.safetensors",
-      "category": "Painting",
-      "url": "https://huggingface.co/renderartist/vector",
-      "tags": [
-        "clean-lines",
-        "flat-design",
-        "corporate"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Steampunk_Gears_Brass.safetensors",
-      "category": "Painting",
-      "url": "https://civitai.com/models/9090",
-      "tags": [
-        "victorian-tech",
-        "steam",
-        "pipes"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Chalkboard_Art_Texture.safetensors",
-      "category": "Painting",
-      "url": "https://civitai.com/models/3236",
-      "tags": [
-        "handwritten",
-        "dusty",
-        "white-chalk"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Embroidery_Sewn_Art.safetensors",
-      "category": "Painting",
-      "url": "https://civitai.com/models/4347",
-      "tags": [
-        "thread-work",
-        "stitch-patterns",
-        "fabric"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Graffiti_Drip_Style.safetensors",
-      "category": "Painting",
-      "url": "https://civitai.com/models/2125",
-      "tags": [
-        "urban-tags",
-        "paint-drips",
-        "street-art"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Inkpunk_Splash_Art.safetensors",
-      "category": "Painting",
-      "url": "https://civitai.com/models/2020",
-      "tags": [
-        "sketchy",
-        "industrial",
-        "ink-wash"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Pastel_Dream_Vibe.safetensors",
-      "category": "Painting",
-      "url": "https://civitai.com/models/pastel",
-      "tags": [
-        "soft-colors",
-        "airy",
-        "ethereal"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Pop_Art_Lichtenstein.safetensors",
-      "category": "Painting",
-      "url": "https://civitai.com/models/popart",
-      "tags": [
-        "halftone-dots",
-        "primary-colors",
-        "bold-inking"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Modern_Interior_Design.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/1111",
-      "tags": [
-        "minimalist",
-        "glass",
-        "luxury",
-        "staging"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Abandoned_Overgrown_Flux.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/abandoned",
-      "tags": [
-        "ruins",
-        "nature-reclaimed",
-        "decay"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Cyber_City_Neon_Grid.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/2222",
-      "tags": [
-        "skyscrapers",
-        "neon-signs",
-        "futuristic"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Cozy_Cottage_Garden.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/3333",
-      "tags": [
-        "rural",
-        "warm-lighting",
-        "wood-textures"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Brutalist_Concrete_Flux.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/4444",
-      "tags": [
-        "stark-shadows",
-        "geometric",
-        "grey"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Gothic_Stone_Cathedral.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/5555",
-      "tags": [
-        "religious-art",
-        "intricate-carving"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Treehouse_Natural_Build.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/6666",
-      "tags": [
-        "hanging-structures",
-        "forest",
-        "wood"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Martian_Base_Modular.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/7777",
-      "tags": [
-        "scifi-domes",
-        "red-dust",
-        "futuristic"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Underwater_Biosphere.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/8888",
-      "tags": [
-        "glass-tunnels",
-        "coral",
-        "bioluminescence"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Tiny_House_Organization.safetensors",
-      "category": "Architecture",
-      "url": "https://civitai.com/models/9999",
-      "tags": [
-        "compact",
-        "smart-design",
-        "modern"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Kitchen_Luxury_Flux.safetensors",
-      "category": "Environment",
-      "url": "https://civitai.com/models/4345",
-      "tags": [
-        "marble-counters",
-        "high-end-appliances"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Gamer_Room_RGB.safetensors",
-      "category": "Environment",
-      "url": "https://civitai.com/models/5456",
-      "tags": [
-        "pc-setup",
-        "neon-strips",
-        "peripherals"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Old_Library_Mahogany.safetensors",
-      "category": "Environment",
-      "url": "https://civitai.com/models/6567",
-      "tags": [
-        "leather-books",
-        "dust-motes",
-        "wood-panels"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Zen_Garden_Tranquil.safetensors",
-      "category": "Environment",
-      "url": "https://civitai.com/models/7678",
-      "tags": [
-        "sand-patterns",
-        "bonsai",
-        "koi-pond"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Industrial_Loft_Flux.safetensors",
-      "category": "Environment",
-      "url": "https://civitai.com/models/8789",
-      "tags": [
-        "exposed-brick",
-        "high-ceilings",
-        "metal"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Arctic_Ice_Tundra.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/1020",
-      "tags": [
-        "snow-glare",
-        "blue-hour",
-        "cold"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Tropical_Island_Beach.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/2030",
-      "tags": [
-        "palm-trees",
-        "clear-water",
-        "sunny"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Grand_Canyon_Utah_XL.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/3040",
-      "tags": [
-        "red-rock",
-        "desert",
-        "high-dynamic-range"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Misty_Forest_Flux_Atmo.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/4050",
-      "tags": [
-        "fog",
-        "pine-trees",
-        "mysterious"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Volcano_Eruption_Fire.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/5060",
-      "tags": [
-        "lava",
-        "ash-cloud",
-        "cinematic-destruction"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Lavender_Field_Horizon.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/6070",
-      "tags": [
-        "purple",
-        "sunset-scenery",
-        "flora"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Space_Nebula_Starfield.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/7080",
-      "tags": [
-        "deep-space",
-        "galaxies",
-        "vibrant-colors"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Swiss_Alps_Summit.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/8090",
-      "tags": [
-        "mountain-peak",
-        "village",
-        "sharp-focus"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Autumn_Fall_Colors.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/9001",
-      "tags": [
-        "orange-leaves",
-        "crisp-air",
-        "seasonal"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Biolume_Crystal_Cave.safetensors",
-      "category": "Landscape",
-      "url": "https://civitai.com/models/1002",
-      "tags": [
-        "glow",
-        "fantasy-nature",
-        "subterranean"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Detailifier_Enhance_XL.safetensors",
-      "category": "Utility",
-      "url": "https://civitai.com/models/126343",
-      "tags": [
-        "sharpen",
-        "micro-detail",
-        "8k-upscale"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Lighting_Master_Pro.safetensors",
-      "category": "Utility",
-      "url": "https://civitai.com/models/2002",
-      "tags": [
-        "rim-lighting",
-        "moody-shadows"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "No-Background_Sticker.safetensors",
-      "category": "Utility",
-      "url": "https://civitai.com/models/3003",
-      "tags": [
-        "flat-background",
-        "cutout",
-        "white"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Text_Spelling_Fixer.safetensors",
-      "category": "Utility",
-      "url": "https://civitai.com/models/4004",
-      "tags": [
-        "coherent-text",
-        "correct-letters"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Color_Pop_Vibrant.safetensors",
-      "category": "Utility",
-      "url": "https://civitai.com/models/1011",
-      "tags": [
-        "saturation",
-        "vivid",
-        "contrast"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Tactical_Armor_XL.safetensors",
-      "category": "Clothing",
-      "url": "https://civitai.com/models/2022",
-      "tags": [
-        "military-gear",
-        "straps",
-        "metal-texture"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Victorian_Lace_Dress.safetensors",
-      "category": "Clothing",
-      "url": "https://civitai.com/models/3033",
-      "tags": [
-        "historical-fabric",
-        "intricate-detail"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Silk_Satin_Flow_Flux.safetensors",
-      "category": "Clothing",
-      "url": "https://civitai.com/models/2233",
-      "tags": [
-        "reflective-fabric",
-        "soft-draping"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Diamond_Gold_Macro.safetensors",
-      "category": "Jewelry",
-      "url": "https://civitai.com/models/5055",
-      "tags": [
-        "reflective",
-        "gems",
-        "high-detail"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Magic_Spell_Particles.safetensors",
-      "category": "VFX",
-      "url": "https://civitai.com/models/magic",
-      "tags": [
-        "glow",
-        "sparks",
-        "floating-runes"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Glitch_Digital_Artifacts.safetensors",
-      "category": "VFX",
-      "url": "https://civitai.com/models/glitch",
-      "tags": [
-        "data-corruption",
-        "neon-smear"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Smoke_Fog_Volumetric.safetensors",
-      "category": "VFX",
-      "url": "https://civitai.com/models/smokefx",
-      "tags": [
-        "swirling",
-        "density",
-        "realistic-mist"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Tarot_Card_Frame.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/5457",
-      "tags": [
-        "mystical",
-        "border",
-        "card-art"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Blueprint_Technical.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/6568",
-      "tags": [
-        "grid-lines",
-        "blue",
-        "drafting"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Stained_Glass_Effect.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/8790",
-      "tags": [
-        "translucent",
-        "backlit",
-        "colorful"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Origami_Paper_Fold.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/9891",
-      "tags": [
-        "geometric",
-        "sharp-creases"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Tattoo_Traditional_Flash.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/1014",
+      "name": "krea2_darkbrush.safetensors",
+      "title": "Krea-2 Darkbrush style",
+      "type": "krea2",
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/loras/krea2_darkbrush.safetensors",
+      "size_gb": 0.5,
+      "strength": 0.8,
+      "category": "Artistic",
+      "group": "Krea-2",
       "tags": [
         "ink",
-        "white-background",
-        "classic"
+        "brush",
+        "dark",
+        "sketch",
+        "expressive",
+        "hand drawn",
+        "doodle"
       ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Neon_Sign_Glow.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/5458",
-      "tags": [
-        "night",
-        "glass-tubes",
-        "ambient-light"
-      ],
-      "type": "sdxl",
-      "group": "Group A",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Miniature_Tilt_Shift.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/tiltshift",
-      "tags": [
-        "diorama",
-        "blurred-top-bottom"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Hologram_Projection.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/holo",
-      "tags": [
-        "transparent",
-        "scan-lines",
-        "blue-glow"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Infographic_Icon_Set.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/icons",
-      "tags": [
-        "flat",
-        "minimalist",
-        "vector-symbols"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Food_Plating_Gourmet.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/plating",
-      "tags": [
-        "chef-style",
-        "fine-dining",
-        "sauce-drip"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Sci-Fi_HUD_Overlay.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/hud",
-      "tags": [
-        "user-interface",
-        "tech-graphics"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Post-Apocalypse_Dust.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/dust",
-      "tags": [
-        "hazy",
-        "gritty",
-        "sun-beams"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
-    },
-    {
-      "name": "Bioluminescent_Creatures.safetensors",
-      "category": "Niche",
-      "url": "https://civitai.com/models/biolumecreature",
-      "tags": [
-        "avatar-style",
-        "glowing-skin"
-      ],
-      "type": "sdxl",
-      "group": "Group C",
-      "recommended": true,
-      "enabled": false
+      "enabled": true
     }
   ],
-  "controlnets": [
+  "text_encoders": [
     {
-      "name": "control_v11p_sd15_canny.safetensors",
-      "category": "Edges",
-      "url": "https://huggingface.co/StableDiffusionVN/Prunedcontrolnet",
-      "tags": [
-        "canny",
-        "edge",
-        "lineart"
-      ],
-      "type": "sd15",
-      "group": "ControlNet SD15",
-      "recommended": true,
-      "strength": 0.8,
-      "enabled": false
+      "name": "qwen3.5_9b_w4a8_gptq.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/text_encoders/qwen3.5_9b_w4a8_gptq.safetensors",
+      "size_gb": 7.3,
+      "folder_type": "text_encoders",
+      "enabled": true
     },
     {
-      "name": "control_v11p_sd15_openpose.safetensors",
-      "category": "Pose",
-      "url": "https://huggingface.co/StableDiffusionVN/Prunedcontrolnet",
-      "tags": [
-        "pose",
-        "openpose",
-        "skeleton"
-      ],
-      "type": "sd15",
-      "group": "ControlNet SD15",
-      "recommended": true,
-      "strength": 0.8,
-      "enabled": false
+      "name": "qwen3vl_4b_int8_convrot.safetensors",
+      "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein-comfy/resolve/main/text_encoders/qwen3vl_4b_int8_convrot.safetensors",
+      "size_gb": 4.9,
+      "folder_type": "text_encoders",
+      "enabled": true,
+      "gated": true
+    },
+    {
+      "name": "qwen3vl_4b_fp8_scaled.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/text_encoders/qwen3vl_4b_fp8_scaled.safetensors",
+      "size_gb": 5.2,
+      "folder_type": "text_encoders",
+      "enabled": true
+    },
+    {
+      "name": "qwen_3_4b_fp8_mixed.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/text_encoders/qwen_3_4b_fp8_mixed.safetensors",
+      "size_gb": 5.6,
+      "folder_type": "text_encoders",
+      "enabled": true
+    },
+    {
+      "name": "qwen_3_4b.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/text_encoders/qwen_3_4b.safetensors",
+      "size_gb": 8.0,
+      "folder_type": "text_encoders",
+      "enabled": true
+    },
+    {
+      "name": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "size_gb": 15.7,
+      "folder_type": "text_encoders",
+      "enabled": true
+    }
+  ],
+  "vae": [
+    {
+      "name": "flux2-vae_small.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/vae/flux2-vae_small.safetensors",
+      "size_gb": 0.25,
+      "folder_type": "vae",
+      "enabled": true
+    },
+    {
+      "name": "flux2-vae.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/flux2-dev/resolve/main/split_files/vae/flux2-vae.safetensors",
+      "size_gb": 0.34,
+      "folder_type": "vae",
+      "enabled": true
+    },
+    {
+      "name": "qwen_image_vae.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors",
+      "size_gb": 0.25,
+      "folder_type": "vae",
+      "enabled": true
+    },
+    {
+      "name": "ae.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/vae/ae.safetensors",
+      "size_gb": 0.34,
+      "folder_type": "vae",
+      "enabled": true
+    },
+    {
+      "name": "minimax_h3_video_vae_int8_convrot.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_int8_convrot.safetensors",
+      "size_gb": 2.8,
+      "folder_type": "vae",
+      "enabled": true
+    },
+    {
+      "name": "minimax_h3_audio_vae_fp32.safetensors",
+      "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+      "size_gb": 0.6,
+      "folder_type": "vae",
+      "enabled": true
     }
   ]
 }

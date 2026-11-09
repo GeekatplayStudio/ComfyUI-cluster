@@ -1,0 +1,1473 @@
+{
+  "id": "c101e9b0-018c-5a0e-90ad-3cced43a5666",
+  "revision": 0,
+  "last_node_id": 18,
+  "last_link_id": 28,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "OllamaPromptPlanner",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        460,
+        1096
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": null
+        },
+        {
+          "name": "ollama_model",
+          "type": "STRING",
+          "widget": {
+            "name": "ollama_model"
+          },
+          "link": null
+        },
+        {
+          "name": "registry_path",
+          "type": "STRING",
+          "widget": {
+            "name": "registry_path"
+          },
+          "link": null
+        },
+        {
+          "name": "task_hint",
+          "type": "COMBO",
+          "widget": {
+            "name": "task_hint"
+          },
+          "link": null
+        },
+        {
+          "name": "user_negative",
+          "type": "STRING",
+          "widget": {
+            "name": "user_negative"
+          },
+          "link": null
+        },
+        {
+          "name": "aspect_ratio",
+          "type": "COMBO",
+          "widget": {
+            "name": "aspect_ratio"
+          },
+          "link": null
+        },
+        {
+          "name": "base_size",
+          "type": "INT",
+          "widget": {
+            "name": "base_size"
+          },
+          "link": null
+        },
+        {
+          "name": "ollama_host",
+          "type": "STRING",
+          "widget": {
+            "name": "ollama_host"
+          },
+          "link": null
+        },
+        {
+          "name": "ollama_port",
+          "type": "INT",
+          "widget": {
+            "name": "ollama_port"
+          },
+          "link": null
+        },
+        {
+          "name": "max_vram",
+          "type": "COMBO",
+          "widget": {
+            "name": "max_vram"
+          },
+          "link": null
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "checkpoint",
+          "type": "STRING",
+          "links": [
+            1
+          ]
+        },
+        {
+          "name": "loras",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "lora_strengths",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "model_type",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "links": [
+            11
+          ]
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "links": [
+            8
+          ]
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "links": [
+            10
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            5
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            6
+          ]
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": [
+            7
+          ]
+        },
+        {
+          "name": "positive_prompt",
+          "type": "STRING",
+          "links": [
+            4,
+            27
+          ]
+        },
+        {
+          "name": "negative_prompt",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "plan_json",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "vae_name",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "clip_name",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "task",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "summary",
+          "type": "STRING",
+          "links": [
+            26
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "OllamaPromptPlanner",
+        "aux_id": "GeekatplayStudio/ComfyUI-cluster"
+      },
+      "widgets_values": [
+        "A red fox trots through fresh snow at sunrise, stops and looks at the camera. Quiet wind, soft crunch of footsteps, a distant bird call.",
+        "qwen3.5:9b",
+        "model_registry.json",
+        "video",
+        "",
+        "16:9",
+        768,
+        "localhost",
+        11434,
+        24,
+        0,
+        "randomize"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 2,
+      "type": "DynamicCheckpointLoader",
+      "pos": [
+        540,
+        0
+      ],
+      "size": [
+        400,
+        320
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "checkpoint",
+          "type": "STRING",
+          "widget": {
+            "name": "checkpoint"
+          },
+          "link": 1
+        },
+        {
+          "name": "model_type",
+          "type": "COMBO",
+          "widget": {
+            "name": "model_type"
+          },
+          "link": null
+        },
+        {
+          "name": "registry_path",
+          "type": "STRING",
+          "widget": {
+            "name": "registry_path"
+          },
+          "link": null
+        },
+        {
+          "name": "custom_path",
+          "type": "STRING",
+          "widget": {
+            "name": "custom_path"
+          },
+          "link": null
+        },
+        {
+          "name": "vae_override",
+          "type": "STRING",
+          "widget": {
+            "name": "vae_override"
+          },
+          "link": null
+        },
+        {
+          "name": "clip_override",
+          "type": "STRING",
+          "widget": {
+            "name": "clip_override"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            9,
+            12
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            2
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            3,
+            20
+          ]
+        },
+        {
+          "name": "debug_info",
+          "type": "STRING",
+          "links": [
+            28
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DynamicCheckpointLoader",
+        "aux_id": "GeekatplayStudio/ComfyUI-cluster"
+      },
+      "widgets_values": [
+        "",
+        "auto",
+        "model_registry.json",
+        "",
+        "",
+        ""
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 3,
+      "type": "VAELoader",
+      "pos": [
+        540,
+        400
+      ],
+      "size": [
+        400,
+        78
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "vae_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "vae_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            22
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader",
+        "models": [
+          {
+            "name": "minimax_h3_audio_vae_fp32.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+            "directory": "vae"
+          }
+        ]
+      },
+      "widgets_values": [
+        "minimax_h3_audio_vae_fp32.safetensors"
+      ],
+      "title": "Load audio VAE",
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 4,
+      "type": "MiniMaxH3ImageToVideo",
+      "pos": [
+        1020,
+        0
+      ],
+      "size": [
+        420,
+        408
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 2
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 3
+        },
+        {
+          "name": "first_frame",
+          "type": "IMAGE",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "last_frame",
+          "type": "IMAGE",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": 4
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 5
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 6
+        },
+        {
+          "name": "length",
+          "type": "INT",
+          "widget": {
+            "name": "length"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            13
+          ]
+        },
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            18
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiniMaxH3ImageToVideo"
+      },
+      "widgets_values": [
+        "",
+        1344,
+        768,
+        124
+      ],
+      "title": "MiniMax H3 prompt and video latent",
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 5,
+      "type": "RandomNoise",
+      "pos": [
+        1520,
+        0
+      ],
+      "size": [
+        340,
+        112
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise_seed",
+          "type": "INT",
+          "widget": {
+            "name": "noise_seed"
+          },
+          "link": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            14
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        0,
+        "fixed"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "KSamplerSelect",
+      "pos": [
+        1520,
+        192
+      ],
+      "size": [
+        340,
+        78
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            16
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "res_multistep"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "BasicScheduler",
+      "pos": [
+        1520,
+        350
+      ],
+      "size": [
+        340,
+        146
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 9
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": 10
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": 11
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "widget": {
+            "name": "denoise"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "simple",
+        20,
+        1.0
+      ]
+    },
+    {
+      "id": 8,
+      "type": "BasicGuider",
+      "pos": [
+        1520,
+        576
+      ],
+      "size": [
+        340,
+        68
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 12
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 9,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        1520,
+        724
+      ],
+      "size": [
+        340,
+        140
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 14
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 15
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 16
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 17
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 18
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            19,
+            21
+          ]
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 10,
+      "type": "VAEDecode",
+      "pos": [
+        1940,
+        0
+      ],
+      "size": [
+        340,
+        68
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 19
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 20
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            23
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "title": "Decode video frames"
+    },
+    {
+      "id": 11,
+      "type": "VAEDecodeAudio",
+      "pos": [
+        1940,
+        148
+      ],
+      "size": [
+        340,
+        68
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 21
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 22
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            24
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecodeAudio"
+      },
+      "widgets_values": [],
+      "title": "Decode audio"
+    },
+    {
+      "id": 12,
+      "type": "CreateVideo",
+      "pos": [
+        1940,
+        296
+      ],
+      "size": [
+        340,
+        204
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 23
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 24,
+          "shape": 7
+        },
+        {
+          "name": "fps",
+          "type": "FLOAT",
+          "widget": {
+            "name": "fps"
+          },
+          "link": null
+        },
+        {
+          "name": "bit_depth",
+          "type": "COMBO",
+          "widget": {
+            "name": "bit_depth"
+          },
+          "link": null
+        },
+        {
+          "name": "color_space",
+          "type": "COMBO",
+          "widget": {
+            "name": "color_space"
+          },
+          "link": null
+        },
+        {
+          "name": "codec",
+          "type": "COMBO",
+          "widget": {
+            "name": "codec"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "VIDEO",
+          "type": "VIDEO",
+          "links": [
+            25
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CreateVideo"
+      },
+      "widgets_values": [
+        24,
+        "auto",
+        "sRGB",
+        "none"
+      ],
+      "title": "Combine frames and audio (24 fps)"
+    },
+    {
+      "id": 13,
+      "type": "SaveVideo",
+      "pos": [
+        1940,
+        580
+      ],
+      "size": [
+        340,
+        440
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "link": 25
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        },
+        {
+          "name": "format",
+          "type": "COMBO",
+          "widget": {
+            "name": "format"
+          },
+          "link": null
+        },
+        {
+          "name": "format.codec",
+          "type": "COMBO",
+          "widget": {
+            "name": "format.codec"
+          },
+          "link": null
+        },
+        {
+          "name": "codec",
+          "type": "COMBO",
+          "widget": {
+            "name": "codec"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveVideo"
+      },
+      "widgets_values": [
+        "video/Geekatplay/text_to_video_minimax_h3",
+        "auto",
+        "auto",
+        "auto"
+      ]
+    },
+    {
+      "id": 14,
+      "type": "PreviewAny",
+      "pos": [
+        0,
+        1310
+      ],
+      "size": [
+        460,
+        300
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 26
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [],
+      "title": "Plan summary"
+    },
+    {
+      "id": 15,
+      "type": "PreviewAny",
+      "pos": [
+        490,
+        1310
+      ],
+      "size": [
+        460,
+        300
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 27
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [],
+      "title": "Prompt sent to the model"
+    },
+    {
+      "id": 16,
+      "type": "PreviewAny",
+      "pos": [
+        980,
+        1310
+      ],
+      "size": [
+        520,
+        300
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 28
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [],
+      "title": "Loader log"
+    },
+    {
+      "id": 17,
+      "type": "MarkdownNote",
+      "pos": [
+        -1140,
+        0
+      ],
+      "size": [
+        520,
+        1146
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "# Text to Video · MiniMax H3\n\n**Geekatplay Studio** · ComfyUI-Cluster\n\nType what should happen and what it should sound like. The planner turns it into a shot-by-shot description with audio, and MiniMax H3 renders video and sound together.\n\n## How to use\n\n1. Start Ollama.\n2. Describe the action **and the sound** in **Ollama Prompt Planner**.\n3. Set `length` on the H3 node (124 frames is about 5 seconds).\n4. Press **Run**.\n\n## Reading the graph\n\nGroups run left to right and are numbered in the order they execute. The **Status** row at the bottom shows what the planner decided and what the loader did.\n\n## If something fails\n\n- **Model not installed**: the loader error lists the exact files and download links. Run `install.bat`.\n- **Planner says tag matching**: Ollama was not reachable or the model tag is not pulled. The workflow still runs; the summary shows the reason.\n"
+      ],
+      "title": "About this workflow",
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 18,
+      "type": "MarkdownNote",
+      "pos": [
+        -600,
+        0
+      ],
+      "size": [
+        520,
+        1146
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "# Models\n\n**MiniMax H3** makes video and matching stereo sound in one pass: voices, effects and music.\n\n## Files\n\n- `models/diffusion_models/`\n  [minimax_h3_fl2va_pruned_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_fl2va_pruned_int8_convrot.safetensors) (21 GB)\n- `models/text_encoders/`\n  [qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors) (15.7 GB)\n- `models/vae/`\n  [minimax_h3_video_vae_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_int8_convrot.safetensors) (2.8 GB)\n- `models/vae/`\n  [minimax_h3_audio_vae_fp32.safetensors](https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors) (0.6 GB)\n\n`install.bat` downloads all four. About 40 GB in total; plan for a 24 GB GPU (estimate).\n\n## Settings used\n\n| Setting | Value |\n|---|---|\n| Steps | 20 |\n| Sampler | res_multistep, simple |\n| Size | 768 px short edge, up to 1344 x 768 |\n| Length | 124 frames = about 5 s at 24 fps |\n\nThese follow the official ComfyUI MiniMax H3 text-to-video template.\n\n## Length\n\n`length` on the H3 node is in frames. Valid values are 5, 22, 39, ... in steps of 17. The model was trained for about 124 to 362 frames (5 to 15 s).\n\n## Faster drafts\n\nThe registry also lists **FastVideo FastH3 8-step**. To use it, disable the base H3 entry in `model_registry.json` (or install only FastH3) and add a *ModelSamplingMiniMaxH3* node with video shift 10 after the loader.\n\n## Ollama\n\n```\nollama pull qwen3.5:9b\n```"
+      ],
+      "title": "Models and setup",
+      "color": "#222",
+      "bgcolor": "#000"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "STRING"
+    ],
+    [
+      2,
+      2,
+      1,
+      4,
+      0,
+      "CLIP"
+    ],
+    [
+      3,
+      2,
+      2,
+      4,
+      1,
+      "VAE"
+    ],
+    [
+      4,
+      1,
+      11,
+      4,
+      4,
+      "STRING"
+    ],
+    [
+      5,
+      1,
+      8,
+      4,
+      5,
+      "INT"
+    ],
+    [
+      6,
+      1,
+      9,
+      4,
+      6,
+      "INT"
+    ],
+    [
+      7,
+      1,
+      10,
+      5,
+      0,
+      "INT"
+    ],
+    [
+      8,
+      1,
+      6,
+      6,
+      0,
+      "COMBO"
+    ],
+    [
+      9,
+      2,
+      0,
+      7,
+      0,
+      "MODEL"
+    ],
+    [
+      10,
+      1,
+      7,
+      7,
+      1,
+      "COMBO"
+    ],
+    [
+      11,
+      1,
+      4,
+      7,
+      2,
+      "INT"
+    ],
+    [
+      12,
+      2,
+      0,
+      8,
+      0,
+      "MODEL"
+    ],
+    [
+      13,
+      4,
+      0,
+      8,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      14,
+      5,
+      0,
+      9,
+      0,
+      "NOISE"
+    ],
+    [
+      15,
+      8,
+      0,
+      9,
+      1,
+      "GUIDER"
+    ],
+    [
+      16,
+      6,
+      0,
+      9,
+      2,
+      "SAMPLER"
+    ],
+    [
+      17,
+      7,
+      0,
+      9,
+      3,
+      "SIGMAS"
+    ],
+    [
+      18,
+      4,
+      1,
+      9,
+      4,
+      "LATENT"
+    ],
+    [
+      19,
+      9,
+      0,
+      10,
+      0,
+      "LATENT"
+    ],
+    [
+      20,
+      2,
+      2,
+      10,
+      1,
+      "VAE"
+    ],
+    [
+      21,
+      9,
+      0,
+      11,
+      0,
+      "LATENT"
+    ],
+    [
+      22,
+      3,
+      0,
+      11,
+      1,
+      "VAE"
+    ],
+    [
+      23,
+      10,
+      0,
+      12,
+      0,
+      "IMAGE"
+    ],
+    [
+      24,
+      11,
+      0,
+      12,
+      1,
+      "AUDIO"
+    ],
+    [
+      25,
+      12,
+      0,
+      13,
+      0,
+      "VIDEO"
+    ],
+    [
+      26,
+      1,
+      18,
+      14,
+      0,
+      "STRING"
+    ],
+    [
+      27,
+      1,
+      11,
+      15,
+      0,
+      "STRING"
+    ],
+    [
+      28,
+      2,
+      3,
+      16,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "1 · Describe and plan",
+      "bounding": [
+        -20,
+        -84,
+        500,
+        1200
+      ],
+      "color": "#a1309b",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "2 · Load model",
+      "bounding": [
+        520,
+        -84,
+        440,
+        582
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "3 · Prompt and video length",
+      "bounding": [
+        1000,
+        -84,
+        460,
+        512
+      ],
+      "color": "#8A8",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "4 · Sample",
+      "bounding": [
+        1500,
+        -84,
+        380,
+        968
+      ],
+      "color": "#b58b2a",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "5 · Decode and save",
+      "bounding": [
+        1920,
+        -84,
+        380,
+        1124
+      ],
+      "color": "#8AA",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 6,
+      "title": "Status · what the planner and loader did",
+      "bounding": [
+        -20,
+        1226,
+        1540,
+        404
+      ],
+      "color": "#444",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5,
+      "offset": [
+        1200,
+        140
+      ]
+    },
+    "frontendVersion": "1.58.5",
+    "workflowRendererVersion": "Vue-corrected",
+    "author": "Geekatplay Studio"
+  },
+  "version": 0.4
+}

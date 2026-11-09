@@ -1,102 +1,118 @@
 # Install Guide
 
-## Prerequisites
+By Geekatplay Studio.
 
-- ComfyUI installed and running
-- Ollama installed and running on `localhost:11434`
-- required Ollama models pulled (examples):
-  - `qwen2.5:7b`
-  - `llava:7b`
+## Requirements
 
-## Automated Install
+- ComfyUI 0.44 or newer (MOSS-Image, FLUX.3 and MiniMax H3 need it)
+- [Ollama](https://ollama.com) running on `localhost:11434`
+- One Ollama model. `qwen3.5:9b` (6.6 GB) handles text and images:
 
-Run from this repo:
+```bat
+ollama pull qwen3.5:9b
+```
+
+Any other Ollama tag works; type it into `ollama_model` on the planner node. The vision planners need a model that can read images.
+
+## Install the nodes
+
+Copy or clone this folder into `ComfyUI/custom_nodes/` and restart ComfyUI. The nodes appear under **Geekatplay Studio**.
+
+## Download models
 
 ```bat
 install.bat
 ```
 
-The installer:
-- reads `install_manifest.json`
-- downloads model files into your selected model root
-  - **New:** Uses BITS for background downloading; UI remains responsive.
-  - **New:** Supports pausing/cancelling mid-download.
-- appends an `ollama_cluster` section to ComfyUI `extra_model_paths.yaml` if missing
+1. Confirm your ComfyUI `models` folder.
+2. Optionally set **My GPU has** to hide models that need more VRAM.
+3. Tick the models you want. The text encoder and VAE each model needs are ticked with it.
+4. Press **Download selected**.
 
-## Managing Model Registry
+Files download to a `.part` file and are renamed when complete, so a cancelled download leaves nothing broken. Failures are listed in the log and in `install_errors.log`.
 
-To keep your `model_registry.json` in sync with what you have actually downloaded (so the node system knows which models are available), run:
+The installer is Windows only. On macOS or Linux, download the files listed in `install_manifest.json` into the matching `models/<subdir>/` folders.
+
+### Gated models
+
+FLUX.3 Image Klein needs a Hugging Face token. Accept the licence on its model page, then:
+
+```bat
+set HF_TOKEN=your_hf_token
+install.bat
+```
+
+## Where files go
+
+| Kind | Folder |
+|---|---|
+| Diffusion models | `models/diffusion_models/` |
+| Text encoders | `models/text_encoders/` |
+| VAE | `models/vae/` |
+| LoRA | `models/loras/` |
+| All-in-one checkpoints | `models/checkpoints/` |
+
+## The registry
+
+`model_registry.json` is the single source of truth. `checkpoints` lists the models the planner may choose; `text_encoders`, `vae` and `loras` list supporting files.
+
+Fields of a checkpoint entry:
+
+| Field | Meaning |
+|---|---|
+| `name` | File name |
+| `type` | Family: `moss_image`, `flux3`, `krea2`, `z_image`, `minimax_h3`, or `checkpoint` for an all-in-one file |
+| `folder_type` | `diffusion_models` for split models, `checkpoints` for all-in-one files |
+| `required_clip`, `required_vae` | Companion files the loader loads with it |
+| `clip_type` | Text encoder type, as in ComfyUI's Load CLIP node |
+| `steps`, `cfg`, `sampler_name`, `scheduler` | Sampler settings the planner outputs |
+| `negative_prompt` | Default negative prompt, used when CFG is above 1 |
+| `min_vram` | Estimated GPU memory in GB, used by the `max_vram` filter |
+| `tags` | Words the planner matches against the prompt |
+| `enabled` | Set `false` to hide a model from the planner |
+
+### Add your own model
+
+Add an entry and rebuild the manifest:
+
+```json
+{
+  "name": "my_model.safetensors",
+  "type": "checkpoint",
+  "folder_type": "checkpoints",
+  "steps": 30,
+  "cfg": 6.5,
+  "sampler_name": "dpmpp_2m",
+  "scheduler": "karras",
+  "min_vram": 8,
+  "tags": ["photo", "portrait"],
+  "enabled": true
+}
+```
+
+```bat
+python update_manifest.py
+```
+
+## Keeping the registry in sync
 
 ```bat
 manage_models.bat
 ```
 
-This utility offers two modes:
-1. **Sync with Disk**: Scans your model folders, enables found models, and disables missing ones in the registry.
-2. **Reset Registry**: Re-enables ALL models in the registry (useful if you plan to download more or just want to see everything in the node options).
+Scans your model folders, fixes paths and sets `enabled` to match what is installed. Command line: `python sync_registry.py --sync`, `--dry-run` or `--reset`.
 
-CLI equivalents:
+To check that every download link still works:
 
 ```bat
-python sync_registry.py --sync
-python sync_registry.py --dry-run
-python sync_registry.py --reset
+python sync_source_urls.py --check-live --dry-run
 ```
 
-This script validates local install paths, updates `enabled`, and can repair `path` / `folder_type` metadata.
+## Troubleshooting
 
-## Source URL Validation (Download Origins)
-
-To validate and repair the original source URLs in `model_registry.json` (for example Civitai slugs to canonical IDs), run:
-
-```bat
-python sync_source_urls.py --checkpoints-only --check-live
-```
-
-Useful options:
-1. `--dry-run` preview changes without writing.
-2. `--name-filter <regex>` limit to specific models (example: `nightvision`).
-3. `--offline` skip network resolution and only normalize obvious URL formats.
-4. `--timeout <seconds>` adjust request timeout.
-
-Convenience launcher:
-
-```bat
-fix_missed_checkpoints.bat
-```
-
-By default this launcher runs source URL repair for checkpoints with live URL checks.
-
-## Model Path Mapping Added by Installer
-
-`install.bat` now writes these folders under `ollama_cluster`:
-- `checkpoints`
-- `diffusion_models`
-- `unet`
-- `loras`
-- `text_encoders`
-- `clip`
-- `controlnet`
-- `vae`
-- `embeddings`
-
-This supports both standard checkpoint workflows and flux split-component workflows.
-
-## Gated Model Downloads
-
-Some Hugging Face assets may require accepted licenses/authentication.
-
-Before running install, set:
-
-```bat
-set HF_TOKEN=your_hf_token
-```
-
-Then rerun `install.bat`.
-
-## Manual Validation
-
-After install, verify files are in expected folders:
-- `models/checkpoints/` for standard checkpoint workflows
-- `models/diffusion_models/`, `models/vae/`, `models/text_encoders/` for flux split workflows
-- `models/loras/` for LoRA files
+| Message | Fix |
+|---|---|
+| "needs companion files that are not installed" | Run `install.bat`; the message lists the files and links. |
+| "this ComfyUI has no text encoder type ..." | Update ComfyUI. |
+| Summary says "tag matching" | Start Ollama, or pull the model tag shown in the note. |
+| Planner picks a model you did not expect | Set `task_hint` to a family, or set `"enabled": false` on models you do not want. |

@@ -1,0 +1,1455 @@
+{
+  "id": "1b9d9d7e-dcdf-5693-9d3d-502f691638bc",
+  "revision": 0,
+  "last_node_id": 17,
+  "last_link_id": 30,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        400,
+        420
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "COMBO",
+          "widget": {
+            "name": "image"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "example.png",
+        "image"
+      ],
+      "title": "Load input image"
+    },
+    {
+      "id": 2,
+      "type": "ImageScaleToTotalPixels",
+      "pos": [
+        0,
+        500
+      ],
+      "size": [
+        400,
+        146
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1
+        },
+        {
+          "name": "upscale_method",
+          "type": "COMBO",
+          "widget": {
+            "name": "upscale_method"
+          },
+          "link": null
+        },
+        {
+          "name": "megapixels",
+          "type": "FLOAT",
+          "widget": {
+            "name": "megapixels"
+          },
+          "link": null
+        },
+        {
+          "name": "resolution_steps",
+          "type": "INT",
+          "widget": {
+            "name": "resolution_steps"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            2,
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScaleToTotalPixels"
+      },
+      "widgets_values": [
+        "lanczos",
+        1.0,
+        16
+      ],
+      "title": "Resize to about 1 megapixel"
+    },
+    {
+      "id": 3,
+      "type": "OllamaVisionDualPlanner",
+      "pos": [
+        480,
+        0
+      ],
+      "size": [
+        460,
+        1186
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 2
+        },
+        {
+          "name": "vision_prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "vision_prompt"
+          },
+          "link": null
+        },
+        {
+          "name": "generation_prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "generation_prompt"
+          },
+          "link": null
+        },
+        {
+          "name": "ollama_model",
+          "type": "STRING",
+          "widget": {
+            "name": "ollama_model"
+          },
+          "link": null
+        },
+        {
+          "name": "registry_path",
+          "type": "STRING",
+          "widget": {
+            "name": "registry_path"
+          },
+          "link": null
+        },
+        {
+          "name": "task_hint",
+          "type": "COMBO",
+          "widget": {
+            "name": "task_hint"
+          },
+          "link": null
+        },
+        {
+          "name": "user_negative",
+          "type": "STRING",
+          "widget": {
+            "name": "user_negative"
+          },
+          "link": null
+        },
+        {
+          "name": "aspect_ratio",
+          "type": "COMBO",
+          "widget": {
+            "name": "aspect_ratio"
+          },
+          "link": null
+        },
+        {
+          "name": "base_size",
+          "type": "INT",
+          "widget": {
+            "name": "base_size"
+          },
+          "link": null
+        },
+        {
+          "name": "ollama_host",
+          "type": "STRING",
+          "widget": {
+            "name": "ollama_host"
+          },
+          "link": null
+        },
+        {
+          "name": "ollama_port",
+          "type": "INT",
+          "widget": {
+            "name": "ollama_port"
+          },
+          "link": null
+        },
+        {
+          "name": "max_vram",
+          "type": "COMBO",
+          "widget": {
+            "name": "max_vram"
+          },
+          "link": null
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "checkpoint",
+          "type": "STRING",
+          "links": [
+            3
+          ]
+        },
+        {
+          "name": "loras",
+          "type": "STRING",
+          "links": [
+            6
+          ]
+        },
+        {
+          "name": "lora_strengths",
+          "type": "STRING",
+          "links": [
+            7
+          ]
+        },
+        {
+          "name": "model_type",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "links": [
+            19
+          ]
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "links": [
+            20
+          ]
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "links": [
+            21
+          ]
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "links": [
+            22
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": [
+            18
+          ]
+        },
+        {
+          "name": "positive_prompt",
+          "type": "STRING",
+          "links": [
+            9,
+            28
+          ]
+        },
+        {
+          "name": "negative_prompt",
+          "type": "STRING",
+          "links": [
+            11
+          ]
+        },
+        {
+          "name": "plan_json",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "vae_name",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "clip_name",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "task",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "links": [
+            23
+          ]
+        },
+        {
+          "name": "summary",
+          "type": "STRING",
+          "links": [
+            27
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "OllamaVisionDualPlanner",
+        "aux_id": "GeekatplayStudio/ComfyUI-cluster"
+      },
+      "widgets_values": [
+        "Describe the style, composition, lighting, and key elements of this image.",
+        "Turn the scene into a neon-lit cyberpunk street at night, high contrast, rain on the ground.",
+        "qwen3.5:9b",
+        "model_registry.json",
+        "img2img",
+        "blurry, oversmoothed, artifacts",
+        "1:1",
+        1024,
+        "localhost",
+        11434,
+        24,
+        0,
+        "randomize"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 4,
+      "type": "DynamicCheckpointLoader",
+      "pos": [
+        1020,
+        0
+      ],
+      "size": [
+        400,
+        320
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "checkpoint",
+          "type": "STRING",
+          "widget": {
+            "name": "checkpoint"
+          },
+          "link": 3
+        },
+        {
+          "name": "model_type",
+          "type": "COMBO",
+          "widget": {
+            "name": "model_type"
+          },
+          "link": null
+        },
+        {
+          "name": "registry_path",
+          "type": "STRING",
+          "widget": {
+            "name": "registry_path"
+          },
+          "link": null
+        },
+        {
+          "name": "custom_path",
+          "type": "STRING",
+          "widget": {
+            "name": "custom_path"
+          },
+          "link": null
+        },
+        {
+          "name": "vae_override",
+          "type": "STRING",
+          "widget": {
+            "name": "vae_override"
+          },
+          "link": null
+        },
+        {
+          "name": "clip_override",
+          "type": "STRING",
+          "widget": {
+            "name": "clip_override"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            4
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            5
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            13,
+            25
+          ]
+        },
+        {
+          "name": "debug_info",
+          "type": "STRING",
+          "links": [
+            29
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DynamicCheckpointLoader",
+        "aux_id": "GeekatplayStudio/ComfyUI-cluster"
+      },
+      "widgets_values": [
+        "",
+        "auto",
+        "model_registry.json",
+        "",
+        "",
+        ""
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 5,
+      "type": "DynamicLoraStack",
+      "pos": [
+        1020,
+        400
+      ],
+      "size": [
+        400,
+        194
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 4
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5
+        },
+        {
+          "name": "loras",
+          "type": "STRING",
+          "widget": {
+            "name": "loras"
+          },
+          "link": 6
+        },
+        {
+          "name": "lora_strengths",
+          "type": "STRING",
+          "widget": {
+            "name": "lora_strengths"
+          },
+          "link": 7
+        },
+        {
+          "name": "custom_path",
+          "type": "STRING",
+          "widget": {
+            "name": "custom_path"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            14
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            8,
+            10
+          ]
+        },
+        {
+          "name": "debug_info",
+          "type": "STRING",
+          "links": [
+            30
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DynamicLoraStack",
+        "aux_id": "GeekatplayStudio/ComfyUI-cluster"
+      },
+      "widgets_values": [
+        "",
+        "",
+        ""
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1500,
+        0
+      ],
+      "size": [
+        420,
+        214
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 8
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "title": "Positive prompt",
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1500,
+        294
+      ],
+      "size": [
+        420,
+        174
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 10
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            16
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "title": "Negative prompt",
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 8,
+      "type": "VAEEncode",
+      "pos": [
+        2000,
+        0
+      ],
+      "size": [
+        340,
+        68
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 12
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "widgets_values": [],
+      "title": "Encode input image"
+    },
+    {
+      "id": 9,
+      "type": "KSampler",
+      "pos": [
+        2000,
+        148
+      ],
+      "size": [
+        340,
+        354
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 14
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 15
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 16
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 17
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 18
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": 19
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": 20
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": 21
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": 22
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "widget": {
+            "name": "denoise"
+          },
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            24
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        0,
+        "fixed",
+        20,
+        1.0,
+        "euler",
+        "simple",
+        1.0
+      ],
+      "title": "KSampler (settings from planner)"
+    },
+    {
+      "id": 10,
+      "type": "VAEDecode",
+      "pos": [
+        2000,
+        582
+      ],
+      "size": [
+        340,
+        68
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 24
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 25
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            26
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 11,
+      "type": "SaveImage",
+      "pos": [
+        2420,
+        0
+      ],
+      "size": [
+        560,
+        640
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 26
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "Geekatplay/image_dual_prompt"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "PreviewAny",
+      "pos": [
+        0,
+        1400
+      ],
+      "size": [
+        460,
+        300
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 27
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [],
+      "title": "Plan summary"
+    },
+    {
+      "id": 13,
+      "type": "PreviewAny",
+      "pos": [
+        490,
+        1400
+      ],
+      "size": [
+        460,
+        300
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 28
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [],
+      "title": "Prompt sent to the model"
+    },
+    {
+      "id": 14,
+      "type": "PreviewAny",
+      "pos": [
+        980,
+        1400
+      ],
+      "size": [
+        520,
+        300
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 29
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [],
+      "title": "Loader log"
+    },
+    {
+      "id": 15,
+      "type": "PreviewAny",
+      "pos": [
+        1530,
+        1400
+      ],
+      "size": [
+        380,
+        300
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 30
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [],
+      "title": "LoRA log"
+    },
+    {
+      "id": 16,
+      "type": "MarkdownNote",
+      "pos": [
+        -1140,
+        0
+      ],
+      "size": [
+        520,
+        1044
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "# Image to Image · Dual Prompt\n\n**Geekatplay Studio** · ComfyUI-Cluster\n\nTwo prompts instead of one. The **vision prompt** tells the Ollama vision model what to look for in your picture; the **generation prompt** says what to make from it.\n\n## How to use\n\n1. Start Ollama with a vision-capable model.\n2. Choose a picture in **Load input image**.\n3. Edit both prompts in **Ollama Vision Dual Planner**.\n4. Press **Run**.\n\n## Reading the graph\n\nGroups run left to right and are numbered in the order they execute. The **Status** row at the bottom shows what the planner decided and what the loader did.\n\n## If something fails\n\n- **Model not installed**: the loader error lists the exact files and download links. Run `install.bat`.\n- **Planner says tag matching**: Ollama was not reachable or the model tag is not pulled. The workflow still runs; the summary shows the reason.\n"
+      ],
+      "title": "About this workflow",
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 17,
+      "type": "MarkdownNote",
+      "pos": [
+        -600,
+        0
+      ],
+      "size": [
+        520,
+        1044
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "# Models\n\nThe planner chooses from the models **you have installed** that are listed in `model_registry.json`:\n\n| Family | Good at | VRAM |\n|---|---|---|\n| MOSS-Image | text in images, posters, layouts, all-round | 12 GB+ |\n| FLUX.3 Klein | photography, portraits, products | 12 GB+ |\n| Krea-2 Turbo | illustration, painterly, stylised | 16 GB+ |\n| Z-Image-Turbo | fast photorealism, low VRAM | 8 GB+ |\n\nVRAM figures are estimates.\n\n## Install\n\nRun `install.bat` in the ComfyUI-Cluster folder and tick the models you want. Each model's text encoder and VAE are selected with it.\n\nFLUX.3 Klein is a gated download: accept its licence on Hugging Face and set `HF_TOKEN` first.\n\n## Ollama\n\n```\nollama pull qwen3.5:9b\n```\n\n`qwen3.5:9b` reads both text and images, so it serves every planner. Any other Ollama tag works: type it into `ollama_model`.\n\n## Pin a family\n\nSet `task_hint` on the planner to `moss_image`, `flux3`, `krea2` or `z_image` to stop it choosing another family.\n\n## Denoise\n\nThe planner sets `denoise` from your request: about 0.3-0.5 for small fixes, 0.6-0.9 for a new style. To override it, disconnect `denoise` on the KSampler and type a value."
+      ],
+      "title": "Models and setup",
+      "color": "#222",
+      "bgcolor": "#000"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "IMAGE"
+    ],
+    [
+      2,
+      2,
+      0,
+      3,
+      0,
+      "IMAGE"
+    ],
+    [
+      3,
+      3,
+      0,
+      4,
+      0,
+      "STRING"
+    ],
+    [
+      4,
+      4,
+      0,
+      5,
+      0,
+      "MODEL"
+    ],
+    [
+      5,
+      4,
+      1,
+      5,
+      1,
+      "CLIP"
+    ],
+    [
+      6,
+      3,
+      1,
+      5,
+      2,
+      "STRING"
+    ],
+    [
+      7,
+      3,
+      2,
+      5,
+      3,
+      "STRING"
+    ],
+    [
+      8,
+      5,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      9,
+      3,
+      11,
+      6,
+      1,
+      "STRING"
+    ],
+    [
+      10,
+      5,
+      1,
+      7,
+      0,
+      "CLIP"
+    ],
+    [
+      11,
+      3,
+      12,
+      7,
+      1,
+      "STRING"
+    ],
+    [
+      12,
+      2,
+      0,
+      8,
+      0,
+      "IMAGE"
+    ],
+    [
+      13,
+      4,
+      2,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      14,
+      5,
+      0,
+      9,
+      0,
+      "MODEL"
+    ],
+    [
+      15,
+      6,
+      0,
+      9,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      16,
+      7,
+      0,
+      9,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      17,
+      8,
+      0,
+      9,
+      3,
+      "LATENT"
+    ],
+    [
+      18,
+      3,
+      10,
+      9,
+      4,
+      "INT"
+    ],
+    [
+      19,
+      3,
+      4,
+      9,
+      5,
+      "INT"
+    ],
+    [
+      20,
+      3,
+      5,
+      9,
+      6,
+      "FLOAT"
+    ],
+    [
+      21,
+      3,
+      6,
+      9,
+      7,
+      "COMBO"
+    ],
+    [
+      22,
+      3,
+      7,
+      9,
+      8,
+      "COMBO"
+    ],
+    [
+      23,
+      3,
+      17,
+      9,
+      9,
+      "FLOAT"
+    ],
+    [
+      24,
+      9,
+      0,
+      10,
+      0,
+      "LATENT"
+    ],
+    [
+      25,
+      4,
+      2,
+      10,
+      1,
+      "VAE"
+    ],
+    [
+      26,
+      10,
+      0,
+      11,
+      0,
+      "IMAGE"
+    ],
+    [
+      27,
+      3,
+      18,
+      12,
+      0,
+      "STRING"
+    ],
+    [
+      28,
+      3,
+      11,
+      13,
+      0,
+      "STRING"
+    ],
+    [
+      29,
+      4,
+      3,
+      14,
+      0,
+      "STRING"
+    ],
+    [
+      30,
+      5,
+      2,
+      15,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "1 · Input image",
+      "bounding": [
+        -20,
+        -84,
+        440,
+        750
+      ],
+      "color": "#8AA",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "2 · Look and plan",
+      "bounding": [
+        460,
+        -84,
+        500,
+        1290
+      ],
+      "color": "#a1309b",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "3 · Load model and LoRAs",
+      "bounding": [
+        1000,
+        -84,
+        440,
+        698
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "4 · Encode prompts",
+      "bounding": [
+        1480,
+        -84,
+        460,
+        572
+      ],
+      "color": "#8A8",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "5 · Sample and decode",
+      "bounding": [
+        1980,
+        -84,
+        380,
+        754
+      ],
+      "color": "#b58b2a",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 6,
+      "title": "6 · Result",
+      "bounding": [
+        2400,
+        -84,
+        600,
+        744
+      ],
+      "color": "#8AA",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 7,
+      "title": "Status · what the planner and loader did",
+      "bounding": [
+        -20,
+        1316,
+        1950,
+        404
+      ],
+      "color": "#444",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5,
+      "offset": [
+        1200,
+        140
+      ]
+    },
+    "frontendVersion": "1.58.5",
+    "workflowRendererVersion": "Vue-corrected",
+    "author": "Geekatplay Studio"
+  },
+  "version": 0.4
+}

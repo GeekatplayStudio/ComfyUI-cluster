@@ -1,6 +1,6 @@
-"""Geekatplay Studio custom nodes for ComfyUI routing and loading."""
+"""ComfyUI-Cluster by Geekatplay Studio: Ollama-driven model routing and loading nodes for ComfyUI."""
 
-from .nodes_ollama_router_new import (
+from .nodes_ollama_router import (
     OllamaPromptPlanner,
     OllamaVisionStylePlanner,
     OllamaVisionDualPlanner,

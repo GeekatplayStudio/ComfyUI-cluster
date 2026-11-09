@@ -21,7 +21,6 @@ USER_AGENT = (
 CATEGORY_SPECS = [
     "checkpoints",
     "loras",
-    "controlnets",
     "vae",
     "text_encoders",
     "diffusion_models",

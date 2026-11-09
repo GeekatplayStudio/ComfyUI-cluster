@@ -1,0 +1,1404 @@
+{
+  "id": "fcebbfa5-227b-5436-a339-489be36ebbe4",
+  "revision": 0,
+  "last_node_id": 16,
+  "last_link_id": 29,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "OllamaPromptPlanner",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        460,
+        1096
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": null
+        },
+        {
+          "name": "ollama_model",
+          "type": "STRING",
+          "widget": {
+            "name": "ollama_model"
+          },
+          "link": null
+        },
+        {
+          "name": "registry_path",
+          "type": "STRING",
+          "widget": {
+            "name": "registry_path"
+          },
+          "link": null
+        },
+        {
+          "name": "task_hint",
+          "type": "COMBO",
+          "widget": {
+            "name": "task_hint"
+          },
+          "link": null
+        },
+        {
+          "name": "user_negative",
+          "type": "STRING",
+          "widget": {
+            "name": "user_negative"
+          },
+          "link": null
+        },
+        {
+          "name": "aspect_ratio",
+          "type": "COMBO",
+          "widget": {
+            "name": "aspect_ratio"
+          },
+          "link": null
+        },
+        {
+          "name": "base_size",
+          "type": "INT",
+          "widget": {
+            "name": "base_size"
+          },
+          "link": null
+        },
+        {
+          "name": "ollama_host",
+          "type": "STRING",
+          "widget": {
+            "name": "ollama_host"
+          },
+          "link": null
+        },
+        {
+          "name": "ollama_port",
+          "type": "INT",
+          "widget": {
+            "name": "ollama_port"
+          },
+          "link": null
+        },
+        {
+          "name": "max_vram",
+          "type": "COMBO",
+          "widget": {
+            "name": "max_vram"
+          },
+          "link": null
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "checkpoint",
+          "type": "STRING",
+          "links": [
+            1
+          ]
+        },
+        {
+          "name": "loras",
+          "type": "STRING",
+          "links": [
+            4
+          ]
+        },
+        {
+          "name": "lora_strengths",
+          "type": "STRING",
+          "links": [
+            5
+          ]
+        },
+        {
+          "name": "model_type",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "links": [
+            18
+          ]
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "links": [
+            19
+          ]
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "links": [
+            20
+          ]
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "links": [
+            21
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            11
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            12
+          ]
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": [
+            17
+          ]
+        },
+        {
+          "name": "positive_prompt",
+          "type": "STRING",
+          "links": [
+            8,
+            27
+          ]
+        },
+        {
+          "name": "negative_prompt",
+          "type": "STRING",
+          "links": [
+            10
+          ]
+        },
+        {
+          "name": "plan_json",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "vae_name",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "clip_name",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "task",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "links": [
+            22
+          ]
+        },
+        {
+          "name": "summary",
+          "type": "STRING",
+          "links": [
+            26
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "OllamaPromptPlanner",
+        "aux_id": "GeekatplayStudio/ComfyUI-cluster"
+      },
+      "widgets_values": [
+        "Event poster for a jazz night: a saxophonist in silhouette under a single spotlight, headline text \"BLUE HOUR\" in tall condensed capitals, smaller line \"Live every Friday\"",
+        "qwen3.5:9b",
+        "model_registry.json",
+        "moss_image",
+        "",
+        "4:5",
+        1024,
+        "localhost",
+        11434,
+        24,
+        0,
+        "randomize"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 2,
+      "type": "DynamicCheckpointLoader",
+      "pos": [
+        540,
+        0
+      ],
+      "size": [
+        400,
+        320
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "checkpoint",
+          "type": "STRING",
+          "widget": {
+            "name": "checkpoint"
+          },
+          "link": 1
+        },
+        {
+          "name": "model_type",
+          "type": "COMBO",
+          "widget": {
+            "name": "model_type"
+          },
+          "link": null
+        },
+        {
+          "name": "registry_path",
+          "type": "STRING",
+          "widget": {
+            "name": "registry_path"
+          },
+          "link": null
+        },
+        {
+          "name": "custom_path",
+          "type": "STRING",
+          "widget": {
+            "name": "custom_path"
+          },
+          "link": null
+        },
+        {
+          "name": "vae_override",
+          "type": "STRING",
+          "widget": {
+            "name": "vae_override"
+          },
+          "link": null
+        },
+        {
+          "name": "clip_override",
+          "type": "STRING",
+          "widget": {
+            "name": "clip_override"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            2
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            3
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            24
+          ]
+        },
+        {
+          "name": "debug_info",
+          "type": "STRING",
+          "links": [
+            28
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DynamicCheckpointLoader",
+        "aux_id": "GeekatplayStudio/ComfyUI-cluster"
+      },
+      "widgets_values": [
+        "",
+        "auto",
+        "model_registry.json",
+        "",
+        "",
+        ""
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 3,
+      "type": "DynamicLoraStack",
+      "pos": [
+        540,
+        400
+      ],
+      "size": [
+        400,
+        194
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 2
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 3
+        },
+        {
+          "name": "loras",
+          "type": "STRING",
+          "widget": {
+            "name": "loras"
+          },
+          "link": 4
+        },
+        {
+          "name": "lora_strengths",
+          "type": "STRING",
+          "widget": {
+            "name": "lora_strengths"
+          },
+          "link": 5
+        },
+        {
+          "name": "custom_path",
+          "type": "STRING",
+          "widget": {
+            "name": "custom_path"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            6
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            7,
+            9
+          ]
+        },
+        {
+          "name": "debug_info",
+          "type": "STRING",
+          "links": [
+            29
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DynamicLoraStack",
+        "aux_id": "GeekatplayStudio/ComfyUI-cluster"
+      },
+      "widgets_values": [
+        "",
+        "",
+        ""
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 4,
+      "type": "SkipLayerGuidanceDiTSimple",
+      "pos": [
+        540,
+        674
+      ],
+      "size": [
+        400,
+        180
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 6
+        },
+        {
+          "name": "double_layers",
+          "type": "STRING",
+          "widget": {
+            "name": "double_layers"
+          },
+          "link": null
+        },
+        {
+          "name": "single_layers",
+          "type": "STRING",
+          "widget": {
+            "name": "single_layers"
+          },
+          "link": null
+        },
+        {
+          "name": "start_percent",
+          "type": "FLOAT",
+          "widget": {
+            "name": "start_percent"
+          },
+          "link": null
+        },
+        {
+          "name": "end_percent",
+          "type": "FLOAT",
+          "widget": {
+            "name": "end_percent"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SkipLayerGuidanceDiTSimple"
+      },
+      "widgets_values": [
+        "",
+        "22",
+        0,
+        0.5
+      ],
+      "title": "Skip Layer Guidance (MOSS layer 22)",
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 5,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1020,
+        0
+      ],
+      "size": [
+        420,
+        214
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 7
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            14
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "title": "Positive prompt",
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1020,
+        294
+      ],
+      "size": [
+        420,
+        174
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 9
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "title": "Negative prompt",
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 7,
+      "type": "EmptyFlux2LatentImage",
+      "pos": [
+        1520,
+        0
+      ],
+      "size": [
+        340,
+        146
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 11
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 12
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "widget": {
+            "name": "batch_size"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            16
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyFlux2LatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ],
+      "title": "Empty latent (size from planner)"
+    },
+    {
+      "id": 8,
+      "type": "KSampler",
+      "pos": [
+        1520,
+        226
+      ],
+      "size": [
+        340,
+        354
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 13
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 14
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 15
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 16
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 17
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": 18
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": 19
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": 20
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": 21
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "widget": {
+            "name": "denoise"
+          },
+          "link": 22
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            23
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        0,
+        "fixed",
+        20,
+        1.0,
+        "euler",
+        "simple",
+        1.0
+      ],
+      "title": "KSampler (settings from planner)"
+    },
+    {
+      "id": 9,
+      "type": "VAEDecode",
+      "pos": [
+        1520,
+        660
+      ],
+      "size": [
+        340,
+        68
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 23
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 24
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            25
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 10,
+      "type": "SaveImage",
+      "pos": [
+        1940,
+        0
+      ],
+      "size": [
+        560,
+        640
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 25
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "Geekatplay/text_to_image_moss"
+      ]
+    },
+    {
+      "id": 11,
+      "type": "PreviewAny",
+      "pos": [
+        0,
+        1310
+      ],
+      "size": [
+        460,
+        300
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 26
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [],
+      "title": "Plan summary"
+    },
+    {
+      "id": 12,
+      "type": "PreviewAny",
+      "pos": [
+        490,
+        1310
+      ],
+      "size": [
+        460,
+        300
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 27
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [],
+      "title": "Prompt sent to the model"
+    },
+    {
+      "id": 13,
+      "type": "PreviewAny",
+      "pos": [
+        980,
+        1310
+      ],
+      "size": [
+        520,
+        300
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 28
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [],
+      "title": "Loader log"
+    },
+    {
+      "id": 14,
+      "type": "PreviewAny",
+      "pos": [
+        1530,
+        1310
+      ],
+      "size": [
+        380,
+        300
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 29
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAny"
+      },
+      "widgets_values": [],
+      "title": "LoRA log"
+    },
+    {
+      "id": 15,
+      "type": "MarkdownNote",
+      "pos": [
+        -1140,
+        0
+      ],
+      "size": [
+        520,
+        958
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "# Text to Image · MOSS-Image\n\n**Geekatplay Studio** · ComfyUI-Cluster\n\nThe same planner-driven pipeline, pinned to MOSS-Image and wired the way the official template is: FLUX.2 latent, skip layer guidance on layer 22, er_sde sampler.\n\n## How to use\n\n1. Start Ollama.\n2. Write your prompt. Put any text that must appear in the image in quotes.\n3. Press **Run**.\n\n## Reading the graph\n\nGroups run left to right and are numbered in the order they execute. The **Status** row at the bottom shows what the planner decided and what the loader did.\n\n## If something fails\n\n- **Model not installed**: the loader error lists the exact files and download links. Run `install.bat`.\n- **Planner says tag matching**: Ollama was not reachable or the model tag is not pulled. The workflow still runs; the summary shows the reason.\n"
+      ],
+      "title": "About this workflow",
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 16,
+      "type": "MarkdownNote",
+      "pos": [
+        -600,
+        0
+      ],
+      "size": [
+        520,
+        958
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "# Models\n\nThis workflow is pinned to **MOSS-Image** with `task_hint = moss_image`. MOSS-Image is strong at readable text, posters and layouts in English and Chinese.\n\n## Files\n\n- `models/diffusion_models/`\n  [moss_image_sft_int8_convrot.safetensors](https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/diffusion_models/moss_image_sft_int8_convrot.safetensors) (5.4 GB)\n- `models/text_encoders/`\n  [qwen3.5_9b_w4a8_gptq.safetensors](https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/text_encoders/qwen3.5_9b_w4a8_gptq.safetensors) (7.3 GB)\n- `models/vae/`\n  [flux2-vae_small.safetensors](https://huggingface.co/Comfy-Org/MOSS-Image/resolve/main/vae/flux2-vae_small.safetensors) (0.25 GB)\n\n`install.bat` downloads all three. Licence: Apache 2.0.\n\n## Settings used\n\n| Setting | Value |\n|---|---|\n| Steps / CFG | 25 / 2.5 |\n| Sampler | er_sde, simple |\n| Skip layer | 22, first half of sampling |\n| Size | about 1 megapixel, sides in steps of 16 |\n\nThese follow the official ComfyUI MOSS-Image template. For results closer to the model authors' reference, set `steps` to 50 and `cfg` to 3 in the registry entry.\n\n## Tips\n\n- Put text you want rendered inside quotes.\n- A negative prompt is used here because CFG is above 1. Leave `user_negative` empty to get the recommended default.\n\n## Ollama\n\n```\nollama pull qwen3.5:9b\n```"
+      ],
+      "title": "Models and setup",
+      "color": "#222",
+      "bgcolor": "#000"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "STRING"
+    ],
+    [
+      2,
+      2,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      3,
+      2,
+      1,
+      3,
+      1,
+      "CLIP"
+    ],
+    [
+      4,
+      1,
+      1,
+      3,
+      2,
+      "STRING"
+    ],
+    [
+      5,
+      1,
+      2,
+      3,
+      3,
+      "STRING"
+    ],
+    [
+      6,
+      3,
+      0,
+      4,
+      0,
+      "MODEL"
+    ],
+    [
+      7,
+      3,
+      1,
+      5,
+      0,
+      "CLIP"
+    ],
+    [
+      8,
+      1,
+      11,
+      5,
+      1,
+      "STRING"
+    ],
+    [
+      9,
+      3,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      10,
+      1,
+      12,
+      6,
+      1,
+      "STRING"
+    ],
+    [
+      11,
+      1,
+      8,
+      7,
+      0,
+      "INT"
+    ],
+    [
+      12,
+      1,
+      9,
+      7,
+      1,
+      "INT"
+    ],
+    [
+      13,
+      4,
+      0,
+      8,
+      0,
+      "MODEL"
+    ],
+    [
+      14,
+      5,
+      0,
+      8,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      15,
+      6,
+      0,
+      8,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      16,
+      7,
+      0,
+      8,
+      3,
+      "LATENT"
+    ],
+    [
+      17,
+      1,
+      10,
+      8,
+      4,
+      "INT"
+    ],
+    [
+      18,
+      1,
+      4,
+      8,
+      5,
+      "INT"
+    ],
+    [
+      19,
+      1,
+      5,
+      8,
+      6,
+      "FLOAT"
+    ],
+    [
+      20,
+      1,
+      6,
+      8,
+      7,
+      "COMBO"
+    ],
+    [
+      21,
+      1,
+      7,
+      8,
+      8,
+      "COMBO"
+    ],
+    [
+      22,
+      1,
+      17,
+      8,
+      9,
+      "FLOAT"
+    ],
+    [
+      23,
+      8,
+      0,
+      9,
+      0,
+      "LATENT"
+    ],
+    [
+      24,
+      2,
+      2,
+      9,
+      1,
+      "VAE"
+    ],
+    [
+      25,
+      9,
+      0,
+      10,
+      0,
+      "IMAGE"
+    ],
+    [
+      26,
+      1,
+      18,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      27,
+      1,
+      11,
+      12,
+      0,
+      "STRING"
+    ],
+    [
+      28,
+      2,
+      3,
+      13,
+      0,
+      "STRING"
+    ],
+    [
+      29,
+      3,
+      2,
+      14,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "1 · Describe and plan",
+      "bounding": [
+        -20,
+        -84,
+        500,
+        1200
+      ],
+      "color": "#a1309b",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "2 · Load model and LoRAs",
+      "bounding": [
+        520,
+        -84,
+        440,
+        958
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "3 · Encode prompts",
+      "bounding": [
+        1000,
+        -84,
+        460,
+        572
+      ],
+      "color": "#8A8",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "4 · Sample and decode",
+      "bounding": [
+        1500,
+        -84,
+        380,
+        832
+      ],
+      "color": "#b58b2a",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "5 · Result",
+      "bounding": [
+        1920,
+        -84,
+        600,
+        744
+      ],
+      "color": "#8AA",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 6,
+      "title": "Status · what the planner and loader did",
+      "bounding": [
+        -20,
+        1226,
+        1950,
+        404
+      ],
+      "color": "#444",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5,
+      "offset": [
+        1200,
+        140
+      ]
+    },
+    "frontendVersion": "1.58.5",
+    "workflowRendererVersion": "Vue-corrected",
+    "author": "Geekatplay Studio"
+  },
+  "version": 0.4
+}
